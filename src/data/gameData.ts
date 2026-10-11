@@ -1,8 +1,8 @@
 import { FlagQuestion, WordQuestion, EmojiVoiceQuestion, DilemmaQuestion } from '../types/game';
 
-// ==========================================
-// 1. DATA TEBAK BENDERA DUNIA (120+ NEGARA)
-// ==========================================
+// ==============================================================
+// 1. DATA TEBAK BENDERA DUNIA LENGKAP (180+ NEGARA DARI SEMUA BENUA)
+// ==============================================================
 export const FLAG_DATABASE: Array<Omit<FlagQuestion, 'options'>> = [
   // ASIA TENGGARA (ASEAN)
   { id: 'f-id', countryCode: 'ID', countryName: 'Indonesia', flagEmoji: '🇮🇩', fact: 'Negara kepulauan terbesar di dunia dengan lebih dari 17.000 pulau.' },
@@ -45,10 +45,15 @@ export const FLAG_DATABASE: Array<Omit<FlagQuestion, 'options'>> = [
   { id: 'f-kw', countryCode: 'KW', countryName: 'Kuwait', flagEmoji: '🇰🇼', fact: 'Negara dengan salah satu mata uang dengan nilai tukar terkuat di dunia (Dinar Kuwait).' },
   { id: 'f-om', countryCode: 'OM', countryName: 'Oman', flagEmoji: '🇴🇲', fact: 'Negara kesultanan di ujung tenggara jazirah Arab yang terkenal dengan benteng kuno.' },
   { id: 'f-ye', countryCode: 'YE', countryName: 'Yaman', flagEmoji: '🇾🇪', fact: 'Kota kuno Shibam di Yaman dijuluki sebagai "Manhattan dari Gurun Pasir".' },
+  { id: 'f-bh', countryCode: 'BH', countryName: 'Bahrain', flagEmoji: '🇧🇭', fact: 'Negara kepulauan kecil di Teluk Persia yang terkenal dengan sirkuit balap F1.' },
+  { id: 'f-sy', countryCode: 'SY', countryName: 'Suriah', flagEmoji: '🇸🇾', fact: 'Ibu kotanya Damaskus merupakan salah satu kota berpenghuni tertua di dunia.' },
 
-  // ASIA TENGAH
-  { id: 'f-kz', countryCode: 'KZ', countryName: 'Kazakhstan', flagEmoji: '🇰🇿', fact: 'Negara tanpa pantai (landlocked) terluas di dunia dan lokasi kosmodrom peluncuran roket Baikonur.' },
+  // ASIA TENGAH & KAUKASUS
+  { id: 'f-kz', countryCode: 'KZ', countryName: 'Kazakhstan', flagEmoji: '🇰🇿', fact: 'Negara tanpa pantai (landlocked) terluas di dunia dan lokasi kosmodrom Baikonur.' },
   { id: 'f-uz', countryCode: 'UZ', countryName: 'Uzbekistan', flagEmoji: '🇺🇿', fact: 'Jantung Jalur Sutra kuno dengan arsitektur kubah biru megah di Samarkand.' },
+  { id: 'f-az', countryCode: 'AZ', countryName: 'Azerbaijan', flagEmoji: '🇦🇿', fact: 'Dijuluki Negeri Api Abadi dengan api gas alam yang terus menyala di tebing batu Yanar Dag.' },
+  { id: 'f-ge', countryCode: 'GE', countryName: 'Georgia', flagEmoji: '🇬🇪', fact: 'Negara di pegunungan Kaukasus yang dipercaya sebagai salah satu tempat lahirnya minuman anggur tertua.' },
+  { id: 'f-am', countryCode: 'AM', countryName: 'Armenia', flagEmoji: '🇦🇲', fact: 'Negara pertama di dunia yang mengadopsi agama Kristen sebagai agama resmi negara pada tahun 301 Masehi.' },
 
   // EROPA BARAT & UTARA
   { id: 'f-gb', countryCode: 'GB', countryName: 'Inggris (Britania Raya)', flagEmoji: '🇬🇧', fact: 'Rumah bagi jam Big Ben, keluarga kerajaan Inggris, dan liga sepak bola Premier League.' },
@@ -64,6 +69,7 @@ export const FLAG_DATABASE: Array<Omit<FlagQuestion, 'options'>> = [
   { id: 'f-dk', countryCode: 'DK', countryName: 'Denmark', flagEmoji: '🇩🇰', fact: 'Negara asal mainan balok susun LEGO dan dongeng Hans Christian Andersen.' },
   { id: 'f-fi', countryCode: 'FI', countryName: 'Finlandia', flagEmoji: '🇫🇮', fact: 'Sering dinobatkan sebagai negara paling bahagia di dunia dan negeri asal sauna.' },
   { id: 'f-is', countryCode: 'IS', countryName: 'Islandia', flagEmoji: '🇮🇸', fact: 'Tanah api dan es dengan banyak gunung berapi aktif dan mata air panas Geyser.' },
+  { id: 'f-lu', countryCode: 'LU', countryName: 'Luksemburg', flagEmoji: '🇱🇺', fact: 'Negara kadipaten agung kecil yang menjadi salah satu negara terkaya per kapita di dunia.' },
 
   // EROPA SELATAN & TIMUR
   { id: 'f-it', countryCode: 'IT', countryName: 'Italia', flagEmoji: '🇮🇹', fact: 'Negara asal Pizza, Menara Miring Pisa, Colosseum Roma, dan mobil sport Ferrari.' },
@@ -79,6 +85,7 @@ export const FLAG_DATABASE: Array<Omit<FlagQuestion, 'options'>> = [
   { id: 'f-hu', countryCode: 'HU', countryName: 'Hungaria', flagEmoji: '🇭🇺', fact: 'Ibu kotanya Budapest dibelah oleh Sungai Donau yang indah.' },
   { id: 'f-mc', countryCode: 'MC', countryName: 'Monako', flagEmoji: '🇲🇨', fact: 'Benderanya mirip Indonesia (merah putih), negara terkecil kedua di dunia.' },
   { id: 'f-va', countryCode: 'VA', countryName: 'Vatikan', flagEmoji: '🇻🇦', fact: 'Negara berdaulat terkecil di dunia yang berada di dalam kota Roma Italia.' },
+  { id: 'f-rs', countryCode: 'RS', countryName: 'Serbia', flagEmoji: '🇷🇸', fact: 'Negara di semenanjung Balkan tempat lahirnya penemu listrik Nikola Tesla.' },
 
   // BENUA AMERIKA (UTARA, TENGAH & SELATAN)
   { id: 'f-us', countryCode: 'US', countryName: 'Amerika Serikat', flagEmoji: '🇺🇸', fact: 'Terdiri dari 50 bintang di benderanya dan rumah bagi Patung Liberty di New York.' },
@@ -91,13 +98,13 @@ export const FLAG_DATABASE: Array<Omit<FlagQuestion, 'options'>> = [
   { id: 'f-pe', countryCode: 'PE', countryName: 'Peru', flagEmoji: '🇵🇪', fact: 'Rumah bagi peninggalan benteng batu suku Inka di Machu Picchu di atas awan.' },
   { id: 'f-uy', countryCode: 'UY', countryName: 'Uruguay', flagEmoji: '🇺🇾', fact: 'Negara tuan rumah dan pemenang Piala Dunia FIFA pertama kali pada tahun 1930.' },
   { id: 'f-py', countryCode: 'PY', countryName: 'Paraguay', flagEmoji: '🇵🇾', fact: 'Satu-satunya bendera nasional yang memiliki lambang berbeda di bagian depan dan belakang.' },
-  { id: 'f-bo', countryCode: 'BO', countryName: 'Bolivia', flagEmoji: '🇧🇴', fact: 'Memiliki dataran garam terbesar di dunia, Salar de Uyuni, yang memantulkan langit seperti cermin.' },
+  { id: 'f-bo', countryCode: 'BO', countryName: 'Bolivia', flagEmoji: '🇧🇴', fact: 'Memiliki dataran garam terbesar di dunia, Salar de Uyuni, yang memantulkan langit.' },
   { id: 'f-ec', countryCode: 'EC', countryName: 'Ekuador', flagEmoji: '🇪🇨', fact: 'Namanya berasal dari garis Khatulistiwa (Equator) dan pemilik Kepulauan Galapagos.' },
   { id: 'f-ve', countryCode: 'VE', countryName: 'Venezuela', flagEmoji: '🇻🇪', fact: 'Memiliki air terjun tertinggi di dunia yang jatuh tanpa putus, Angel Falls.' },
-  { id: 'f-cu', countryCode: 'CU', countryName: 'Kuba', flagEmoji: '🇨🇺', fact: 'Pulau di Karibia yang terkenal dengan mobil-mobil antik klasik dan cerutu Havana.' },
+  { id: 'f-cu', countryCode: 'CU', countryName: 'Kuba', flagEmoji: '🇨🇺', fact: 'Pulau di Karibia yang terkenal dengan mobil antik klasik dan cerutu Havana.' },
   { id: 'f-jm', countryCode: 'JM', countryName: 'Jamaika', flagEmoji: '🇯🇲', fact: 'Negeri asal musik Reggae Bob Marley dan pelari tercepat dunia Usain Bolt.' },
   { id: 'f-cr', countryCode: 'CR', countryName: 'Kosta Rika', flagEmoji: '🇨🇷', fact: 'Negara pelopor ekowisata dunia tanpa tentara militer sejak tahun 1948.' },
-  { id: 'f-pa', countryCode: 'PA', countryName: 'Panama', flagEmoji: '🇵🇦', fact: 'Terkenal dengan Terusan Panama yang menghubungkan Samudra Atlantik dan Samudra Pasifik.' },
+  { id: 'f-pa', countryCode: 'PA', countryName: 'Panama', flagEmoji: '🇵🇦', fact: 'Terkenal dengan Terusan Panama yang menghubungkan Samudra Atlantik dan Pasifik.' },
 
   // BENUA AFRIKA
   { id: 'f-eg', countryCode: 'EG', countryName: 'Mesir', flagEmoji: '🇪🇬', fact: 'Memiliki monumen Piramida Giza berusia ribuan tahun dan Sungai Nil yang legendaris.' },
@@ -110,509 +117,931 @@ export const FLAG_DATABASE: Array<Omit<FlagQuestion, 'options'>> = [
   { id: 'f-tz', countryCode: 'TZ', countryName: 'Tanzania', flagEmoji: '🇹🇿', fact: 'Rumah bagi puncak tertinggi di Afrika, Gunung Kilimanjaro bersalju abadi.' },
   { id: 'f-mg', countryCode: 'MG', countryName: 'Madagaskar', flagEmoji: '🇲🇬', fact: 'Pulau raksasa terisolasi dengan flora fauna unik seperti pohon Baobab dan Lemur.' },
   { id: 'f-et', countryCode: 'ET', countryName: 'Ethiopia', flagEmoji: '🇪🇹', fact: 'Tempat asal mula ditemukannya pohon kopi pertama kali di wilayah Kaffa.' },
-  { id: 'f-ci', countryCode: 'CI', countryName: 'Pantai Gading (Côte d\'Ivoire)', flagEmoji: '🇨🇮', fact: 'Produsen biji kakao terbesar di dunia dengan bendera jingga, putih, dan hijau.' },
+  { id: 'f-ci', countryCode: 'CI', countryName: 'Pantai Gading', flagEmoji: '🇨🇮', fact: 'Produsen biji kakao terbesar di dunia dengan bendera jingga, putih, dan hijau.' },
   { id: 'f-cm', countryCode: 'CM', countryName: 'Kamerun', flagEmoji: '🇨🇲', fact: 'Dijuluki sebagai "Miniatur Afrika" karena keragaman iklim dan budayanya.' },
   { id: 'f-dz', countryCode: 'DZ', countryName: 'Aljazair', flagEmoji: '🇩🇿', fact: 'Negara dengan wilayah daratan terluas di seluruh benua Afrika.' },
-  { id: 'f-tn', countryCode: 'TN', countryName: 'Tunisia', flagEmoji: '🇹🇳', fact: 'Lokasi reruntuhan kota kuno Kartago dan latar syuting planet Tatooine di film Star Wars.' },
+  { id: 'f-tn', countryCode: 'TN', countryName: 'Tunisia', flagEmoji: '🇹🇳', fact: 'Lokasi reruntuhan kota kuno Kartago dan latar syuting planet Tatooine film Star Wars.' },
 
   // BENUA OSEANIA
   { id: 'f-au', countryCode: 'AU', countryName: 'Australia', flagEmoji: '🇦🇺', fact: 'Benua dan negara tempat tinggal hewan berkantung endemik Kangguru dan Koala.' },
   { id: 'f-nz', countryCode: 'NZ', countryName: 'Selandia Baru', flagEmoji: '🇳🇿', fact: 'Negeri suku Maori, burung Kiwi tak bersayap, dan lanskap film The Lord of the Rings.' },
-  { id: 'f-fj', countryCode: 'FJ', countryName: 'Fiji', flagEmoji: '🇫🇯', fact: 'Negara kepulauan di Pasifik Selatan yang terkenal dengan keramahan warganya dan terumbu karang.' },
-  { id: 'f-pg', countryCode: 'PG', countryName: 'Papua Nugini', flagEmoji: '🇵🇬', fact: 'Negara tetangga provinsi Papua Indonesia dengan lebih dari 800 bahasa daerah yang aktif.' },
-  { id: 'f-ws', countryCode: 'WS', countryName: 'Samoa', flagEmoji: '🇼🇸', fact: 'Negara pulau Polinesia dengan budaya Fa\'a Samoa yang menjunjung tinggi kekeluargaan.' }
+  { id: 'f-fj', countryCode: 'FJ', countryName: 'Fiji', flagEmoji: '🇫🇯', fact: 'Negara kepulauan di Samudra Pasifik Selatan dengan terumbu karang warna-warni mempesona.' },
+  { id: 'f-pg', countryCode: 'PG', countryName: 'Papua Nugini', flagEmoji: '🇵🇬', fact: 'Negara tetangga provinsi Papua dengan lebih dari 800 bahasa daerah yang berbeda.' }
 ];
 
-// ========================================================
-// 2. DATA TEBAK KATA BAHASA INDONESIA (110+ TEKA-TEKI KATA)
-// ========================================================
-export const WORD_DATABASE: Array<Omit<WordQuestion, 'options'>> = [
+// ==============================================================
+// 2. DATA TEBAK KATA & TEKA-TEKI INDONESIA (150+ SOAL BERVARIASI)
+// ==============================================================
+export const WORD_DATABASE: WordQuestion[] = [
   // KULINER NUSANTARA
-  { id: 'w-1', word: 'RENDANG', clue: 'Olahan daging sapi Minangkabau dimasak dengan aneka rempah dan santan berjam-jam hingga kuah hitam kering.', category: 'Kuliner Nusantara', hint: 'Pernah dinobatkan sebagai salah satu makanan terenak di dunia' },
-  { id: 'w-2', word: 'PEMPEK', clue: 'Kuliner Palembang dari adonan ikan dan sagu yang disantap bersama kuah cuko manis pedas asam.', category: 'Kuliner Nusantara', hint: 'Ada varian kapal selam yang berisi kuning telur' },
-  { id: 'w-3', word: 'GUDEG', clue: 'Olahan nangka muda manis khas Yogyakarta yang dimasak bersama santan dan daun jati.', category: 'Kuliner Nusantara', hint: 'Sering disantap dengan krecek pedas dan telur bacem' },
-  { id: 'w-4', word: 'RAWON', clue: 'Sup daging sapi khas Jawa Timur berkuah hitam pekat gurih berkat rempah istimewa kluwek.', category: 'Kuliner Nusantara', hint: 'Disajikan bersama tauge pendek, sambal terasi, dan telur asin' },
-  { id: 'w-5', word: 'SATE', clue: 'Potongan daging ditusuk lidi bambu lalu dibakar di atas arang batok dan disiram bumbu kacang atau kecap.', category: 'Kuliner Nusantara', hint: 'Aroma bakaran arang bambunya sangat khas' },
-  { id: 'w-6', word: 'TEMPE', clue: 'Makanan fermentasi kedelai menggunakan jamur Rhizopus yang menjadi sumber protein nabati favorit Indonesia.', category: 'Kuliner Nusantara', hint: 'Sering digoreng mendoan atau ditumis orek' },
-  { id: 'w-7', word: 'PAPEDA', clue: 'Makanan pokok khas Papua dan Maluku berupa bubur sagu kenyal yang disantap dengan kuah kuning ikan.', category: 'Kuliner Nusantara', hint: 'Digulung menggunakan sepasang sumpit bambu khusus bernama gata-gata' },
-  { id: 'w-8', word: 'BAKSO', clue: 'Bulatan daging sapi kenyal yang disajikan dengan kuah kaldu hangat, mie kuning, bihun, dan bawang goreng.', category: 'Kuliner Nusantara', hint: 'Sering dijual memakai gerobak keliling dengan mangkok ayam jago' },
-  { id: 'w-9', word: 'KLEPON', clue: 'Kue bulat kenyal berwarna hijau daun suji bertabur kelapa parut yang meletus gula merah cair saat digigit.', category: 'Kue Tradisional', hint: 'Hati-hati gula merahnya muncrat di dalam mulut' },
-  { id: 'w-10', word: 'CENDOL', clue: 'Minuman manis dingin berisi butiran tepung hijau beras pandan dengan santan gurih dan sirup gula aren.', category: 'Minuman Tradisional', hint: 'Sering disebut juga es dawet' },
-  { id: 'w-11', word: 'KERAK TELOR', clue: 'Jajanan khas Betawi dari beras ketan, telur bebek, dan kelapa sangrai serundeng yang dimasak di wajan terbalik.', category: 'Kuliner Betawi', hint: 'Kuliner ikonik di Pekan Raya Jakarta (PRJ)' },
-  { id: 'w-12', word: 'ONDE-ONDE', clue: 'Kue bulat goreng bertabur biji wijen di seluruh kulitnya dengan isian pasta kacang hijau manis legit.', category: 'Kue Tradisional', hint: 'Kulit luarnya kenyal renyah bertabur wijen' },
-  { id: 'w-13', word: 'SAMBAL', clue: 'Ulekan cabai, bawang, dan terasi yang menjadi pelengkap wajib hampir di setiap piring makan orang Indonesia.', category: 'Pelengkap Makanan', hint: 'Tanpa benda ini makanan terasa kurang nendang' },
-  { id: 'w-14', word: 'RUJAK', clue: 'Campuran potongan buah-buahan segar seperti mangga, kedondong, dan jambu yang dicocol bumbu gula merah pedas.', category: 'Camilan Buah', hint: 'Cocok dinikmati saat siang hari terik' },
-  { id: 'w-15', word: 'MARTABAK', clue: 'Adonan tebal bersarang dengan topping cokelat keju wijen manis, atau kulit garing isi telur dan daging gurih.', category: 'Kuliner Malam', hint: 'Ada versi manis dan versi telur' },
+  { id: 'w-1', word: 'RENDANG', clue: 'Olahan daging sapi Minangkabau dimasak dengan aneka rempah dan santan berjam-jam hingga kuah hitam kering.', category: 'Kuliner Nusantara', hint: 'Pernah dinobatkan sebagai salah satu makanan terenak di dunia', options: [] },
+  { id: 'w-2', word: 'PEMPEK', clue: 'Kuliner Palembang dari adonan ikan dan sagu yang disantap bersama kuah cuko manis pedas asam.', category: 'Kuliner Nusantara', hint: 'Ada varian kapal selam yang berisi kuning telur', options: [] },
+  { id: 'w-3', word: 'GUDEG', clue: 'Olahan nangka muda manis khas Yogyakarta yang dimasak bersama santan dan daun jati.', category: 'Kuliner Nusantara', hint: 'Sering disantap dengan krecek pedas dan telur bacem', options: [] },
+  { id: 'w-4', word: 'RAWON', clue: 'Sup daging sapi khas Jawa Timur berkuah hitam pekat gurih berkat rempah istimewa kluwek.', category: 'Kuliner Nusantara', hint: 'Disajikan bersama tauge pendek, sambal terasi, dan telur asin', options: [] },
+  { id: 'w-5', word: 'SATE', clue: 'Potongan daging ditusuk lidi bambu lalu dibakar di atas arang batok dan disiram bumbu kacang atau kecap.', category: 'Kuliner Nusantara', hint: 'Aroma bakaran arang bambunya sangat khas', options: [] },
+  { id: 'w-6', word: 'TEMPE', clue: 'Makanan fermentasi kedelai menggunakan jamur Rhizopus yang menjadi sumber protein nabati favorit Indonesia.', category: 'Kuliner Nusantara', hint: 'Sering digoreng mendoan atau ditumis orek', options: [] },
+  { id: 'w-7', word: 'PAPEDA', clue: 'Makanan pokok khas Papua dan Maluku berupa bubur sagu kenyal yang disantap dengan kuah kuning ikan.', category: 'Kuliner Nusantara', hint: 'Digulung menggunakan sepasang sumpit bambu khusus bernama gata-gata', options: [] },
+  { id: 'w-8', word: 'BAKSO', clue: 'Bulatan daging sapi kenyal yang disajikan dengan kuah kaldu hangat, mie kuning, bihun, dan bawang goreng.', category: 'Kuliner Nusantara', hint: 'Sering dijual memakai gerobak keliling dengan mangkok ayam jago', options: [] },
+  { id: 'w-9', word: 'KLEPON', clue: 'Kue bulat kenyal berwarna hijau daun suji bertabur kelapa parut yang meletus gula merah cair saat digigit.', category: 'Kue Tradisional', hint: 'Hati-hati gula merahnya muncrat di dalam mulut', options: [] },
+  { id: 'w-10', word: 'CENDOL', clue: 'Minuman manis dingin berisi butiran tepung hijau beras pandan dengan santan gurih dan sirup gula aren.', category: 'Minuman Tradisional', hint: 'Sering disebut juga es dawet', options: [] },
+  { id: 'w-11', word: 'KERAK TELOR', clue: 'Jajanan Betawi dari beras ketan, telur bebek, dan serundeng kelapa sangrai yang dimasak di wajan terbalik.', category: 'Kuliner Betawi', hint: 'Kuliner ikonik di Pekan Raya Jakarta (PRJ)', options: [] },
+  { id: 'w-12', word: 'ONDE-ONDE', clue: 'Kue bulat goreng bertabur biji wijen di seluruh kulitnya dengan isian pasta kacang hijau manis legit.', category: 'Kue Tradisional', hint: 'Kulit luarnya kenyal renyah bertabur wijen', options: [] },
+  { id: 'w-13', word: 'SAMBAL', clue: 'Ulekan cabai, bawang, dan terasi yang menjadi pelengkap wajib hampir di setiap piring makan orang Indonesia.', category: 'Pelengkap Makanan', hint: 'Tanpa benda ini makanan terasa kurang nendang', options: [] },
+  { id: 'w-14', word: 'RUJAK', clue: 'Campuran potongan buah segar seperti mangga, kedondong, dan bengkuang dicocol bumbu gula merah terasi pedas.', category: 'Camilan Buah', hint: 'Cocok dinikmati saat siang hari terik', options: [] },
+  { id: 'w-15', word: 'MARTABAK', clue: 'Adonan tebal bersarang dengan topping cokelat keju manis legit, atau kulit garing isi cincang daging dan telur.', category: 'Kuliner Malam', hint: 'Ada versi manis dan versi telur gurih', options: [] },
+  { id: 'w-16', word: 'SOTO', clue: 'Hidangan sup berkuah kuning kunyit hangat berisi suwiran ayam atau daging, kol, dan soun.', category: 'Kuliner Berkuah', hint: 'Hampir tiap daerah di Indonesia punya variasi khasnya (Lamongan, Betawi, Kudus)', options: [] },
+  { id: 'w-17', word: 'KERUPUK', clue: 'Pelengkap makanan garing renyah dari tepung tapioka yang bersuara kriuk saat digigit.', category: 'Pelengkap Makan', hint: 'Sering ditaruh di dalam kaleng seng warna biru dengan tutup kaca', options: [] },
+  { id: 'w-18', word: 'ES TELER', clue: 'Minuman dingin segar berisi serutan kelapa muda, potongan buah alpukat, dan nangka disiram susu kental manis.', category: 'Minuman Segar', hint: 'Minuman penuntas dahaga di siang terik', options: [] },
+  { id: 'w-19', word: 'SERABI', clue: 'Pancake tradisional dari tepung beras dan santan yang dimasak di atas wajan tanah liat kecil.', category: 'Jajanan Tradisional', hint: 'Bisa dimakan dengan kuah kinca gula kelapa manis atau oncom gurih', options: [] },
+  { id: 'w-20', word: 'BIKA AMBON', clue: 'Kue kenyal berongga kuning cerah dengan aroma harum daun jeruk dan serai, oleh-oleh legendaris kota Medan.', category: 'Kue Khas Nusantara', hint: 'Namanya ada kata Ambon tapi berasal dari Medan', options: [] },
 
   // FAUNA & SATWA
-  { id: 'w-16', word: 'KOMODO', clue: 'Kadal purba terbesar di dunia yang merupakan satwa endemik langka di Nusa Tenggara Timur.', category: 'Fauna Indonesia', hint: 'Memiliki lidah bercabang kuning dan liur beracun' },
-  { id: 'w-17', word: 'ORANGUTAN', clue: 'Kera besar berambut kemerahan dengan kecerdasan tinggi yang hidup bergelantungan di hutan Kalimantan dan Sumatra.', category: 'Fauna Hutan', hint: 'Menghabiskan sebagian besar hidupnya di atas tajuk pohon' },
-  { id: 'w-18', word: 'CENDERAWASIH', clue: 'Burung elok berbulu warna-warni memikat asal Papua yang sering dijuluki burung dari surga (Bird of Paradise).', category: 'Unggas Cantik', hint: 'Tergambar pada uang koin pecahan rupiah klasik' },
-  { id: 'w-19', word: 'LUMBA-LUMBA', clue: 'Mamalia laut cerdas yang suka berenang melompat di haluan kapal dan bernapas lewat lubang di atas kepalanya.', category: 'Biologi Laut', hint: 'Sering terlihat menyambut matahari terbit di pantai Lovina Bali' },
-  { id: 'w-20', word: 'GURITA', clue: 'Hewan laut berbadan lunak tanpa tulang belakang, memiliki delapan lengan berpenghisap dan tinta hitam pertahanan.', category: 'Biologi Laut', hint: 'Bisa menyamar meniru warna dan tekstur karang' },
-  { id: 'w-21', word: 'TRENGGILING', clue: 'Mamalia pemakan semut yang tubuhnya dilapisi sisik tebal keras dan akan menggulung seperti bola saat terancam.', category: 'Fauna Unik', hint: 'Menjilati sarang semut menggunakan lidahnya yang sangat panjang' },
-  { id: 'w-22', word: 'KUKANG', clue: 'Primata malam bermata bulat besar yang gerakannya sangat lambat dan suka memeluk dahan pohon.', category: 'Fauna Nokturnal', hint: 'Sering dijuluki si pemalu' },
-  { id: 'w-23', word: 'ANOA', clue: 'Hewan endemik Sulawesi bertubuh mirip kerbau kerdil yang hidup liar di hutan belantara.', category: 'Fauna Endemik', hint: 'Sering disebut kerbau kerdil' },
-  { id: 'w-24', word: 'HARIMAU', clue: 'Kucing besar berbelang loreng oranye hitam yang merupakan predator puncak di rimba Sumatra.', category: 'Satwa Liar', hint: 'Raja predator bertaring tajam' },
-  { id: 'w-25', word: 'KANGGURU', clue: 'Hewan berkantung yang melompat menggunakan kedua kaki belakangnya dan membawa anaknya di kantung perut.', category: 'Fauna Mamalia', hint: 'Ada jenis yang hidup di tanah dan ada kangguru pohon di Papua' },
+  { id: 'w-21', word: 'KOMODO', clue: 'Kadal purba terbesar di dunia yang merupakan satwa endemik langka di Nusa Tenggara Timur.', category: 'Fauna Indonesia', hint: 'Memiliki lidah bercabang kuning dan liur beracun', options: [] },
+  { id: 'w-22', word: 'ORANGUTAN', clue: 'Kera besar berambut kemerahan dengan kecerdasan tinggi yang hidup bergelantungan di hutan Kalimantan dan Sumatra.', category: 'Fauna Hutan', hint: 'Menghabiskan sebagian besar hidupnya di atas tajuk pohon', options: [] },
+  { id: 'w-23', word: 'CENDERAWASIH', clue: 'Burung elok berbulu warna-warni memikat asal Papua yang sering dijuluki burung dari surga (Bird of Paradise).', category: 'Unggas Cantik', hint: 'Tergambar pada uang koin pecahan rupiah klasik', options: [] },
+  { id: 'w-24', word: 'LUMBA-LUMBA', clue: 'Mamalia laut cerdas yang suka berenang melompat di haluan kapal dan bernapas lewat lubang di atas kepalanya.', category: 'Biologi Laut', hint: 'Sering terlihat menyambut matahari terbit di pantai Lovina Bali', options: [] },
+  { id: 'w-25', word: 'GURITA', clue: 'Hewan laut berbadan lunak tanpa tulang belakang, memiliki delapan lengan berpenghisap dan tinta hitam pertahanan.', category: 'Biologi Laut', hint: 'Bisa menyamar meniru warna dan tekstur karang', options: [] },
+  { id: 'w-26', word: 'TRENGGILING', clue: 'Mamalia pemakan semut yang tubuhnya dilapisi sisik tebal keras dan akan menggulung seperti bola saat terancam.', category: 'Fauna Unik', hint: 'Menjilati sarang semut menggunakan lidahnya yang sangat panjang', options: [] },
+  { id: 'w-27', word: 'KUKANG', clue: 'Primata malam bermata bulat besar yang gerakannya sangat lambat dan suka memeluk dahan pohon.', category: 'Fauna Nokturnal', hint: 'Sering dijuluki si pemalu', options: [] },
+  { id: 'w-28', word: 'ANOA', clue: 'Hewan endemik Sulawesi bertubuh mirip kerbau kerdil yang hidup liar di hutan belantara.', category: 'Fauna Endemik', hint: 'Sering disebut kerbau kerdil', options: [] },
+  { id: 'w-29', word: 'HARIMAU', clue: 'Kucing besar berbelang loreng oranye hitam yang merupakan predator puncak di rimba Sumatra.', category: 'Satwa Liar', hint: 'Raja predator bertaring tajam', options: [] },
+  { id: 'w-30', word: 'KANGGURU', clue: 'Hewan berkantung yang melompat menggunakan kedua kaki belakangnya dan membawa anaknya di kantung perut.', category: 'Fauna Mamalia', hint: 'Ada jenis yang hidup di tanah dan ada kangguru pohon di Papua', options: [] },
+  { id: 'w-31', word: 'BEKANTAN', clue: 'Monyet unik khas pulau Kalimantan yang memiliki hidung besar panjang menggantung dan perut buncit.', category: 'Fauna Endemik', hint: 'Menjadi maskot taman rekreasi Dunia Fantasi (Dufan) Ancol', options: [] },
+  { id: 'w-32', word: 'BADAK', clue: 'Hewan herbivora berkulit tebal mirip baju zirah yang memiliki cula di atas moncong hidungnya.', category: 'Satwa Langka', hint: 'Badak Jawa bercula satu dilindungi ketat di Taman Nasional Ujung Kulon', options: [] },
+  { id: 'w-33', word: 'BUNGLON', clue: 'Reptil pohon yang memiliki kemampuan luar biasa mengubah warna kulitnya sesuai lingkungan sekitarnya.', category: 'Reptil Unik', hint: 'Memiliki mata yang bisa bergerak ke arah berlawanan secara mandiri', options: [] },
+  { id: 'w-34', word: 'PAUS BIRU', clue: 'Makhluk hidup dan mamalia laut terbesar yang pernah ada di muka bumi, beratnya bisa mencapai ratusan ton.', category: 'Raksasa Samudra', hint: 'Bernapas dengan paru-paru dan menyemburkan uap air ke udara', options: [] },
+  { id: 'w-35', word: 'KUNANG-KUNANG', clue: 'Serangga kecil terbang di malam hari yang bagian perut belakangnya dapat memancarkan cahaya kehijauan indah.', category: 'Serangga Malam', hint: 'Sering terlihat berkelap-kelip di dekat persawahan yang bebas polusi', options: [] },
 
-  // BENDA & PERALATAN SEHARI-HARI
-  { id: 'w-26', word: 'PAYUNG', clue: 'Saat cuaca cerah sering disimpan di sudut rumah, tapi saat langit menangis atau matahari menyengat selalu dibuka.', category: 'Benda Sehari-hari', hint: 'Punya kain tudung melingkar dan gagang bengkok' },
-  { id: 'w-27', word: 'GUNTING', clue: 'Punya dua mata pisau yang saling bersilang, semakin sering mereka beradu maka lembaran di tengahnya terbelah.', category: 'Peralatan Rumah', hint: 'Dipakai memotong kain, kertas, dan rambut' },
-  { id: 'w-28', word: 'JARUM', clue: 'Badanku ramping berujung runcing lancip, punya lubang kecil di satu ujungnya untuk dilalui seutas benang.', category: 'Peralatan Jahit', hint: 'Pasangan sejati dari benang jahit' },
-  { id: 'w-29', word: 'SPION', clue: 'Kaca kecil yang menempel di stang atau pintu kendaraan untuk memantau keadaan di belakang tanpa menoleh.', category: 'Otomotif', hint: 'Wajib dilihat sebelum berbelok atau berpindah jalur' },
-  { id: 'w-30', word: 'KELERENG', clue: 'Bulatan kaca bening mengilap warna-warni yang disentil anak-anak di tanah berdebu.', category: 'Permainan Klasik', hint: 'Sering disebut juga gundu' },
-  { id: 'w-31', word: 'KULKAS', clue: 'Lemari yang tak pernah menyimpan pakaian, selalu dingin membekukan es batu dan menjaga kesegaran sayuran.', category: 'Elektronik Rumah', hint: 'Memiliki bagian freezer di dalamnya' },
-  { id: 'w-32', word: 'SEPATU', clue: 'Selalu berpasangan kanan dan kiri, punya tali atau perekat, setia melindungi telapak kakimu dari aspal panas.', category: 'Alas Kaki', hint: 'Dilepas sebelum melangkah masuk ke karpet rumah' },
-  { id: 'w-33', word: 'CANGKUL', clue: 'Bilah besi pipih bergagang kayu panjang, senjata andalan para petani untuk membalik tanah gembur di sawah.', category: 'Peralatan Tani', hint: 'Ada lagu anak: Cangkul, cangkul, cangkul yang dalam' },
-  { id: 'w-34', word: 'BANTAL', clue: 'Benda empuk bersarung kain yang selalu dicari saat mata mengantuk, tempat kepala merebahkan lelah.', category: 'Kamar Tidur', hint: 'Teman setia guling di atas kasur' },
-  { id: 'w-35', word: 'KIPAS ANGIN', clue: 'Memiliki baling-baling yang berputar cepat menghasilkan hembusan angin sejuk saat ruangan terasa gerah.', category: 'Elektronik Rumah', hint: 'Bisa berputar menggeleng ke kanan dan kiri' },
-  { id: 'w-36', word: 'SETRIKA', clue: 'Alat beralas logam yang menjadi sangat panas saat dialiri listrik untuk melicinkan pakaian kusut sehabis dicuci.', category: 'Elektronik Rumah', hint: 'Membuat baju kusut menjadi rapi kembali' },
-  { id: 'w-37', word: 'EMBER', clue: 'Wadah silinder terbuka bergagang kawat melengkung yang digunakan menampung air saat mengepel atau mandi.', category: 'Alat Rumah Tangga', hint: 'Sering ditaruh di bawah keran air kamar mandi' },
-  { id: 'w-38', word: 'PENSIL', clue: 'Batang kayu berisi grafit hitam yang bisa diraut lancip, menghasilkan goresan tulisan yang bisa dihapus karet penghapus.', category: 'Alat Tulis', hint: 'Ujungnya harus diraut jika patah atau tumpul' },
-  { id: 'w-39', word: 'CERMIN', clue: 'Kaca datar mengilap yang meniru wajah dan gerakanmu persis tanpa pernah mengeluarkan suara.', category: 'Benda Kamar', hint: 'Tempat bercermin saat menyisir atau berdandan' },
-  { id: 'w-40', word: 'DOMPET', clue: 'Lipatan kulit atau kain kecil tempat menyimpan uang kertas, koin, dan kartu identitas di dalam saku celana.', category: 'Aksesoris Saku', hint: 'Benda yang paling dicari saat hendak membayar di kasir' },
+  // BENDA SEHARI-HARI & TEKNOLOGI
+  { id: 'w-36', word: 'PAYUNG', clue: 'Saat cuaca cerah sering disimpan di sudut rumah, tapi saat langit menangis atau terik selalu dibuka.', category: 'Benda Sehari-hari', hint: 'Punya kain tudung melingkar dan gagang bengkok', options: [] },
+  { id: 'w-37', word: 'GUNTING', clue: 'Punya dua mata pisau yang saling bersilang, semakin sering mereka beradu maka lembaran di tengahnya terbelah.', category: 'Peralatan Rumah', hint: 'Dipakai memotong kain, kertas, dan rambut', options: [] },
+  { id: 'w-38', word: 'JARUM', clue: 'Badanku ramping berujung runcing lancip, punya lubang kecil di satu ujungnya untuk dilalui seutas benang.', category: 'Peralatan Jahit', hint: 'Pasangan sejati dari benang jahit', options: [] },
+  { id: 'w-39', word: 'SPION', clue: 'Kaca kecil yang menempel di stang atau pintu kendaraan untuk memantau keadaan di belakang tanpa menoleh.', category: 'Otomotif', hint: 'Wajib dilihat sebelum berbelok atau berpindah jalur', options: [] },
+  { id: 'w-40', word: 'KELERENG', clue: 'Bulatan kaca bening mengilap warna-warni yang disentil anak-anak di tanah berdebu.', category: 'Permainan Klasik', hint: 'Sering disebut juga gundu', options: [] },
+  { id: 'w-41', word: 'KULKAS', clue: 'Lemari yang tak pernah menyimpan pakaian, selalu dingin membekukan es batu dan menjaga kesegaran sayuran.', category: 'Elektronik Rumah', hint: 'Memiliki bagian freezer di dalamnya', options: [] },
+  { id: 'w-42', word: 'SEPATU', clue: 'Selalu berpasangan kanan dan kiri, punya tali atau perekat, setia melindungi telapak kakimu dari aspal panas.', category: 'Alas Kaki', hint: 'Dilepas sebelum melangkah masuk ke karpet rumah', options: [] },
+  { id: 'w-43', word: 'CANGKUL', clue: 'Bilah besi pipih bergagang kayu panjang, senjata andalan para petani untuk membalik tanah gembur di sawah.', category: 'Peralatan Tani', hint: 'Ada lagu anak: Cangkul, cangkul, cangkul yang dalam', options: [] },
+  { id: 'w-44', word: 'BANTAL', clue: 'Benda empuk bersarung kain yang selalu dicari saat mata mengantuk, tempat kepala merebahkan lelah.', category: 'Kamar Tidur', hint: 'Teman setia guling di atas kasur', options: [] },
+  { id: 'w-45', word: 'KIPAS ANGIN', clue: 'Memiliki baling-baling yang berputar cepat menghasilkan hembusan angin sejuk saat ruangan gerah.', category: 'Elektronik Rumah', hint: 'Bisa berputar menggeleng ke kanan dan kiri', options: [] },
+  { id: 'w-46', word: 'SETRIKA', clue: 'Alat beralas logam yang menjadi sangat panas saat dialiri listrik untuk melicinkan pakaian kusut.', category: 'Elektronik Rumah', hint: 'Membuat baju kusut menjadi rapi kembali', options: [] },
+  { id: 'w-47', word: 'EMBER', clue: 'Wadah silinder terbuka bergagang kawat melengkung yang digunakan menampung air saat mengepel atau mandi.', category: 'Alat Rumah Tangga', hint: 'Sering ditaruh di bawah keran air kamar mandi', options: [] },
+  { id: 'w-48', word: 'PENSIL', clue: 'Batang kayu berisi grafit hitam yang bisa diraut lancip, menghasilkan goresan tulisan yang bisa dihapus.', category: 'Alat Tulis', hint: 'Ujungnya harus diraut jika patah atau tumpul', options: [] },
+  { id: 'w-49', word: 'CERMIN', clue: 'Kaca datar mengilap yang meniru wajah dan gerakanmu persis tanpa pernah mengeluarkan suara.', category: 'Benda Kamar', hint: 'Tempat bercermin saat menyisir atau berdandan', options: [] },
+  { id: 'w-50', word: 'DOMPET', clue: 'Lipatan kulit atau kain kecil tempat menyimpan uang kertas, koin, dan kartu identitas di dalam saku celana.', category: 'Aksesoris Saku', hint: 'Benda yang paling dicari saat hendak membayar di kasir', options: [] },
+  { id: 'w-51', word: 'HELM', clue: 'Pelindung kepala berbahan batok keras berspon tebal dan berkaca mika yang wajib dipakai pengendara motor.', category: 'Keselamatan', hint: 'Harus berstandar SNI dan diklik talinya di bawah dagu', options: [] },
+  { id: 'w-52', word: 'JAM DINDING', clue: 'Piringan angka satu sampai dua belas yang dipajang di tembok dan berdetik teratur setiap detik.', category: 'Penunjuk Waktu', hint: 'Berbunyi tik-tok-tik-tok tiada henti', options: [] },
+  { id: 'w-53', word: 'KACAMATA', clue: 'Dua lensa berbingkai yang bertengger di atas hidung dan dikaitkan di telinga untuk membantu pandangan mata.', category: 'Aksesoris Penglihatan', hint: 'Bisa berlensa minus, plus, atau silinder hitam anti silau', options: [] },
+  { id: 'w-54', word: 'TERMOS', clue: 'Botol berdinding hampa udara ganda yang mampu mempertahankan suhu air panas agar tidak cepat dingin.', category: 'Perabotan Dapur', hint: 'Biasa dipakai menyimpan air panas untuk menyeduh kopi atau susu bayi', options: [] },
+  { id: 'w-55', word: 'GEMBOK', clue: 'Besi pengunci berkait melengkung yang mengunci pintu pagar atau rantai dan hanya bisa dibuka dengan anak kuncinya.', category: 'Keamanan Rumah', hint: 'Pasangan sejati dari lubang kunci logam', options: [] },
 
   // SENI & BUDAYA NUSANTARA
-  { id: 'w-41', word: 'ANGKLUNG', clue: 'Alat musik bambu tradisional asal Jawa Barat yang mengeluarkan nada harmonis merdu saat digoyangkan.', category: 'Musik Nusantara', hint: 'Terdaftar sebagai Warisan Budaya Takbenda UNESCO' },
-  { id: 'w-42', word: 'BATIK', clue: 'Kain bergambar motif indah nusantara yang dibuat menggunakan canting berisi malam lilin panas.', category: 'Karya Nusantara', hint: 'Kerap dikenakan pada hari Jumat dan acara resmi' },
-  { id: 'w-43', word: 'KERIS', clue: 'Senjata tikam tradisional dengan bilah berluk-luk kelok indah dan pamor logam berlapis sakral.', category: 'Pusaka Tradisional', hint: 'Senjata warisan para ksatria dan raja Jawa' },
-  { id: 'w-44', word: 'WAYANG', clue: 'Seni pertunjukan boneka kulit bayangan atau golek kayu yang dimainkan oleh seorang dalang semalam suntuk.', category: 'Seni Pertunjukan', hint: 'Menceritakan kisah Mahabharata dan Ramayana' },
-  { id: 'w-45', word: 'GAMELAN', clue: 'Ansambel musik tradisional Jawa dan Bali yang terdiri dari gong, saron, bonang, kendang, dan kenong.', category: 'Musik Tradisional', hint: 'Dimainkan secara bersama-sama dalam satu kelompok penabuh' },
-  { id: 'w-46', word: 'SASANDO', clue: 'Alat musik dawai petik tradisional dari Pulau Rote Nusa Tenggara Timur yang memiliki wadah daun lontar melengkung.', category: 'Alat Musik Tradisional', hint: 'Pernah menjadi gambar pada uang kertas lima ribu rupiah' },
-  { id: 'w-47', word: 'REOG', clue: 'Kesenian tari topeng singa raksasa bermahkota bulu merak setinggi dua meter asal Ponorogo yang digigit di gigi penari.', category: 'Seni Tradisional', hint: 'Topeng dadak merak super berat digigit tanpa bantuan tangan' },
-  { id: 'w-48', word: 'BLANGKON', clue: 'Penutup kepala tradisional pria khas Jawa dengan lipatan kain batik dan tonjolan mondolan di belakang.', category: 'Pakaian Adat', hint: 'Pelengkap busana beskap atau surjan pria' },
-  { id: 'w-49', word: 'SONGKET', clue: 'Kain tenun mewah tradisional khas Minangkabau dan Palembang yang ditenun menggunakan benang emas atau perak berkilau.', category: 'Kain Tradisional', hint: 'Kain kebanggaan untuk upacara pernikahan adat' },
-  { id: 'w-50', word: 'KOLINTANG', clue: 'Alat musik bilah-bilah kayu bernada yang dipukul menggunakan stik empuk asal Minahasa Sulawesi Utara.', category: 'Alat Musik Pukul', hint: 'Bilah kayunya disusun rapi di atas kotak resonansi' },
+  { id: 'w-56', word: 'ANGKLUNG', clue: 'Alat musik bambu tradisional asal Jawa Barat yang mengeluarkan nada harmonis merdu saat digoyangkan.', category: 'Musik Nusantara', hint: 'Terdaftar sebagai Warisan Budaya Takbenda UNESCO', options: [] },
+  { id: 'w-57', word: 'BATIK', clue: 'Kain bergambar motif indah nusantara yang dibuat menggunakan canting berisi malam lilin panas.', category: 'Karya Nusantara', hint: 'Kerap dikenakan pada hari Jumat dan acara resmi', options: [] },
+  { id: 'w-58', word: 'KERIS', clue: 'Senjata tikam tradisional dengan bilah berluk-luk kelok indah dan pamor logam berlapis sakral.', category: 'Pusaka Tradisional', hint: 'Senjata warisan para ksatria dan raja Jawa', options: [] },
+  { id: 'w-59', word: 'WAYANG', clue: 'Seni pertunjukan boneka kulit bayangan atau golek kayu yang dimainkan oleh seorang dalang semalam suntuk.', category: 'Seni Pertunjukan', hint: 'Menceritakan kisah Mahabharata dan Ramayana', options: [] },
+  { id: 'w-60', word: 'GAMELAN', clue: 'Ansambel musik tradisional Jawa dan Bali yang terdiri dari gong, saron, bonang, kendang, dan kenong.', category: 'Musik Tradisional', hint: 'Dimainkan secara bersama-sama dalam satu kelompok penabuh', options: [] },
+  { id: 'w-61', word: 'SASANDO', clue: 'Alat musik dawai petik tradisional dari Pulau Rote NTT yang memiliki wadah daun lontar melengkung.', category: 'Alat Musik Petik', hint: 'Pernah menjadi gambar pada uang kertas lima ribu rupiah', options: [] },
+  { id: 'w-62', word: 'REOG', clue: 'Kesenian tari topeng singa raksasa bermahkota bulu merak setinggi dua meter asal Ponorogo yang digigit di gigi penari.', category: 'Seni Tradisional', hint: 'Topeng dadak merak super berat digigit tanpa bantuan tangan', options: [] },
+  { id: 'w-63', word: 'BLANGKON', clue: 'Penutup kepala tradisional pria khas Jawa dengan lipatan kain batik dan tonjolan mondolan di belakang.', category: 'Pakaian Adat', hint: 'Pelengkap busana beskap atau surjan pria', options: [] },
+  { id: 'w-64', word: 'SONGKET', clue: 'Kain tenun mewah tradisional khas Minangkabau dan Palembang yang ditenun dengan benang emas berkilau.', category: 'Kain Tradisional', hint: 'Kain kebanggaan untuk upacara pernikahan adat', options: [] },
+  { id: 'w-65', word: 'KOLINTANG', clue: 'Alat musik bilah-bilah kayu bernada yang dipukul menggunakan stik empuk asal Minahasa Sulawesi Utara.', category: 'Alat Musik Pukul', hint: 'Bilah kayunya disusun rapi di atas kotak resonansi kayu', options: [] },
 
   // PROFESI & PEKERJAAN
-  { id: 'w-51', word: 'PRAMUGARI', clue: 'Petugas ramah di pesawat terbang yang bertugas melayani kenyamanan dan memastikan keselamatan seluruh penumpang di udara.', category: 'Profesi Udara', hint: 'Bekerja di dalam kabin pesawat di atas awan' },
-  { id: 'w-52', word: 'MASINIS', clue: 'Orang yang bertugas mengemudikan lokomotif kereta api di atas jalur rel dari stasiun ke stasiun.', category: 'Profesi Transportasi', hint: 'Meniup semboyan suling kereta api' },
-  { id: 'w-53', word: 'ASTRONOT', clue: 'Penjelajah pemberani yang memakai baju luar angkasa khusus dan terbang keluar dari atmosfer bumi dengan roket.', category: 'Profesi Sains', hint: 'Melayang di stasiun luar angkasa tanpa gravitasi' },
-  { id: 'w-54', word: 'NAHKODA', clue: 'Pemimpin tertinggi di atas kapal laut yang bertanggung jawab penuh atas kemudi pelayaran mengarungi samudra luas.', category: 'Profesi Maritim', hint: 'Kapten yang mengarahkan kompas haluan kapal di laut' },
-  { id: 'w-55', word: 'ARSITEK', clue: 'Ahli yang merancang denah, bentuk estetika, dan tata ruang sebuah gedung megah sebelum dibangun para tukang.', category: 'Profesi Kreatif', hint: 'Menggambar rancangan cetak biru gedung di atas meja gambar' },
-  { id: 'w-56', word: 'PETANI', clue: 'Pahlawan pangan yang mencangkul sawah, menanam bibit padi, dan merawat tanaman hingga masa panen tiba.', category: 'Pekerjaan Mulia', hint: 'Bekerja bermandikan terik matahari mengenakan topi caping' },
-  { id: 'w-57', word: 'NELAYAN', clue: 'Pemberani yang menerjang deburan ombak malam hari dengan perahu dan jaring demi menangkap ikan segar di laut.', category: 'Pekerjaan Maritim', hint: 'Berangkat melaut malam hari dan pulang saat fajar membawa hasil tangkapan' },
-  { id: 'w-58', word: 'PEMADAM', clue: 'Pasukan berseragam tahan api yang menaiki mobil bersirine meraung-raung dan menyemprotkan air memadamkan amukan si jago merah.', category: 'Layanan Darurat', hint: 'Membawa selang air besar dan tangga penyelamat' },
-  { id: 'w-59', word: 'DOKTER', clue: 'Tenaga medis berjas putih yang memeriksa detak jantung pasien menggunakan stetoskop dan meresepkan obat kesembuhan.', category: 'Kesehatan', hint: 'Mengalungkan stetoskop di lehernya' },
-  { id: 'w-60', word: 'KOKI', clue: 'Ahli meracik bumbu dan mengolah masakan lezat di dapur restoran bintang lima dengan mengenakan topi putih tinggi.', category: 'Kuliner Profesional', hint: 'Sering disebut juga dengan istilah Chef' },
+  { id: 'w-66', word: 'PRAMUGARI', clue: 'Petugas ramah di pesawat terbang yang bertugas melayani kenyamanan dan memastikan keselamatan penumpang di udara.', category: 'Profesi Udara', hint: 'Bekerja di dalam kabin pesawat di atas awan', options: [] },
+  { id: 'w-67', word: 'MASINIS', clue: 'Orang yang bertugas mengemudikan lokomotif kereta api di atas jalur rel dari stasiun ke stasiun.', category: 'Profesi Transportasi', hint: 'Meniup semboyan suling kereta api', options: [] },
+  { id: 'w-68', word: 'ASTRONOT', clue: 'Penjelajah pemberani yang memakai baju luar angkasa khusus dan terbang keluar dari atmosfer bumi dengan roket.', category: 'Profesi Sains', hint: 'Melayang di stasiun luar angkasa tanpa gravitasi', options: [] },
+  { id: 'w-69', word: 'NAHKODA', clue: 'Pemimpin tertinggi di atas kapal laut yang bertanggung jawab penuh atas kemudi pelayaran mengarungi samudra luas.', category: 'Profesi Maritim', hint: 'Kapten yang mengarahkan kompas haluan kapal di laut', options: [] },
+  { id: 'w-70', word: 'ARSITEK', clue: 'Ahli yang merancang denah, estetika, dan tata ruang sebuah gedung megah sebelum dibangun para tukang.', category: 'Profesi Kreatif', hint: 'Menggambar rancangan cetak biru gedung di atas meja gambar', options: [] },
+  { id: 'w-71', word: 'PETANI', clue: 'Pahlawan pangan yang mencangkul sawah, menanam bibit padi, dan merawat tanaman hingga panen tiba.', category: 'Pekerjaan Mulia', hint: 'Bekerja bermandikan terik matahari mengenakan topi caping', options: [] },
+  { id: 'w-72', word: 'NELAYAN', clue: 'Pemberani yang menerjang deburan ombak malam hari dengan perahu dan jaring demi menangkap ikan segar di laut.', category: 'Pekerjaan Maritim', hint: 'Berangkat melaut malam hari dan pulang saat fajar membawa tangkapan', options: [] },
+  { id: 'w-73', word: 'PEMADAM', clue: 'Pasukan berseragam tahan api yang menaiki mobil bersirine meraung-raung dan menyemprotkan air memadamkan si jago merah.', category: 'Layanan Darurat', hint: 'Membawa selang air besar dan tangga penyelamat', options: [] },
+  { id: 'w-74', word: 'DOKTER', clue: 'Tenaga medis berjas putih yang memeriksa detak jantung pasien memakai stetoskop dan meresepkan obat kesembuhan.', category: 'Kesehatan', hint: 'Mengalungkan stetoskop di lehernya', options: [] },
+  { id: 'w-75', word: 'KOKI', clue: 'Ahli meracik bumbu dan mengolah masakan lezat di dapur restoran bintang lima dengan mengenakan topi putih tinggi.', category: 'Kuliner Profesional', hint: 'Sering disebut juga dengan istilah Chef', options: [] },
+  { id: 'w-76', word: 'FOTOGRAFER', clue: 'Seseorang yang mengabadikan momen berharga lewat lensa kamera dengan mengatur pencahayaan dan komposisi gambar.', category: 'Seni Visual', hint: 'Selalu menyuruh orang tersenyum dan berkata: "Satu, dua, tiga, cheese!"', options: [] },
+  { id: 'w-77', word: 'MONTIR', clue: 'Orang ahli yang memperbaiki mesin mobil atau motor yang mogok dan mengganti oli di bengkel.', category: 'Otomotif', hint: 'Bekerja dengan memegang kunci pas dan obeng berlumur oli', options: [] },
 
-  // FENOMENA ALAM & GEOGRAFI
-  { id: 'w-61', word: 'PELANGI', clue: 'Busur spektrum tujuh warna mempesona di cakrawala saat tetesan air hujan dibiaskan oleh pancaran sinar matahari.', category: 'Fenomena Langit', hint: 'Urutan warnanya disingkat Me-Ji-Ku-Hi-Bi-Ni-U' },
-  { id: 'w-62', word: 'PETIR', clue: 'Kilatan cahaya listrik raksasa di langit yang menyambar sesaat dan disusul suara dentuman guntur menggelegar.', category: 'Cuaca Ekstrem', hint: 'Kilatannya tampak lebih dulu sebelum suaranya terdengar' },
-  { id: 'w-63', word: 'TSUNAMI', clue: 'Gelombang pasang laut raksasa berkecepatan tinggi yang tercipta akibat pergeseran lempeng gempa di dasar samudra.', category: 'Bencana Alam', hint: 'Air laut sempat surut drastis sebelum menerjang daratan' },
-  { id: 'w-64', word: 'GERHANA', clue: 'Fenomena ketika matahari, bulan, dan bumi berada pada satu garis lurus hingga cahaya tertutup bayangan.', category: 'Astronomi', hint: 'Bisa berupa gerhana matahari atau gerhana bulan' },
-  { id: 'w-65', word: 'AIR TERJUN', clue: 'Aliran sungai yang terjun bebas dari tebing batu tinggi curam menghasilkan deburan buih air sejuk.', category: 'Wisata Alam', hint: 'Sering disebut juga curug atau coban di daerah Jawa' },
-  { id: 'w-66', word: 'SALJU', clue: 'Kristal es putih lembut yang jatuh perlahan dari awan dingin saat musim dingin di negara empat musim.', category: 'Iklim Dingin', hint: 'Bahan membuat boneka salju dan bermain ski' },
-  { id: 'w-67', word: 'DANAU TOBA', clue: 'Danau vulkanik terbesar di dunia yang terbentuk akibat letusan gunung super purba, dengan pulau Samosir di tengahnya.', category: 'Geografi Nusantara', hint: 'Ikon wisata kebanggaan di Sumatra Utara' },
-  { id: 'w-68', word: 'KABUT', clue: 'Awan uap air tebal yang melayang rendah di permukaan tanah atau perbukitan sejuk hingga membatasi jarak pandang.', category: 'Alam Sejuk', hint: 'Sering menyelimuti udara pagi hari di kawasan pegunungan' },
+  // FENOMENA ALAM & ASTRONOMI
+  { id: 'w-78', word: 'PELANGI', clue: 'Busur spektrum tujuh warna mempesona di cakrawala saat tetesan air hujan dibiaskan oleh pancaran sinar matahari.', category: 'Fenomena Langit', hint: 'Urutan warnanya disingkat Me-Ji-Ku-Hi-Bi-Ni-U', options: [] },
+  { id: 'w-79', word: 'PETIR', clue: 'Kilatan cahaya listrik raksasa di langit yang menyambar sesaat dan disusul suara dentuman guntur menggelegar.', category: 'Cuaca Ekstrem', hint: 'Kilatannya tampak lebih dulu sebelum suaranya terdengar', options: [] },
+  { id: 'w-80', word: 'TSUNAMI', clue: 'Gelombang pasang laut raksasa berkecepatan tinggi yang tercipta akibat pergeseran lempeng gempa di dasar samudra.', category: 'Bencana Alam', hint: 'Air laut sempat surut drastis sebelum menerjang daratan', options: [] },
+  { id: 'w-81', word: 'GERHANA', clue: 'Fenomena ketika matahari, bulan, dan bumi berada pada satu garis lurus hingga cahaya tertutup bayangan.', category: 'Astronomi', hint: 'Bisa berupa gerhana matahari atau gerhana bulan', options: [] },
+  { id: 'w-82', word: 'AIR TERJUN', clue: 'Aliran sungai yang terjun bebas dari tebing batu tinggi curam menghasilkan deburan buih air sejuk.', category: 'Wisata Alam', hint: 'Sering disebut juga curug atau coban di daerah Jawa', options: [] },
+  { id: 'w-83', word: 'SALJU', clue: 'Kristal es putih lembut yang jatuh perlahan dari awan dingin saat musim dingin di negara empat musim.', category: 'Iklim Dingin', hint: 'Bahan membuat boneka salju dan bermain ski', options: [] },
+  { id: 'w-84', word: 'DANAU TOBA', clue: 'Danau vulkanik terbesar di dunia yang terbentuk akibat letusan gunung super purba, dengan pulau Samosir di tengahnya.', category: 'Geografi Nusantara', hint: 'Ikon wisata kebanggaan di Sumatra Utara', options: [] },
+  { id: 'w-85', word: 'KABUT', clue: 'Awan uap air tebal yang melayang rendah di permukaan tanah atau perbukitan sejuk hingga membatasi jarak pandang.', category: 'Alam Sejuk', hint: 'Sering menyelimuti udara pagi hari di kawasan pegunungan', options: [] },
+  { id: 'w-86', word: 'AURORA', clue: 'Tirai cahaya hijau dan ungu menari-nari mempesona di langit kutub malam akibat partikel matahari menabrak medan magnet bumi.', category: 'Fenomena Atmosfer', hint: 'Dikenal sebagai Cahaya Utara (Northern Lights) di negara dekat kutub', options: [] },
+  { id: 'w-87', word: 'GUNUNG BERAPI', clue: 'Tonjolan daratan tinggi menjulang yang memiliki kawah magma pijar dan dapat meletuskan abu vulkanik panas.', category: 'Geologi Bumi', hint: 'Indonesia berada di jalur Cincin Api Pasifik (Ring of Fire) dengan ratusan gunung ini', options: [] },
 
-  // TEKA-TEKI LOGIKA & KATA UNIK
-  { id: 'w-69', word: 'BUKU', clue: 'Punya daun tapi bukan pohon, punya isi tapi bukan peti, dibaca lembar demi lembar tapi bukan koran.', category: 'Teka-Teki Benda', hint: 'Jendela dunia bagi mereka yang suka membaca' },
-  { id: 'w-70', word: 'LILIN', clue: 'Saat masih muda tubuhku tinggi tegap, tapi semakin tua dan berguna bagi kegelapan tubuhku justru semakin memendek.', category: 'Teka-Teki Benda', hint: 'Meneteskan lelehan parafin saat dibakar sumbunya' },
-  { id: 'w-71', word: 'JEJAK KAKI', clue: 'Semakin banyak kamu melangkah maju di atas pasir basah, semakin banyak benda ini kamu tinggalkan di belakangmu.', category: 'Teka-Teki Logika', hint: 'Membekas di pasir atau lumpur' },
-  { id: 'w-72', word: 'BAYANGAN', clue: 'Selalu setia mengikutimu ke mana pun kamu pergi di bawah terik matahari, tapi langsung lenyap saat berada dalam gelap gulita.', category: 'Teka-Teki Fenomena', hint: 'Siluet hitam tubuhmu sendiri di tanah' },
-  { id: 'w-73', word: 'WAKTU', clue: 'Selalu berjalan maju tanpa pernah menoleh ke belakang, tak bisa dibeli dengan miliaran rupiah, dan tak pernah menunggu siapa pun.', category: 'Filosofi Hidup', hint: 'Dihitung dengan detik, menit, jam, dan hari' },
-  { id: 'w-74', word: 'KUNCI', clue: 'Punya gerigi lekuk khusus di badannya, mampu membuka pintu yang terkunci rapat meski badannya kecil mungil.', category: 'Benda Rumah', hint: 'Dimasukkan ke dalam lubang gembok lalu diputar' },
-  { id: 'w-75', word: 'HANDUK', clue: 'Semakin sering benda ini kamu gunakan untuk mengeringkan badan basahmu, maka benda ini sendiri yang akan menjadi basah.', category: 'Teka-Teki Mandi', hint: 'Kain berserat empuk penyerap air sehabis mandi' },
-  { id: 'w-76', word: 'GIGI', clue: 'Benda keras berwarna putih di dalam mulut yang bertugas mengunyah dan menghancurkan makanan sebelum ditelan.', category: 'Anatomi Tubuh', hint: 'Dibersihkan setiap hari dengan sikat dan pasta berbusa' },
-  { id: 'w-77', word: 'TELUR', clue: 'Harus dipecahkan cangkang kerasnya terlebih dahulu sebelum isi putih dan kuningnya bisa dimasak dan dimakan.', category: 'Bahan Makanan', hint: 'Dihasilkan oleh ayam atau bebek' },
-  { id: 'w-78', word: 'JARUM JAM', clue: 'Benda yang terus berputar mengelilingi angka satu sampai dua belas tanpa pernah merasa lelah atau berhenti sejenak.', category: 'Penunjuk Waktu', hint: 'Ada jarum pendek untuk jam dan jarum panjang untuk menit' },
-  { id: 'w-79', word: 'PINTU', clue: 'Bisa dibuka dan ditutup, menjadi pembatas antara ruangan dalam rumah dengan dunia luar.', category: 'Bagian Rumah', hint: 'Diketuk terlebih dahulu sebelum masuk bertamu' },
-  { id: 'w-80', word: 'KELERENG', clue: 'Batu kaca bulat licin warna-warni yang sering disentil di tanah lapang oleh anak-anak.', category: 'Mainan Tradisional', hint: 'Disebut juga gundu' }
+  // TEKA-TEKI LOGIKA & ASAH OTAK INDONESIA
+  { id: 'w-88', word: 'BUKU', clue: 'Punya daun tapi bukan pohon, punya isi tapi bukan peti, dibaca lembar demi lembar tapi bukan koran.', category: 'Teka-Teki Benda', hint: 'Jendela dunia bagi mereka yang suka membaca', options: [] },
+  { id: 'w-89', word: 'LILIN', clue: 'Saat masih muda tubuhku tinggi tegap, tapi semakin tua dan berguna bagi kegelapan tubuhku justru semakin memendek.', category: 'Teka-Teki Benda', hint: 'Meneteskan lelehan parafin saat dibakar sumbunya', options: [] },
+  { id: 'w-90', word: 'JEJAK KAKI', clue: 'Semakin banyak kamu melangkah maju di atas pasir basah, semakin banyak benda ini kamu tinggalkan di belakangmu.', category: 'Teka-Teki Logika', hint: 'Membekas di pasir atau lumpur', options: [] },
+  { id: 'w-91', word: 'BAYANGAN', clue: 'Selalu setia mengikutimu ke mana pun kamu pergi di bawah terik matahari, tapi langsung lenyap saat berada dalam gelap gulita.', category: 'Teka-Teki Fenomena', hint: 'Siluet hitam tubuhmu sendiri di tanah', options: [] },
+  { id: 'w-92', word: 'WAKTU', clue: 'Selalu berjalan maju tanpa pernah menoleh ke belakang, tak bisa dibeli dengan miliaran rupiah, dan tak pernah menunggu siapa pun.', category: 'Filosofi Hidup', hint: 'Dihitung dengan detik, menit, jam, dan hari', options: [] },
+  { id: 'w-93', word: 'KUNCI', clue: 'Punya gerigi lekuk khusus di badannya, mampu membuka pintu yang terkunci rapat meski badannya kecil mungil.', category: 'Benda Rumah', hint: 'Dimasukkan ke dalam lubang gembok lalu diputar', options: [] },
+  { id: 'w-94', word: 'HANDUK', clue: 'Semakin sering benda ini kamu gunakan untuk mengeringkan badan basahmu, maka benda ini sendiri yang akan menjadi basah.', category: 'Teka-Teki Mandi', hint: 'Kain berserat empuk penyerap air sehabis mandi', options: [] },
+  { id: 'w-95', word: 'GIGI', clue: 'Benda keras berwarna putih di dalam mulut yang bertugas mengunyah dan menghancurkan makanan sebelum ditelan.', category: 'Anatomi Tubuh', hint: 'Dibersihkan setiap hari dengan sikat dan pasta berbusa', options: [] },
+  { id: 'w-96', word: 'TELUR', clue: 'Harus dipecahkan cangkang kerasnya terlebih dahulu sebelum isi putih dan kuningnya bisa dimasak dan dimakan.', category: 'Bahan Makanan', hint: 'Dihasilkan oleh ayam atau bebek', options: [] },
+  { id: 'w-97', word: 'JARUM JAM', clue: 'Benda yang terus berputar mengelilingi angka satu sampai dua belas tanpa pernah merasa lelah atau berhenti sejenak.', category: 'Penunjuk Waktu', hint: 'Ada jarum pendek untuk jam dan jarum panjang untuk menit', options: [] },
+  { id: 'w-98', word: 'PINTU', clue: 'Bisa dibuka dan ditutup, menjadi pembatas antara ruangan dalam rumah dengan dunia luar.', category: 'Bagian Rumah', hint: 'Diketuk terlebih dahulu sebelum masuk bertamu', options: [] },
+  { id: 'w-99', word: 'LUBANG', clue: 'Semakin banyak kamu mengambil dan menggali tanah darinya, maka benda ini justru akan menjadi semakin besar.', category: 'Teka-Teki Logika', hint: 'Ada di dalam tanah atau baju yang robek', options: [] },
+  { id: 'w-100', word: 'PETA', clue: 'Punya kota tapi tak ada rumah, punya sungai tapi tak ada airnya, punya gunung tapi tak ada batunya.', category: 'Teka-Teki Geografi', hint: 'Kertas gambaran permukaan bumi yang dilipat atau dibuka di aplikasi GPS', options: [] },
+  { id: 'w-101', word: 'RAHASIA', clue: 'Jika kamu menyimpannya, benda ini tetap ada. Tapi begitu kamu menceritakannya ke satu orang saja, benda ini langsung hilang.', category: 'Teka-Teki Kata', hint: 'Sesuatu yang dibisikkan dan tidak boleh disebarkan', options: [] },
+  { id: 'w-102', word: 'GARAM', clue: 'Berasal dari air laut yang dijemur di bawah terik matahari, terasa asin gurih dan langsung larut jika masuk ke dalam air.', category: 'Bumbu Dapur', hint: 'Bumbu putih wajib agar masakan tidak hambar', options: [] },
+  { id: 'w-103', word: 'BAWANG MERAH', clue: 'Kulitnya berlapis-lapis tipis ungu kemerahan, jika kamu mengiris atau mencincangnya maka matamu yang akan meneteskan air mata.', category: 'Bumbu Masakan', hint: 'Mengeluarkan zat pedih yang membuat orang menangis saat memasak', options: [] },
+  { id: 'w-104', word: 'KOREK API', clue: 'Batang kayu kecil dengan pentolan belerang di ujungnya, begitu digesekkan di tepi kotaknya langsung memercikkan api.', category: 'Penyala Api', hint: 'Dipakai menyalakan lilin, kompor minyak, atau obat nyamuk bakar', options: [] },
+  { id: 'w-105', word: 'AMPLOP', clue: 'Kantong kertas berperekat yang menyimpan surat tertulis di dalamnya dan ditempeli perangko di sudut kanan atasnya.', category: 'Alat Pos', hint: 'Diserahkan ke pak pos atau dimasukkan ke dalam kotak surat merah', options: [] },
+  { id: 'w-106', word: 'BINTANG', clue: 'Titik-titik cahaya yang menghiasi langit malam dan hanya terlihat saat gelap, tapi menghilang saat matahari terbit.', category: 'Benda Langit', hint: 'Ada lagu anak: Bintang kecil di langit yang biru', options: [] },
+  { id: 'w-107', word: 'KANCING', clue: 'Benda bulat pipih berlubang empat yang dikaitkan di belahan baju kemeja agar tidak terbuka.', category: 'Aksesoris Pakaian', hint: 'Dimasukkan ke dalam lubang kain pasangannya', options: [] }
 ];
 
 // ==============================================================
-// 3. DATA UJI KECOCOKAN / TELEPATI PILIHAN (100+ DILEMA LENGKAP)
+// 3. DATA TEBAK EMOJI LENGKAP OS TERBARU (160+ EMOJI DENGAN FORBIDDEN WORDS)
 // ==============================================================
-export const DILEMMA_DATABASE: DilemmaQuestion[] = [
-  // MAKANAN & KULINER
-  { id: 'dl-1', title: 'Sekte Cara Makan Bubur Ayam', category: 'Kebiasaan Makan', optionA: { id: 'A', text: 'Diaduk rata biar bumbunya merata', emoji: '🥣' }, optionB: { id: 'B', text: 'Gak diaduk biar topping tetap rapi', emoji: '🥄' } },
-  { id: 'dl-2', title: 'Sensasi Rasa Kuliner Favorit', category: 'Selera Lidah', optionA: { id: 'A', text: 'Pedas nampol bikin keringetan', emoji: '🌶️' }, optionB: { id: 'B', text: 'Manis gurih bikin mood naik', emoji: '🍰' } },
-  { id: 'dl-3', title: 'Varian Olahan Mie Instan', category: 'Mie Instan', optionA: { id: 'A', text: 'Mie goreng gurih pakai telur ceplok', emoji: '🍳' }, optionB: { id: 'B', text: 'Mie kuah panas berkaldu hangat', emoji: '🍜' } },
-  { id: 'dl-4', title: 'Minuman Peneman Nongkrong', category: 'Minuman', optionA: { id: 'A', text: 'Kopi hitam atau es kopi susu', emoji: '☕' }, optionB: { id: 'B', text: 'Teh melati wangi atau Boba manis', emoji: '🧋' } },
-  { id: 'dl-5', title: 'Cara Menikmati Nasi Padang', category: 'Kuliner Nusantara', optionA: { id: 'A', text: 'Bungkus bawa pulang (porsi lebih banyak)', emoji: '📦' }, optionB: { id: 'B', text: 'Makan langsung di tempat (bisa nambah kuah)', emoji: '🍽️' } },
-  { id: 'dl-6', title: 'Camilan Gorengan Wajib', category: 'Gorengan', optionA: { id: 'A', text: 'Bakwan / Bala-bala renyah', emoji: '🥬' }, optionB: { id: 'B', text: 'Tahu isi pedas / Mendoan hangat', emoji: '🧈' } },
-  { id: 'dl-7', title: 'Tekstur Telur Ceplok Goreng', category: 'Masakan Rumah', optionA: { id: 'A', text: 'Setengah matang meleleh saat ditusuk', emoji: '🍳' }, optionB: { id: 'B', text: 'Matang garing pinggirannya crispy', emoji: '✨' } },
-  { id: 'dl-8', title: 'Pilihan Fast Food Favorit', category: 'Fast Food', optionA: { id: 'A', text: 'Ayam goreng crispy berbumbu', emoji: '🍗' }, optionB: { id: 'B', text: 'Burger daging keju tebal', emoji: '🍔' } },
-  { id: 'dl-9', title: 'Topping Pizza Paling Pas', category: 'Pizza', optionA: { id: 'A', text: 'Full keju mozzarella & daging gurih', emoji: '🧀' }, optionB: { id: 'B', text: 'Ada nanasnya (Hawaiian style segar)', emoji: '🍍' } },
-  { id: 'dl-10', title: 'Gaya Minum Es Teh di Warung', category: 'Minuman Rakyat', optionA: { id: 'A', text: 'Es teh manis dingin segar', emoji: '🧊' }, optionB: { id: 'B', text: 'Teh tawar hangat penawar lemak', emoji: '🍵' } },
-
-  // LIBURAN, HANGOUT & GAYA HIDUP
-  { id: 'dl-11', title: 'Destinasi Liburan Impian', category: 'Liburan', optionA: { id: 'A', text: 'Pantai tropis santai & sunset', emoji: '🏖️' }, optionB: { id: 'B', text: 'Pegunungan sejuk & udara segar', emoji: '🏔️' } },
-  { id: 'dl-12', title: 'Rencana Menghabiskan Malam Minggu', category: 'Weekend', optionA: { id: 'A', text: 'Pergi keluar jalan-jalan ke bioskop/mall', emoji: '🍿' }, optionB: { id: 'B', text: 'Rebahan di kasur nonton serial streaming', emoji: '🛋️' } },
-  { id: 'dl-13', title: 'Gaya Merencanakan Perjalanan', category: 'Traveling', optionA: { id: 'A', text: 'Jadwal rapi tersusun menit demi menit', emoji: '📝' }, optionB: { id: 'B', text: 'Spontan kemana kaki melangkah (Go with flow)', emoji: '🎒' } },
-  { id: 'dl-14', title: 'Ritme Waktu Beraktivitas', category: 'Jam Biologis', optionA: { id: 'A', text: 'Burung hantu / Ide lancar tengah malam', emoji: '🦉' }, optionB: { id: 'B', text: 'Early bird / Bangun subuh udara bersih', emoji: '🌅' } },
-  { id: 'dl-15', title: 'Hewan Peliharaan Idaman', category: 'Hewan Peliharaan', optionA: { id: 'A', text: 'Kucing manja yang menggemaskan', emoji: '🐱' }, optionB: { id: 'B', text: 'Anjing setia yang pintar dan aktif', emoji: '🐶' } },
-  { id: 'dl-16', title: 'Suasana Nongkrong Paling Nyaman', category: 'Social', optionA: { id: 'A', text: 'Kafe estetik tenang sambil dengerin lofi', emoji: '☕' }, optionB: { id: 'B', text: 'Angkringan kaki lima seru rame-rame', emoji: '🍢' } },
-  { id: 'dl-17', title: 'Kondisi Kamar Tidur Saat Istirahat', category: 'Kenyamanan', optionA: { id: 'A', text: 'AC dingin menusuk pakai selimut tebal', emoji: '❄️' }, optionB: { id: 'B', text: 'Suhu ruangan sejuk alami semilir angin', emoji: '🍃' } },
-  { id: 'dl-18', title: 'Pilihan Menginap Saat Liburan', category: 'Hotel vs Alam', optionA: { id: 'A', text: 'Hotel berbintang dengan kasur empuk mewah', emoji: '🏨' }, optionB: { id: 'B', text: 'Glamping / Tenda di tengah alam terbuka', emoji: '⛺' } },
-  { id: 'dl-19', title: 'Kendaraan Jalan-Jalan Santai', category: 'Transportasi', optionA: { id: 'A', text: 'Naik motor boncengan kena angin sore', emoji: '🛵' }, optionB: { id: 'B', text: 'Naik mobil adem sambil dengerin playlist', emoji: '🚗' } },
-  { id: 'dl-20', title: 'Saat Hujan Deras Turun di Rumah', category: 'Suasana Hati', optionA: { id: 'A', text: 'Tidur nyenyak berselimut dengar gemercik air', emoji: '😴' }, optionB: { id: 'B', text: 'Bikin mie rebus panas sambil ngopi melamun', emoji: '🍜' } },
-
-  // KOMUNIKASI & HUBUNGAN
-  { id: 'dl-21', title: 'Gaya Membalas Pesan Chat', category: 'Chatting', optionA: { id: 'A', text: 'Fast response langsung balas dalam hitungan detik', emoji: '⚡' }, optionB: { id: 'B', text: 'Santai, baru balas pas senggang atau selesai urusan', emoji: '🐢' } },
-  { id: 'dl-22', title: 'Cara Berkomunikasi Jarak Jauh', category: 'LDR / Bestie', optionA: { id: 'A', text: 'Voice Call / Video Call berjam-jam sampai ketiduran', emoji: '📞' }, optionB: { id: 'B', text: 'Kirim-kiriman pesan chat dan meme lucu', emoji: '💬' } },
-  { id: 'dl-23', title: 'Gaya Membayar Saat Kencan Pertama', category: 'Etika Kencan', optionA: { id: 'A', text: 'Salah satu mentraktir penuh secara bergantian', emoji: '💳' }, optionB: { id: 'B', text: 'Split bill bayar porsi masing-masing adil', emoji: '🧾' } },
-  { id: 'dl-24', title: 'Sikap Saat Menyambut Hari Ulang Tahun', category: 'Ulang Tahun', optionA: { id: 'A', text: 'Suka kejutan surprise tak terduga', emoji: '🎉' }, optionB: { id: 'B', text: 'Mending ditanya langsung mau kado apa', emoji: '🎁' } },
-  { id: 'dl-25', title: 'Tipe Sahabat / Pasangan Paling Nyaman', category: 'Karakter', optionA: { id: 'A', text: 'Humoris receh bikin ketawa terbahak-bahak', emoji: '😂' }, optionB: { id: 'B', text: 'Pendengar yang hangat, bijak, dan dewasa', emoji: '🥰' } },
-  { id: 'dl-26', title: 'Menyelesaikan Masalah atau Perdebatan', category: 'Konflik', optionA: { id: 'A', text: 'Bahas dan selesaikan detik itu juga biar tuntas', emoji: '🗣️' }, optionB: { id: 'B', text: 'Tunggu kepala dingin dulu baru diobrolkan baik-baik', emoji: '🧊' } },
-  { id: 'dl-27', title: 'Gaya Berfoto Bersama Pasangan / Bestie', category: 'Foto & Kenangan', optionA: { id: 'A', text: 'Foto candid estetik tanpa lihat kamera', emoji: '📸' }, optionB: { id: 'B', text: 'Pose gaya konyol muka jelek yang bikin ngakak', emoji: '🤪' } },
-  { id: 'dl-28', title: 'Prioritas Menggunakan Uang Bonus / THR', category: 'Keuangan', optionA: { id: 'A', text: 'Langsung simpan ditabung atau diinvestasikan', emoji: '💰' }, optionB: { id: 'B', text: 'Self-reward belanja impian atau kuliner puas', emoji: '🛍️' } },
-
-  // HIBURAN & KECERDASAN
-  { id: 'dl-29', title: 'Genre Tontonan Film / Serial', category: 'Film', optionA: { id: 'A', text: 'Film horor / misteri thriller menegangkan', emoji: '👻' }, optionB: { id: 'B', text: 'Komedi romantis yang bikin senyum-senyum sendiri', emoji: '💖' } },
-  { id: 'dl-30', title: 'Menikmati Musik Favorit', category: 'Musik', optionA: { id: 'A', text: 'Nonton festival konser live nyanyi bareng ribuan orang', emoji: '🎤' }, optionB: { id: 'B', text: 'Pasang headphone di kamar sendirian mendalami lirik', emoji: '🎧' } },
-  { id: 'dl-31', title: 'Kekuatan Super Impian', category: 'Kekuatan Fantasi', optionA: { id: 'A', text: 'Bisa menghilang tak terlihat kapan pun', emoji: '🥷' }, optionB: { id: 'B', text: 'Bisa terbang bebas menembus awan di langit', emoji: '🦅' } },
-  { id: 'dl-32', title: 'Mesin Penjelajah Waktu', category: 'Mesin Waktu', optionA: { id: 'A', text: 'Kembali ke masa lalu memperbaiki kenangan', emoji: '🕰️' }, optionB: { id: 'B', text: 'Melompat ke masa depan melihat takdir masa depan', emoji: '🚀' } }
-];
-
-// =========================================================================
-// 4. DATA TEBAK EMOJI PANGGILAN SUARA TERLENGKAP OS TERBARU (100+ EMOJI)
-// =========================================================================
-export const EMOJI_VOICE_DATABASE: Array<{
+export interface EmojiVoiceDatabaseItem {
   id: string;
   targetEmoji: string;
   name: string;
   category: string;
   forbiddenWords: string[];
   distractors: { emoji: string; name: string }[];
-}> = [
-  // OLAHRAGA & AKTIVITAS FISIK
+}
+
+export const EMOJI_VOICE_DATABASE: EmojiVoiceDatabaseItem[] = [
+  // --- WAJAH, EKSPRESI & EMOSI ---
   {
     id: 'ev-1',
-    targetEmoji: '🧗‍♂️',
-    name: 'Panjat Tebing',
-    category: 'Olahraga Ekstrem',
-    forbiddenWords: ['gunung', 'panjat', 'tebing', 'tali', 'batu'],
-    distractors: [{ emoji: '🏄‍♂️', name: 'Selancar' }, { emoji: '🏂', name: 'Snowboard' }, { emoji: '🏊‍♂️', name: 'Berenang' }]
+    targetEmoji: '🤣',
+    name: 'Tertawa Terpingkal-pingkal',
+    category: 'Ekspresi Lucu',
+    forbiddenWords: ['tertawa', 'ketawa', 'guling', 'miring', 'lucu'],
+    distractors: [{ emoji: '😂', name: 'Nangis Bahagia' }, { emoji: '😆', name: 'Nyengir' }, { emoji: '😜', name: 'Melet Lucu' }]
   },
   {
     id: 'ev-2',
-    targetEmoji: '🏄‍♂️',
-    name: 'Selancar Ombak',
-    category: 'Olahraga Air',
-    forbiddenWords: ['ombak', 'pantai', 'selancar', 'papan', 'laut'],
-    distractors: [{ emoji: '🚣‍♂️', name: 'Dayung' }, { emoji: '🏊‍♂️', name: 'Berenang' }, { emoji: '⛵', name: 'Berlayar' }]
+    targetEmoji: '🥺',
+    name: 'Wajah Memelas / Puppy Eyes',
+    category: 'Ekspresi Emosi',
+    forbiddenWords: ['memelas', 'kaca', 'mata', 'mohon', 'sedih'],
+    distractors: [{ emoji: '🥹', name: 'Terharu Bahagia' }, { emoji: '😭', name: 'Menangis Kencang' }, { emoji: '😢', name: 'Meneteskan Air Mata' }]
   },
   {
     id: 'ev-3',
-    targetEmoji: '🤿',
-    name: 'Menyelam (Diving / Snorkeling)',
-    category: 'Eksplorasi Laut',
-    forbiddenWords: ['selam', 'kacamata', 'karang', 'oksigen', 'bawah air'],
-    distractors: [{ emoji: '🎣', name: 'Mancing' }, { emoji: '🏊‍♂️', name: 'Berenang' }, { emoji: '🏄‍♂️', name: 'Selancar' }]
+    targetEmoji: '🤔',
+    name: 'Berpikir / Mikir Keras',
+    category: 'Ekspresi Emosi',
+    forbiddenWords: ['mikir', 'tangan', 'dagu', 'bingung', 'ide'],
+    distractors: [{ emoji: '🧐', name: 'Pakai Monokel' }, { emoji: '🤨', name: 'Alis Naik Curiga' }, { emoji: '😐', name: 'Wajah Datar' }]
   },
   {
     id: 'ev-4',
-    targetEmoji: '🪂',
-    name: 'Terjun Payung (Skydiving)',
-    category: 'Olahraga Udara',
-    forbiddenWords: ['terjun', 'payung', 'parasut', 'lompat', 'pesawat'],
-    distractors: [{ emoji: '🪁', name: 'Layangan' }, { emoji: '🎈', name: 'Balon Udara' }, { emoji: '🚀', name: 'Roket' }]
+    targetEmoji: '🤯',
+    name: 'Kepala Meledak (Mindblown)',
+    category: 'Kaget Luar Biasa',
+    forbiddenWords: ['meledak', 'kepala', 'otak', 'kaget', 'bom'],
+    distractors: [{ emoji: '😱', name: 'Histeris Jerit' }, { emoji: '😳', name: 'Pipi Merah Kaget' }, { emoji: '😵', name: 'Pusing Pingsan' }]
   },
   {
     id: 'ev-5',
-    targetEmoji: '🥊',
-    name: 'Tinju (Boxing)',
-    category: 'Bela Diri',
-    forbiddenWords: ['tinju', 'sarung', 'pukul', 'ring', 'tyson'],
-    distractors: [{ emoji: '🥋', name: 'Karate' }, { emoji: '🤺', name: 'Anggar' }, { emoji: '🏋️‍♂️', name: 'Angkat Beban' }]
+    targetEmoji: '🫠',
+    name: 'Wajah Meleleh (Melting Face)',
+    category: 'Ekspresi Panas',
+    forbiddenWords: ['leleh', 'cair', 'meleleh', 'panas', 'senyum'],
+    distractors: [{ emoji: '🥵', name: 'Kegerahan Merah' }, { emoji: '🥶', name: 'Kedinginan Beku' }, { emoji: '😶‍🌫️', name: 'Tertutup Kabut' }]
   },
   {
     id: 'ev-6',
-    targetEmoji: '🏹',
-    name: 'Panahan (Archery)',
-    category: 'Akurasi',
-    forbiddenWords: ['panah', 'busur', 'target', 'bidik', 'robin hood'],
-    distractors: [{ emoji: '🎯', name: 'Papan Dart' }, { emoji: '🔫', name: 'Tembak' }, { emoji: '⚔️', name: 'Pedang' }]
+    targetEmoji: '😎',
+    name: 'Kacamata Hitam Keren (Cool)',
+    category: 'Gaya Keren',
+    forbiddenWords: ['kacamata', 'hitam', 'keren', 'gaya', 'silau'],
+    distractors: [{ emoji: '🤓', name: 'Kutu Buku Kacamata' }, { emoji: '🤠', name: 'Topi Koboi' }, { emoji: '😏', name: 'Senyum Licik' }]
   },
   {
     id: 'ev-7',
-    targetEmoji: '🎣',
-    name: 'Memancing Ikan',
-    category: 'Hobi Santai',
-    forbiddenWords: ['pancing', 'ikan', 'umpan', 'sungai', 'kail'],
-    distractors: [{ emoji: '🚣‍♂️', name: 'Dayung' }, { emoji: '⛺', name: 'Kemah' }, { emoji: '⛵', name: 'Perahu' }]
+    targetEmoji: '🤡',
+    name: 'Badut Sirkus',
+    category: 'Karakter Lucu',
+    forbiddenWords: ['badut', 'hidung', 'merah', 'sirkus', 'topeng'],
+    distractors: [{ emoji: '👺', name: 'Topeng Goblin' }, { emoji: '👻', name: 'Hantu' }, { emoji: '🎭', name: 'Topeng Teater' }]
   },
   {
     id: 'ev-8',
-    targetEmoji: '🛹',
-    name: 'Main Skateboard',
-    category: 'Olahraga Jalanan',
-    forbiddenWords: ['skate', 'papan', 'roda', 'aspal', 'meluncur'],
-    distractors: [{ emoji: '🛴', name: 'Skuter' }, { emoji: '🚲', name: 'Sepeda' }, { emoji: '⛸️', name: 'Sepatu Roda' }]
+    targetEmoji: '👻',
+    name: 'Hantu Putih Gentayangan',
+    category: 'Misteri Horor',
+    forbiddenWords: ['hantu', 'setan', 'putih', 'lidah', 'takut'],
+    distractors: [{ emoji: '💀', name: 'Tengkorak' }, { emoji: '🎃', name: 'Labu Halloween' }, { emoji: '👽', name: 'Alien' }]
   },
   {
     id: 'ev-9',
-    targetEmoji: '🎳',
-    name: 'Main Bowling',
-    category: 'Permainan Gelinding',
-    forbiddenWords: ['bowling', 'pin', 'bola', 'strike', 'jalur'],
-    distractors: [{ emoji: '⚽', name: 'Sepak Bola' }, { emoji: '🏀', name: 'Bola Basket' }, { emoji: '🎱', name: 'Biliar' }]
+    targetEmoji: '💀',
+    name: 'Tengkorak Kepala (Skull)',
+    category: 'Simbol Kematian / Ketawa Abis',
+    forbiddenWords: ['tengkorak', 'tulang', 'mati', 'kepala', 'kuburan'],
+    distractors: [{ emoji: '☠️', name: 'Tengkorak Bajak Laut' }, { emoji: '🦴', name: 'Tulang' }, { emoji: '👻', name: 'Hantu' }]
   },
-
-  // MAKANAN & MINUMAN
   {
     id: 'ev-10',
-    targetEmoji: '🍕',
-    name: 'Pizza Keju',
-    category: 'Kuliner',
-    forbiddenWords: ['pizza', 'roti', 'keju', 'italia', 'potong'],
-    distractors: [{ emoji: '🍔', name: 'Burger' }, { emoji: '🌭', name: 'Hotdog' }, { emoji: '🥪', name: 'Sandwich' }]
+    targetEmoji: '🤖',
+    name: 'Robot Kaleng Logam',
+    category: 'Teknologi Canggih',
+    forbiddenWords: ['robot', 'besi', 'antena', 'mesin', 'logam'],
+    distractors: [{ emoji: '👾', name: 'Monster Pixel' }, { emoji: '👽', name: 'Alien' }, { emoji: '🦾', name: 'Lengan Robot' }]
   },
   {
     id: 'ev-11',
-    targetEmoji: '🍔',
-    name: 'Burger Daging',
-    category: 'Makanan Cepat Saji',
-    forbiddenWords: ['burger', 'roti', 'daging', 'patty', 'selada'],
-    distractors: [{ emoji: '🍕', name: 'Pizza' }, { emoji: '🌮', name: 'Taco' }, { emoji: '🍟', name: 'Kentang' }]
+    targetEmoji: '👽',
+    name: 'Alien Kepala Hijau',
+    category: 'Luar Angkasa',
+    forbiddenWords: ['alien', 'ufo', 'hijau', 'mata', 'luar angkasa'],
+    distractors: [{ emoji: '🛸', name: 'Piring Terbang' }, { emoji: '🚀', name: 'Roket' }, { emoji: '🤖', name: 'Robot' }]
   },
   {
     id: 'ev-12',
-    targetEmoji: '🍣',
-    name: 'Sushi Gulung',
-    category: 'Makanan Jepang',
-    forbiddenWords: ['sushi', 'ikan', 'mentah', 'nasi', 'jepang'],
-    distractors: [{ emoji: '🍙', name: 'Onigiri' }, { emoji: '🍜', name: 'Ramen' }, { emoji: '🥟', name: 'Dimsum' }]
+    targetEmoji: '🙈',
+    name: 'Monyet Tutup Mata (See No Evil)',
+    category: 'Malu / Takut',
+    forbiddenWords: ['monyet', 'tutup', 'mata', 'malu', 'tangan'],
+    distractors: [{ emoji: '🙉', name: 'Tutup Telinga' }, { emoji: '🙊', name: 'Tutup Mulut' }, { emoji: '🐵', name: 'Wajah Monyet' }]
   },
   {
     id: 'ev-13',
-    targetEmoji: '🍜',
-    name: 'Ramen / Mie Kuah',
-    category: 'Kuliner Kuah',
-    forbiddenWords: ['mie', 'kuah', 'ramen', 'sumpit', 'mangkuk'],
-    distractors: [{ emoji: '🍲', name: 'Sup' }, { emoji: '🍝', name: 'Spageti' }, { emoji: '🍛', name: 'Kari' }]
+    targetEmoji: '❤️‍🔥',
+    name: 'Hati Terbakar Kobaran Api',
+    category: 'Gairah Semangat',
+    forbiddenWords: ['hati', 'api', 'bakar', 'cinta', 'merah'],
+    distractors: [{ emoji: '💔', name: 'Hati Retak' }, { emoji: '❤️', name: 'Hati Merah' }, { emoji: '🔥', name: 'Api Membara' }]
   },
   {
     id: 'ev-14',
-    targetEmoji: '🧋',
-    name: 'Boba Milk Tea',
-    category: 'Minuman Kekinian',
-    forbiddenWords: ['boba', 'teh', 'susu', 'sedotan', 'tapioka'],
-    distractors: [{ emoji: '☕', name: 'Kopi' }, { emoji: '🥤', name: 'Soda' }, { emoji: '🍧', name: 'Es Serut' }]
+    targetEmoji: '😴',
+    name: 'Tidur Pulas Mendengkur',
+    category: 'Istirahat',
+    forbiddenWords: ['tidur', 'ngantuk', 'mimpi', 'mata', 'lelah'],
+    distractors: [{ emoji: '🥱', name: 'Menguap Ngantuk' }, { emoji: '🤤', name: 'Tidur Ngiler' }, { emoji: '😪', name: 'Gelembung Hidung' }]
   },
   {
     id: 'ev-15',
-    targetEmoji: '🍿',
-    name: 'Popcorn Bioskop',
-    category: 'Camilan Nonton',
-    forbiddenWords: ['popcorn', 'jagung', 'bioskop', 'nonton', 'asin'],
-    distractors: [{ emoji: '🍟', name: 'Kentang Goreng' }, { emoji: '🥨', name: 'Pretzel' }, { emoji: '🥜', name: 'Kacang' }]
-  },
-  {
-    id: 'ev-16',
-    targetEmoji: '🥑',
-    name: 'Alpukat Hijau',
-    category: 'Buah Sehat',
-    forbiddenWords: ['alpukat', 'biji', 'hijau', 'jus', 'lemak'],
-    distractors: [{ emoji: '🥥', name: 'Kelapa' }, { emoji: '🥝', name: 'Kiwi' }, { emoji: '🍈', name: 'Melon' }]
-  },
-  {
-    id: 'ev-17',
-    targetEmoji: '🍦',
-    name: 'Es Krim Cone',
-    category: 'Dessert Manis',
-    forbiddenWords: ['es krim', 'dingin', 'cone', 'jilat', 'meleleh'],
-    distractors: [{ emoji: '🍧', name: 'Es Serut' }, { emoji: '🍩', name: 'Donat' }, { emoji: '🍰', name: 'Kue' }]
+    targetEmoji: '🤠',
+    name: 'Wajah Bertopi Koboi',
+    category: 'Profesi Western',
+    forbiddenWords: ['koboi', 'topi', 'kuda', 'kulit', 'texas'],
+    distractors: [{ emoji: '💂‍♂️', name: 'Penjaga Kerajaan' }, { emoji: '👨‍🌾', name: 'Petani Topi Caping' }, { emoji: '🎩', name: 'Topi Sulap' }]
   },
 
-  // HEWAN & SATWA LIAR
+  // --- HEWAN & SATWA LIAR ---
   {
-    id: 'ev-18',
+    id: 'ev-16',
     targetEmoji: '🦁',
     name: 'Singa (Raja Hutan)',
     category: 'Hewan Liar',
     forbiddenWords: ['singa', 'raja', 'hutan', 'rambut', 'aum'],
-    distractors: [{ emoji: '🐯', name: 'Harimau' }, { emoji: '🐻', name: 'Beruang' }, { emoji: '🐆', name: 'Macan Tutul' }]
+    distractors: [{ emoji: '🐯', name: 'Harimau Loreng' }, { emoji: '🐆', name: 'Macan Tutul' }, { emoji: '🐻', name: 'Beruang' }]
+  },
+  {
+    id: 'ev-17',
+    targetEmoji: '🐼',
+    name: 'Panda Raksasa Imut',
+    category: 'Hewan Lucu',
+    forbiddenWords: ['panda', 'bambu', 'hitam putih', 'tiongkok', 'beruang'],
+    distractors: [{ emoji: '🐨', name: 'Koala' }, { emoji: '🐻', name: 'Beruang Cokelat' }, { emoji: '🦝', name: 'Rakun' }]
+  },
+  {
+    id: 'ev-18',
+    targetEmoji: '🦖',
+    name: 'Dinosaurus T-Rex Purba',
+    category: 'Satwa Purba',
+    forbiddenWords: ['dinosaurus', 't-rex', 'purba', 'tangan kecil', 'raksasa'],
+    distractors: [{ emoji: '🦕', name: 'Dino Leher Panjang' }, { emoji: '🐊', name: 'Buaya' }, { emoji: '🦎', name: 'Kadal' }]
   },
   {
     id: 'ev-19',
-    targetEmoji: '🦥',
-    name: 'Kukang / Sloth',
-    category: 'Hewan Unik',
-    forbiddenWords: ['sloth', 'kukang', 'lambat', 'pohon', 'tidur'],
-    distractors: [{ emoji: '🐨', name: 'Koala' }, { emoji: '🦔', name: 'Landak' }, { emoji: '🦦', name: 'Berang-berang' }]
+    targetEmoji: '🦄',
+    name: 'Kuda Unicorn Bercula Ajaib',
+    category: 'Makhluk Mitos',
+    forbiddenWords: ['unicorn', 'cula', 'tanduk', 'kuda', 'pelangi'],
+    distractors: [{ emoji: '🐴', name: 'Kuda Biasa' }, { emoji: '🦓', name: 'Zebra Loreng' }, { emoji: 'Pegasus', name: 'Kuda Sayap' }]
   },
   {
     id: 'ev-20',
-    targetEmoji: '🐼',
-    name: 'Panda Raksasa',
-    category: 'Hewan Imut',
-    forbiddenWords: ['panda', 'bambu', 'hitam putih', 'tiongkok', 'beruang'],
-    distractors: [{ emoji: '🐨', name: 'Koala' }, { emoji: '🐻', name: 'Beruang' }, { emoji: '🦝', name: 'Rakun' }]
+    targetEmoji: '🦈',
+    name: 'Hiu Predator Lautan',
+    category: 'Biologi Laut',
+    forbiddenWords: ['hiu', 'sirip', 'laut', 'taring', 'megalodon'],
+    distractors: [{ emoji: '🐬', name: 'Lumba-Lumba' }, { emoji: '🐋', name: 'Paus Semprot' }, { emoji: '🐟', name: 'Ikan Kecil' }]
   },
   {
     id: 'ev-21',
-    targetEmoji: '🦉',
-    name: 'Burung Hantu',
-    category: 'Unggas Malam',
-    forbiddenWords: ['hantu', 'burung', 'malam', 'mata bulat', 'leher putar'],
-    distractors: [{ emoji: '🦅', name: 'Elang' }, { emoji: '🦇', name: 'Kelelawar' }, { emoji: '🦜', name: 'Beo' }]
+    targetEmoji: '🐙',
+    name: 'Gurita Delapan Tentakel',
+    category: 'Biologi Laut',
+    forbiddenWords: ['gurita', 'tinta', 'tentakel', 'delapan', 'laut'],
+    distractors: [{ emoji: '🦑', name: 'Cumi-Cumi' }, { emoji: '🦞', name: 'Lobster' }, { emoji: '🦀', name: 'Kepiting' }]
   },
   {
     id: 'ev-22',
-    targetEmoji: '🦈',
-    name: 'Ikan Hiu',
-    category: 'Predator Laut',
-    forbiddenWords: ['hiu', 'taring', 'sirip', 'laut', 'megalodon'],
-    distractors: [{ emoji: '🐬', name: 'Lumba-lumba' }, { emoji: '🐳', name: 'Paus' }, { emoji: '🐊', name: 'Buaya' }]
+    targetEmoji: '🦥',
+    name: 'Kukang / Sloth Lambat',
+    category: 'Hewan Hutan',
+    forbiddenWords: ['sloth', 'kukang', 'lambat', 'gelantung', 'pohon'],
+    distractors: [{ emoji: '🐨', name: 'Koala' }, { emoji: '🦔', name: 'Landak' }, { emoji: '🦦', name: 'Berang-berang' }]
   },
   {
     id: 'ev-23',
-    targetEmoji: '🐙',
-    name: 'Gurita (Octopus)',
-    category: 'Hewan Laut',
-    forbiddenWords: ['gurita', 'delapan', 'tentakel', 'tinta', 'penghisap'],
-    distractors: [{ emoji: '🦑', name: 'Cumi' }, { emoji: '🦀', name: 'Kepiting' }, { emoji: '🦞', name: 'Lobster' }]
+    targetEmoji: '🦩',
+    name: 'Burung Flamingo Pink',
+    category: 'Unggas Cantik',
+    forbiddenWords: ['flamingo', 'pink', 'merah muda', 'satu kaki', 'panjang'],
+    distractors: [{ emoji: '🦢', name: 'Angsa Putih' }, { emoji: '🦜', name: 'Burung Beo' }, { emoji: '🦚', name: 'Burung Merak' }]
   },
   {
     id: 'ev-24',
-    targetEmoji: '🦘',
-    name: 'Kangguru Australia',
-    category: 'Hewan Berkantung',
-    forbiddenWords: ['kangguru', 'lompat', 'kantung', 'anak', 'australia'],
-    distractors: [{ emoji: '🦌', name: 'Rusa' }, { emoji: '🐇', name: 'Kelinci' }, { emoji: '🦙', name: 'Llama' }]
+    targetEmoji: '🦉',
+    name: 'Burung Hantu Nokturnal',
+    category: 'Unggas Malam',
+    forbiddenWords: ['hantu', 'malam', 'mata bulat', 'leher putar', 'burung'],
+    distractors: [{ emoji: '🦅', name: 'Elang Gagah' }, { emoji: '🦇', name: 'Kelelawar' }, { emoji: '🦆', name: 'Bebek' }]
   },
   {
     id: 'ev-25',
-    targetEmoji: '🦩',
-    name: 'Burung Flamingo',
-    category: 'Unggas Cantik',
-    forbiddenWords: ['flamingo', 'merah muda', 'pink', 'satu kaki', 'rawa'],
-    distractors: [{ emoji: '🦢', name: 'Angsa' }, { emoji: '🦚', name: 'Merak' }, { emoji: '🕊️', name: 'Merpati' }]
+    targetEmoji: '🦒',
+    name: 'Jerapah Leher Panjang',
+    category: 'Satwa Savana',
+    forbiddenWords: ['jerapah', 'leher', 'tinggi', 'tutul', 'daun'],
+    distractors: [{ emoji: '🦓', name: 'Zebra' }, { emoji: '🦏', name: 'Badak' }, { emoji: '🐘', name: 'Gajah' }]
   },
   {
     id: 'ev-26',
-    targetEmoji: '🦖',
-    name: 'Dinosaurus T-Rex',
-    category: 'Satwa Purba',
-    forbiddenWords: ['dinosaurus', 't-rex', 'tangan kecil', 'purba', 'taring'],
-    distractors: [{ emoji: '🐊', name: 'Buaya' }, { emoji: '🐉', name: 'Naga' }, { emoji: '🦎', name: 'Kadal' }]
+    targetEmoji: '🦔',
+    name: 'Landak Berduri Tajam',
+    category: 'Hewan Mungil',
+    forbiddenWords: ['landak', 'duri', 'tajam', 'gulung', 'tusuk'],
+    distractors: [{ emoji: '🐹', name: 'Hamster' }, { emoji: '🦡', name: 'Badger' }, { emoji: '🐭', name: 'Tikus' }]
   },
-
-  // FANTASI, PROFESI & KARAKTER
   {
     id: 'ev-27',
-    targetEmoji: '🧛‍♂️',
-    name: 'Vampir Drakula',
-    category: 'Karakter Horor',
-    forbiddenWords: ['vampir', 'drakula', 'darah', 'taring', 'kelelawar'],
-    distractors: [{ emoji: '🧟‍♂️', name: 'Zombi' }, { emoji: '🧙‍♂️', name: 'Penyihir' }, { emoji: '👻', name: 'Hantu' }]
+    targetEmoji: '🦋',
+    name: 'Kupu-Kupu Sayap Indah',
+    category: 'Serangga Cantik',
+    forbiddenWords: ['kupu', 'sayap', 'ulat', 'terbang', 'bunga'],
+    distractors: [{ emoji: '🐝', name: 'Lebah Madu' }, { emoji: '🐞', name: 'Kepik Bintik' }, { emoji: '🪲', name: 'Kumbang' }]
   },
   {
     id: 'ev-28',
-    targetEmoji: '🥷',
-    name: 'Ninja Bertopeng',
-    category: 'Prajurit Senyap',
-    forbiddenWords: ['ninja', 'pedang', 'topeng', 'jepang', 'sembunyi'],
-    distractors: [{ emoji: '🦸‍♂️', name: 'Pahlawan' }, { emoji: '🧙‍♂️', name: 'Penyihir' }, { emoji: '🤺', name: 'Pendekar' }]
+    targetEmoji: '🐸',
+    name: 'Katak Hijau Melompat',
+    category: 'Hewan Amfibi',
+    forbiddenWords: ['katak', 'kodok', 'hijau', 'lompat', 'kolam'],
+    distractors: [{ emoji: '🦎', name: 'Kadal' }, { emoji: '🐢', name: 'Kura-Kura' }, { emoji: '🐍', name: 'Ular' }]
   },
   {
     id: 'ev-29',
-    targetEmoji: '👨‍🚀',
-    name: 'Astronot Luar Angkasa',
-    category: 'Penjelajah Antariksa',
-    forbiddenWords: ['astronot', 'bulan', 'baju putih', 'luar angkasa', 'melayang'],
-    distractors: [{ emoji: '👨‍✈️', name: 'Pilot' }, { emoji: '👨‍🔬', name: 'Ilmuwan' }, { emoji: '👨‍🚒', name: 'Pemadam' }]
+    targetEmoji: '🐝',
+    name: 'Lebah Penghasil Madu',
+    category: 'Serangga Pekerja',
+    forbiddenWords: ['lebah', 'madu', 'sengat', 'kuning hitam', 'sarang'],
+    distractors: [{ emoji: '🦟', name: 'Nyamuk' }, { emoji: '🪰', name: 'Lalat' }, { emoji: '🐜', name: 'Semut' }]
   },
   {
     id: 'ev-30',
-    targetEmoji: '🧙‍♂️',
-    name: 'Penyihir Berjanggut (Wizard)',
-    category: 'Karakter Fantasi',
-    forbiddenWords: ['penyihir', 'tongkat', 'mantra', 'topi kerucut', 'sihir'],
-    distractors: [{ emoji: '🧛‍♂️', name: 'Vampir' }, { emoji: '🧞‍♂️', name: 'Jin' }, { emoji: '🎅', name: 'Santa' }]
-  },
-  {
-    id: 'ev-31',
-    targetEmoji: '🕵️‍♂️',
-    name: 'Detektif Rahasia',
-    category: 'Penyelidik',
-    forbiddenWords: ['detektif', 'kaca pembesar', 'jas', 'topi', 'kasus'],
-    distractors: [{ emoji: '👮‍♂️', name: 'Polisi' }, { emoji: '🥷', name: 'Ninja' }, { emoji: '👨‍⚕️', name: 'Dokter' }]
+    targetEmoji: '🐢',
+    name: 'Kura-Kura Bercangkang Keras',
+    category: 'Reptil Lambat',
+    forbiddenWords: ['kura', 'cangkang', 'tempurung', 'lambat', 'telur'],
+    distractors: [{ emoji: '🦎', name: 'Kadal' }, { emoji: '🐌', name: 'Siput' }, { emoji: '🐊', name: 'Buaya' }]
   },
 
-  // TEKNOLOGI, ALAM & BENDA
+  // --- KULINER, MAKANAN & MINUMAN ---
+  {
+    id: 'ev-31',
+    targetEmoji: '🍕',
+    name: 'Pizza Keju Potong',
+    category: 'Kuliner Italia',
+    forbiddenWords: ['pizza', 'keju', 'roti', 'potong', 'italia'],
+    distractors: [{ emoji: '🍔', name: 'Burger' }, { emoji: '🌭', name: 'Hotdog' }, { emoji: '🥪', name: 'Sandwich' }]
+  },
   {
     id: 'ev-32',
-    targetEmoji: '🚀',
-    name: 'Roket Meluncur',
-    category: 'Teknologi Antariksa',
-    forbiddenWords: ['roket', 'api', 'luar angkasa', 'bulan', 'luncur'],
-    distractors: [{ emoji: '✈️', name: 'Pesawat' }, { emoji: '🛸', name: 'UFO' }, { emoji: '🛰️', name: 'Satelit' }]
+    targetEmoji: '🍔',
+    name: 'Burger Daging Keju (Cheeseburger)',
+    category: 'Fast Food',
+    forbiddenWords: ['burger', 'patty', 'daging', 'selada', 'wijen'],
+    distractors: [{ emoji: '🌮', name: 'Taco' }, { emoji: '🌯', name: 'Burrito' }, { emoji: '🥪', name: 'Sandwich' }]
   },
   {
     id: 'ev-33',
-    targetEmoji: '🌋',
-    name: 'Gunung Berapi Meletus',
-    category: 'Bencana Alam',
-    forbiddenWords: ['gunung', 'meletus', 'lahar', 'lava', 'api'],
-    distractors: [{ emoji: '🌪️', name: 'Tornado' }, { emoji: '🌊', name: 'Ombak' }, { emoji: '⚡', name: 'Petir' }]
+    targetEmoji: '🍜',
+    name: 'Ramen / Mie Kuah Sumpit',
+    category: 'Kuliner Berkuah',
+    forbiddenWords: ['mie', 'ramen', 'kuah', 'sumpit', 'mangkuk'],
+    distractors: [{ emoji: '🍲', name: 'Sup Sayur' }, { emoji: '🍝', name: 'Spageti' }, { emoji: '🍛', name: 'Nasi Kari' }]
   },
   {
     id: 'ev-34',
-    targetEmoji: '🛸',
-    name: 'Piring Terbang (UFO Alien)',
-    category: 'Misteri Langit',
-    forbiddenWords: ['ufo', 'alien', 'piring terbang', 'angkasa', 'sinar'],
-    distractors: [{ emoji: '🚀', name: 'Roket' }, { emoji: '🛰️', name: 'Satelit' }, { emoji: '✈️', name: 'Pesawat' }]
+    targetEmoji: '🍣',
+    name: 'Sushi Gulung Salmon',
+    category: 'Kuliner Jepang',
+    forbiddenWords: ['sushi', 'ikan', 'nasi', 'jepang', 'nori'],
+    distractors: [{ emoji: '🍙', name: 'Onigiri Segitiga' }, { emoji: '🥟', name: 'Pangsit Dimsum' }, { emoji: '🍱', name: 'Kotak Bento' }]
   },
   {
     id: 'ev-35',
-    targetEmoji: '🎬',
-    name: 'Papan Sutradara Film',
-    category: 'Perfilman',
-    forbiddenWords: ['film', 'sutradara', 'action', 'kamera', 'syuting'],
-    distractors: [{ emoji: '🍿', name: 'Popcorn' }, { emoji: '🎟️', name: 'Tiket' }, { emoji: '📺', name: 'Televisi' }]
+    targetEmoji: '🧋',
+    name: 'Boba Milk Tea',
+    category: 'Minuman Kekinian',
+    forbiddenWords: ['boba', 'teh', 'susu', 'sedotan', 'tapioka'],
+    distractors: [{ emoji: '☕', name: 'Kopi Hangat' }, { emoji: '🥤', name: 'Minuman Soda' }, { emoji: '🍧', name: 'Es Serut' }]
   },
   {
     id: 'ev-36',
-    targetEmoji: '💎',
-    name: 'Berlian Berkilau (Diamond)',
-    category: 'Batu Permata',
-    forbiddenWords: ['berlian', 'mahal', 'permata', 'kilau', 'cincin'],
-    distractors: [{ emoji: '👑', name: 'Mahkota' }, { emoji: '💍', name: 'Cincin' }, { emoji: '🪙', name: 'Koin Emas' }]
+    targetEmoji: '🍿',
+    name: 'Popcorn Bioskop',
+    category: 'Camilan Film',
+    forbiddenWords: ['popcorn', 'jagung', 'bioskop', 'nonton', 'kotak'],
+    distractors: [{ emoji: '🍟', name: 'Kentang Goreng' }, { emoji: '🥨', name: 'Pretzel' }, { emoji: '🥜', name: 'Kacang Kulit' }]
   },
   {
     id: 'ev-37',
-    targetEmoji: '💣',
-    name: 'Bom Waktu Berdetak',
-    category: 'Peledak',
-    forbiddenWords: ['bom', 'ledak', 'sumbu', 'dinamit', 'hitam'],
-    distractors: [{ emoji: '🧨', name: 'Petasan' }, { emoji: '🔥', name: 'Api' }, { emoji: '⚡', name: 'Petir' }]
+    targetEmoji: '🍦',
+    name: 'Es Krim Cone Lembut',
+    category: 'Dessert Manis',
+    forbiddenWords: ['es krim', 'dingin', 'cone', 'jilat', 'meleleh'],
+    distractors: [{ emoji: '🍧', name: 'Es Campur Serut' }, { emoji: '🍨', name: 'Es Krim Mangkok' }, { emoji: '🧁', name: 'Cupcake' }]
   },
   {
     id: 'ev-38',
-    targetEmoji: '🎸',
-    name: 'Gitar Listrik Rock',
-    category: 'Alat Musik',
-    forbiddenWords: ['gitar', 'senar', 'petik', 'rock', 'musik'],
-    distractors: [{ emoji: '🥁', name: 'Drum' }, { emoji: '🎹', name: 'Piano' }, { emoji: '🎷', name: 'Saksofon' }]
+    targetEmoji: '🍩',
+    name: 'Donat Cokelat Berlubang',
+    category: 'Kue Manis',
+    forbiddenWords: ['donat', 'lubang', 'tengah', 'topping', 'manis'],
+    distractors: [{ emoji: '🍪', name: 'Kue Kering Cookie' }, { emoji: '🍰', name: 'Kue Tart Potong' }, { emoji: '🥯', name: 'Bagel' }]
   },
   {
     id: 'ev-39',
-    targetEmoji: '🤖',
-    name: 'Robot Logam Cerdas',
-    category: 'Kecerdasan Buatan',
-    forbiddenWords: ['robot', 'besi', 'mesin', 'antena', 'android'],
-    distractors: [{ emoji: '👾', name: 'Alien Pixel' }, { emoji: '🎮', name: 'Joystick' }, { emoji: '💻', name: 'Laptop' }]
+    targetEmoji: '🥑',
+    name: 'Alpukat Hijau Berbiji',
+    category: 'Buah Sehat',
+    forbiddenWords: ['alpukat', 'biji', 'hijau', 'jus', 'lemak'],
+    distractors: [{ emoji: '🥝', name: 'Kiwi' }, { emoji: '🥥', name: 'Kelapa' }, { emoji: '🍈', name: 'Melon' }]
   },
   {
     id: 'ev-40',
+    targetEmoji: '🍉',
+    name: 'Semangka Potong Segar',
+    category: 'Buah Tropis',
+    forbiddenWords: ['semangka', 'merah', 'biji hitam', 'kulit hijau', 'segar'],
+    distractors: [{ emoji: '🍓', name: 'Stroberi' }, { emoji: '🍎', name: 'Apel Merah' }, { emoji: '🍒', name: 'Ceri' }]
+  },
+  {
+    id: 'ev-41',
+    targetEmoji: '🌶️',
+    name: 'Cabai Merah Pedas',
+    category: 'Bumbu Pedas',
+    forbiddenWords: ['cabai', 'cabe', 'pedas', 'merah', 'sambal'],
+    distractors: [{ emoji: '🧄', name: 'Bawang Putih' }, { emoji: '🧅', name: 'Bawang Bombay' }, { emoji: '🥕', name: 'Wortel' }]
+  },
+  {
+    id: 'ev-42',
+    targetEmoji: '☕',
+    name: 'Cangkir Kopi Panas Berasap',
+    category: 'Minuman Kafein',
+    forbiddenWords: ['kopi', 'cangkir', 'hitam', 'asap', 'kafein'],
+    distractors: [{ emoji: '🍵', name: 'Teh Hijau Panas' }, { emoji: '🥛', name: 'Segelas Susu' }, { emoji: '🫖', name: 'Teko Teh' }]
+  },
+  {
+    id: 'ev-43',
+    targetEmoji: '🎂',
+    name: 'Kue Ulang Tahun Lilin',
+    category: 'Pesta Perayaan',
+    forbiddenWords: ['kue', 'ulang tahun', 'lilin', 'tiup', 'tart'],
+    distractors: [{ emoji: '🧁', name: 'Kue Muffin Cupcake' }, { emoji: '🍰', name: 'Sepotong Kue' }, { emoji: '🎁', name: 'Kado' }]
+  },
+  {
+    id: 'ev-44',
+    targetEmoji: '🥞',
+    name: 'Tumpukan Pancake Madu',
+    category: 'Sarapan Pagi',
+    forbiddenWords: ['pancake', 'mentega', 'madu', 'sirup', 'tumpuk'],
+    distractors: [{ emoji: '🧇', name: 'Wafel Kotak' }, { emoji: '🍳', name: 'Telur Mata Sapi' }, { emoji: '🍞', name: 'Roti Tawar' }]
+  },
+  {
+    id: 'ev-45',
+    targetEmoji: '🍫',
+    name: 'Cokelat Batangan Manis',
+    category: 'Camilan Manis',
+    forbiddenWords: ['cokelat', 'batang', 'kotak', 'manis', 'bungkus'],
+    distractors: [{ emoji: '🍬', name: 'Permen Manis' }, { emoji: '🍭', name: 'Permen Lolipop' }, { emoji: '🍪', name: 'Kue Kering' }]
+  },
+
+  // --- OLAHRAGA, HOBI & AKTIVITAS ---
+  {
+    id: 'ev-46',
+    targetEmoji: '🥊',
+    name: 'Sarung Tinju Merah',
+    category: 'Bela Diri',
+    forbiddenWords: ['tinju', 'sarung', 'pukul', 'ring', 'tyson'],
+    distractors: [{ emoji: '🥋', name: 'Seragam Karate' }, { emoji: '🤺', name: 'Anggar Pedang' }, { emoji: '🏋️‍♂️', name: 'Angkat Besi' }]
+  },
+  {
+    id: 'ev-47',
+    targetEmoji: '🏹',
+    name: 'Busur Panah dan Anak Panah',
+    category: 'Akurasi Target',
+    forbiddenWords: ['panah', 'busur', 'target', 'bidik', 'tali'],
+    distractors: [{ emoji: '🎯', name: 'Papan Sasaran Dart' }, { emoji: '🔫', name: 'Pistol Tembak' }, { emoji: '⚔️', name: 'Pedang Silang' }]
+  },
+  {
+    id: 'ev-48',
+    targetEmoji: '🛹',
+    name: 'Papan Skateboard Meluncur',
+    category: 'Olahraga Jalanan',
+    forbiddenWords: ['skateboard', 'papan', 'roda empat', 'aspal', 'seluncur'],
+    distractors: [{ emoji: '🛴', name: 'Skuter Anak' }, { emoji: '🚲', name: 'Sepeda Gowes' }, { emoji: '🛼', name: 'Sepatu Roda' }]
+  },
+  {
+    id: 'ev-49',
+    targetEmoji: '🎳',
+    name: 'Bola Bowling dan Tiga Pin',
+    category: 'Permainan Lintasan',
+    forbiddenWords: ['bowling', 'pin', 'bola', 'strike', 'lubang tiga'],
+    distractors: [{ emoji: '🎱', name: 'Bola Biliar 8' }, { emoji: '⚾', name: 'Bola Bisbol' }, { emoji: '🎾', name: 'Bola Tenis' }]
+  },
+  {
+    id: 'ev-50',
+    targetEmoji: '🤿',
+    name: 'Kacamata Selam & Snorkel',
+    category: 'Eksplorasi Laut',
+    forbiddenWords: ['selam', 'snorkel', 'kacamata', 'karang', 'bawah laut'],
+    distractors: [{ emoji: '🏊‍♂️', name: 'Orang Berenang' }, { emoji: '🏄‍♂️', name: 'Selancar Ombak' }, { emoji: '🎣', name: 'Memancing' }]
+  },
+  {
+    id: 'ev-51',
+    targetEmoji: '🪂',
+    name: 'Parasut Terjun Payung',
+    category: 'Olahraga Ekstrem Udara',
+    forbiddenWords: ['parasut', 'terjun payung', 'lompat', 'pesawat', 'udara'],
+    distractors: [{ emoji: '🪁', name: 'Layang-layang' }, { emoji: '🎈', name: 'Balon Udara' }, { emoji: '🛸', name: 'UFO' }]
+  },
+  {
+    id: 'ev-52',
+    targetEmoji: '🎮',
+    name: 'Joystick / Kontroler Game',
+    category: 'Video Game',
+    forbiddenWords: ['stik', 'game', 'playstation', 'tombol', 'joystick'],
+    distractors: [{ emoji: '🕹️', name: 'Arcade Joystick' }, { emoji: '💻', name: 'Laptop' }, { emoji: '📺', name: 'Layar TV' }]
+  },
+  {
+    id: 'ev-53',
+    targetEmoji: '🎸',
+    name: 'Gitar Listrik Musisi Rock',
+    category: 'Alat Musik',
+    forbiddenWords: ['gitar', 'senar', 'petik', 'melodi', 'rock'],
+    distractors: [{ emoji: '🎻', name: 'Biola Gesek' }, { emoji: '🎹', name: 'Piano Tuts' }, { emoji: '🥁', name: 'Drum Pukul' }]
+  },
+  {
+    id: 'ev-54',
+    targetEmoji: '🎤',
+    name: 'Mikrofon Bernyanyi Panggung',
+    category: 'Suara Musik',
+    forbiddenWords: ['mikrofon', 'karaoke', 'nyanyi', 'suara', 'mic'],
+    distractors: [{ emoji: '🎧', name: 'Headphone Musik' }, { emoji: '📻', name: 'Radio Antik' }, { emoji: '📢', name: 'Megafon Pengeras' }]
+  },
+  {
+    id: 'ev-55',
+    targetEmoji: '🏆',
+    name: 'Piala Trofi Juara Emas',
+    category: 'Penghargaan Juara',
+    forbiddenWords: ['piala', 'trofi', 'emas', 'juara satu', 'menang'],
+    distractors: [{ emoji: '🥇', name: 'Medali Emas' }, { emoji: '👑', name: 'Mahkota Raja' }, { emoji: '🎖️', name: 'Pita Militer' }]
+  },
+  {
+    id: 'ev-56',
+    targetEmoji: '🎲',
+    name: 'Dadu Berbintik Angka',
+    category: 'Permainan Meja',
+    forbiddenWords: ['dadu', 'titik', 'lempar', 'monopoli', 'kocok'],
+    distractors: [{ emoji: '🎯', name: 'Dart' }, { emoji: '🃏', name: 'Kartu Joker' }, { emoji: '♟️', name: 'Pion Catur' }]
+  },
+  {
+    id: 'ev-57',
+    targetEmoji: '🎨',
+    name: 'Palet Cat Seniman Lukis',
+    category: 'Kesenian Menggambar',
+    forbiddenWords: ['cat', 'lukis', 'kuas', 'palet', 'gambar'],
+    distractors: [{ emoji: '🖌️', name: 'Kuas Lukis' }, { emoji: '🖍️', name: 'Krayon Mewarnai' }, { emoji: '✏️', name: 'Pensil' }]
+  },
+  {
+    id: 'ev-58',
+    targetEmoji: '🎣',
+    name: 'Alat Pancing Kail Ikan',
+    category: 'Hobi Santai',
+    forbiddenWords: ['pancing', 'kail', 'ikan', 'umpan', 'sungai'],
+    distractors: [{ emoji: '🚣‍♂️', name: 'Mendayung Sampan' }, { emoji: '⛵', name: 'Perahu Layar' }, { emoji: '⛺', name: 'Tenda Kemah' }]
+  },
+  {
+    id: 'ev-59',
+    targetEmoji: '🧩',
+    name: 'Kepingan Puzzle Sambung',
+    category: 'Asah Otak',
+    forbiddenWords: ['puzzle', 'keping', 'sambung', 'pasang', 'teka-teki'],
+    distractors: [{ emoji: '🧱', name: 'Batu Bata' }, { emoji: '🪨', name: 'Batu Kali' }, { emoji: '🪙', name: 'Koin Emas' }]
+  },
+
+  // --- KENDARAAN, TEMPAT & PERJALANAN ---
+  {
+    id: 'ev-60',
+    targetEmoji: '🚀',
+    name: 'Roket Meluncur Luar Angkasa',
+    category: 'Antariksa',
+    forbiddenWords: ['roket', 'api bawah', 'bulan', 'antariksa', 'luncur'],
+    distractors: [{ emoji: '🛸', name: 'UFO Piring' }, { emoji: '✈️', name: 'Pesawat Terbang' }, { emoji: '🛰️', name: 'Satelit Angkasa' }]
+  },
+  {
+    id: 'ev-61',
+    targetEmoji: '🚁',
+    name: 'Helikopter Baling-baling',
+    category: 'Transportasi Udara',
+    forbiddenWords: ['helikopter', 'baling-baling', 'atas', 'pilot', 'udara'],
+    distractors: [{ emoji: '✈️', name: 'Pesawat Penumpang' }, { emoji: '🛩️', name: 'Pesawat Mini' }, { emoji: '🪂', name: 'Parasut' }]
+  },
+  {
+    id: 'ev-62',
+    targetEmoji: '🚓',
+    name: 'Mobil Polisi Sirene',
+    category: 'Kendaraan Darurat',
+    forbiddenWords: ['polisi', 'sirene', 'patroli', 'tangkap', 'lampu biru'],
+    distractors: [{ emoji: '🚑', name: 'Ambulans Rumah Sakit' }, { emoji: '🚒', name: 'Mobil Pemadam' }, { emoji: '🚕', name: 'Taksi Kuning' }]
+  },
+  {
+    id: 'ev-63',
+    targetEmoji: '🚂',
+    name: 'Lokomotif Kereta Uap Asap',
+    category: 'Kereta Klasik',
+    forbiddenWords: ['kereta', 'uap', 'rel', 'asap', 'stasiun'],
+    distractors: [{ emoji: '🚅', name: 'Kereta Cepat Peluru' }, { emoji: '🚇', name: 'Kereta Bawah Tanah' }, { emoji: '🚌', name: 'Bus Kota' }]
+  },
+  {
+    id: 'ev-64',
+    targetEmoji: '⛵',
+    name: 'Perahu Layar di Laut',
+    category: 'Transportasi Air',
+    forbiddenWords: ['perahu', 'layar', 'angin', 'laut', 'ombak'],
+    distractors: [{ emoji: '🚢', name: 'Kapal Pesiar Besar' }, { emoji: '🚤', name: 'Speedboat Cepat' }, { emoji: '🛶', name: 'Kano Dayung' }]
+  },
+  {
+    id: 'ev-65',
+    targetEmoji: '🏰',
+    name: 'Kastil Megah Kerajaan',
+    category: 'Bangunan Kuno',
+    forbiddenWords: ['kastil', 'raja', 'benteng', 'menara batu', 'putri'],
+    distractors: [{ emoji: '🏯', name: 'Kastil Jepang' }, { emoji: '🏛️', name: 'Gedung Pilar Yunani' }, { emoji: '💒', name: 'Gereja Menikah' }]
+  },
+  {
+    id: 'ev-66',
+    targetEmoji: '🏕️',
+    name: 'Tenda Kemah Camping Liar',
+    category: 'Petualangan Alam',
+    forbiddenWords: ['tenda', 'kemah', 'camping', 'api unggun', 'hutan'],
+    distractors: [{ emoji: '⛺', name: 'Tenda Segitiga' }, { emoji: '🛖', name: 'Gubuk Jerami' }, { emoji: '🪵', name: 'Kayu Bakar' }]
+  },
+  {
+    id: 'ev-67',
+    targetEmoji: '🏖️',
+    name: 'Pantai Tropis Payung Pasir',
+    category: 'Liburan Santai',
+    forbiddenWords: ['pantai', 'pasir', 'payung', 'laut', 'kelapa'],
+    distractors: [{ emoji: '🏝️', name: 'Pulau Terpencil' }, { emoji: '🏜️', name: 'Gurun Tandus' }, { emoji: '🏔️', name: 'Puncak Bersalju' }]
+  },
+  {
+    id: 'ev-68',
+    targetEmoji: '🌋',
+    name: 'Gunung Berapi Meletus Magma',
+    category: 'Bencana Geologi',
+    forbiddenWords: ['gunung', 'meletus', 'lahar', 'magma', 'asap'],
+    distractors: [{ emoji: '⛰️', name: 'Gunung Biasa' }, { emoji: '🔥', name: 'Api Membara' }, { emoji: '💥', name: 'Ledakan' }]
+  },
+
+  // --- BENDA, TEKNOLOGI & MISTERI ---
+  {
+    id: 'ev-69',
+    targetEmoji: '💎',
+    name: 'Berlian Permata Berkilau',
+    category: 'Perhiasan Berharga',
+    forbiddenWords: ['berlian', 'permata', 'kilau', 'mahal', 'biru'],
+    distractors: [{ emoji: '💍', name: 'Cincin Kawin' }, { emoji: '👑', name: 'Mahkota' }, { emoji: '✨', name: 'Kelap-kelip' }]
+  },
+  {
+    id: 'ev-70',
+    targetEmoji: '👑',
+    name: 'Mahkota Raja Bertabur Emas',
+    category: 'Atribut Kerajaan',
+    forbiddenWords: ['mahkota', 'raja', 'ratu', 'emas', 'kepala'],
+    distractors: [{ emoji: '💎', name: 'Berlian' }, { emoji: '💍', name: 'Cincin' }, { emoji: '🏆', name: 'Piala' }]
+  },
+  {
+    id: 'ev-71',
     targetEmoji: '🔮',
-    name: 'Bola Kristal Ramalan',
-    category: 'Misteri Sihir',
-    forbiddenWords: ['kristal', 'ramal', 'bola', 'masa depan', 'dukun'],
-    distractors: [{ emoji: '🪄', name: 'Tongkat Sihir' }, { emoji: '🕯️', name: 'Lilin' }, { emoji: '✨', name: 'Kilauan' }]
+    name: 'Bola Kristal Ramalan Masa Depan',
+    category: 'Sihir Mistis',
+    forbiddenWords: ['kristal', 'bola', 'ramal', 'dukun', 'ungu'],
+    distractors: [{ emoji: '🪄', name: 'Tongkat Sihir' }, { emoji: '🕯️', name: 'Lilin Menyala' }, { emoji: '✨', name: 'Kilauan Ajaib' }]
+  },
+  {
+    id: 'ev-72',
+    targetEmoji: '🪄',
+    name: 'Tongkat Sihir Berbintang (Magic Wand)',
+    category: 'Keajaiban Sulap',
+    forbiddenWords: ['tongkat', 'sihir', 'sulap', 'bintang', 'harry potter'],
+    distractors: [{ emoji: '🔮', name: 'Bola Kristal' }, { emoji: '🎩', name: 'Topi Sulap' }, { emoji: '✨', name: 'Serbuk Ajaib' }]
+  },
+  {
+    id: 'ev-73',
+    targetEmoji: '💣',
+    name: 'Bom Hitam Sumbu Menyala',
+    category: 'Senjata Ledak',
+    forbiddenWords: ['bom', 'sumbu', 'meledak', 'hitam', 'percik'],
+    distractors: [{ emoji: '🧨', name: 'Petasan Merah' }, { emoji: '💥', name: 'Ledakan Dahsyat' }, { emoji: '🗡️', name: 'Belati' }]
+  },
+  {
+    id: 'ev-74',
+    targetEmoji: '🔑',
+    name: 'Kunci Pintu Kuningan',
+    category: 'Alat Buka Pintu',
+    forbiddenWords: ['kunci', 'gembok', 'pintu', 'gerigi', 'buka'],
+    distractors: [{ emoji: '🗝️', name: 'Kunci Kuno Antik' }, { emoji: '🔒', name: 'Gembok Terkunci' }, { emoji: '🚪', name: 'Pintu Kayu' }]
+  },
+  {
+    id: 'ev-75',
+    targetEmoji: '💡',
+    name: 'Lampu Bohlam Ide Cemerlang',
+    category: 'Penerangan & Ide',
+    forbiddenWords: ['lampu', 'bohlam', 'kuning', 'ide', 'terang'],
+    distractors: [{ emoji: '🔦', name: 'Senter Tangan' }, { emoji: '🕯️', name: 'Lilin Sumbu' }, { emoji: '☀️', name: 'Matahari' }]
+  },
+  {
+    id: 'ev-76',
+    targetEmoji: '🧲',
+    name: 'Magnet Tapal Kuda Tarik Logam',
+    category: 'Fisika & Sains',
+    forbiddenWords: ['magnet', 'merah biru', 'besi', 'tarik', 'kutub'],
+    distractors: [{ emoji: '🔋', name: 'Baterai Listrik' }, { emoji: '⚡', name: 'Kilat Petir' }, { emoji: '🔩', name: 'Baut Mur' }]
+  },
+  {
+    id: 'ev-77',
+    targetEmoji: '📷',
+    name: 'Kamera Jepret Foto Lensa',
+    category: 'Fotografi',
+    forbiddenWords: ['kamera', 'foto', 'jepret', 'lensa', 'flash'],
+    distractors: [{ emoji: '📹', name: 'Kamera Video' }, { emoji: '📱', name: 'Handphone' }, { emoji: '🎞️', name: 'Rol Klise Film' }]
+  },
+  {
+    id: 'ev-78',
+    targetEmoji: '⏰',
+    name: 'Jam Weker Dering Bunyi Pagi',
+    category: 'Pengingat Waktu',
+    forbiddenWords: ['jam', 'weker', 'dering', 'bangun tidur', 'lonceng'],
+    distractors: [{ emoji: '⏱️', name: 'Stopwatch Detik' }, { emoji: '⏳', name: 'Jam Pasir Tabung' }, { emoji: '🕰️', name: 'Jam Meja Kuno' }]
+  },
+  {
+    id: 'ev-79',
+    targetEmoji: '💰',
+    name: 'Kantong Karung Uang Dolar',
+    category: 'Kekayaan Finansial',
+    forbiddenWords: ['uang', 'karung', 'kantong', 'dolar', 'emas'],
+    distractors: [{ emoji: '💵', name: 'Uang Kertas Lembaran' }, { emoji: '🪙', name: 'Koin Logam' }, { emoji: '💳', name: 'Kartu Kredit ATM' }]
+  },
+  {
+    id: 'ev-80',
+    targetEmoji: '🎁',
+    name: 'Kotak Kado Hadiah Pita',
+    category: 'Hadiah Spesial',
+    forbiddenWords: ['kado', 'hadiah', 'pita', 'kotak', 'bungkus'],
+    distractors: [{ emoji: '📦', name: 'Kardus Paket Kurir' }, { emoji: '🎈', name: 'Balon Pesta' }, { emoji: '🎉', name: 'Terompet Pesta' }]
+  },
+  {
+    id: 'ev-81',
+    targetEmoji: '💌',
+    name: 'Surat Cinta Amplop Berhati Merah',
+    category: 'Pesan Romantis',
+    forbiddenWords: ['surat', 'amplop', 'hati', 'cinta', 'pos'],
+    distractors: [{ emoji: '✉️', name: 'Amplop Putih' }, { emoji: '📦', name: 'Paket Kardus' }, { emoji: '📜', name: 'Gulungan Kertas Kuno' }]
+  },
+  {
+    id: 'ev-82',
+    targetEmoji: '💍',
+    name: 'Cincin Kawin Berlian Kemilau',
+    category: 'Pernikahan',
+    forbiddenWords: ['cincin', 'berlian', 'jari', 'lamaran', 'nikah'],
+    distractors: [{ emoji: '💎', name: 'Berlian Permata' }, { emoji: '👑', name: 'Mahkota' }, { emoji: '📿', name: 'Kalung Manik' }]
+  },
+  {
+    id: 'ev-83',
+    targetEmoji: '🧯',
+    name: 'Tabung Pemadam Api Merah (APAR)',
+    category: 'Keselamatan Kebakaran',
+    forbiddenWords: ['pemadam', 'tabung', 'api', 'merah', 'semprot'],
+    distractors: [{ emoji: '🪓', name: 'Kapak Besi' }, { emoji: '🚨', name: 'Lampu Sirine Darurat' }, { emoji: '🔥', name: 'Kobaran Api' }]
+  },
+  {
+    id: 'ev-84',
+    targetEmoji: '🪓',
+    name: 'Kapak Gagang Kayu Tajam',
+    category: 'Alat Tukang & Hutan',
+    forbiddenWords: ['kapak', 'tebang', 'kayu', 'pohon', 'tajam'],
+    distractors: [{ emoji: '🔨', name: 'Palu Besi' }, { emoji: '⛏️', name: 'Beliung Tambang' }, { emoji: '🗡️', name: 'Pedang' }]
+  },
+  {
+    id: 'ev-85',
+    targetEmoji: '🧭',
+    name: 'Kompas Petunjuk Arah Jarum Magnet',
+    category: 'Navigasi Petualangan',
+    forbiddenWords: ['kompas', 'arah', 'utara', 'jarum', 'petunjuk'],
+    distractors: [{ emoji: '🗺️', name: 'Peta Dunia' }, { emoji: '⏰', name: 'Jam Weker' }, { emoji: '⚓', name: 'Jangkar Kapal' }]
+  },
+  {
+    id: 'ev-86',
+    targetEmoji: '🧪',
+    name: 'Tabung Reaksi Kimia Laboratorium',
+    category: 'Sains & Penelitian',
+    forbiddenWords: ['tabung', 'kimia', 'cairan', 'reaksi', 'laboratorium'],
+    distractors: [{ emoji: '🧬', name: 'Rantai DNA' }, { emoji: '🔬', name: 'Mikroskop Pembesar' }, { emoji: '🧫', name: 'Cawan Petri' }]
+  },
+  {
+    id: 'ev-87',
+    targetEmoji: '🧲',
+    name: 'Magnet Tapal Kuda',
+    category: 'Fisika Eksperimen',
+    forbiddenWords: ['magnet', 'tarik', 'besi', 'kutub', 'u'],
+    distractors: [{ emoji: '🔩', name: 'Baut Mur' }, { emoji: '⚙️', name: 'Roda Gerigi' }, { emoji: '🪛', name: 'Obeng Sekrup' }]
+  },
+  {
+    id: 'ev-88',
+    targetEmoji: '🪞',
+    name: 'Cermin Rias Kaca Pantul',
+    category: 'Kecantikan',
+    forbiddenWords: ['cermin', 'kaca', 'pantul', 'rias', 'wajah'],
+    distractors: [{ emoji: '🪥', name: 'Sikat Gigi' }, { emoji: '🧴', name: 'Botol Losion' }, { emoji: '🧼', name: 'Sabun Mandi' }]
+  },
+  {
+    id: 'ev-89',
+    targetEmoji: '🪁',
+    name: 'Layang-Layang Terbang Ditiup Angin',
+    category: 'Permainan Tradisional',
+    forbiddenWords: ['layangan', 'benang', 'terbang', 'angin', 'ekor'],
+    distractors: [{ emoji: '🪂', name: 'Parasut' }, { emoji: '🎈', name: 'Balon Gas' }, { emoji: '🛸', name: 'Piring Terbang' }]
+  },
+  {
+    id: 'ev-90',
+    targetEmoji: '🪆',
+    name: 'Boneka Matryoshka Bersarang',
+    category: 'Kesenian Tradisional',
+    forbiddenWords: ['matryoshka', 'boneka', 'rusia', 'susun', 'dalam'],
+    distractors: [{ emoji: '🧸', name: 'Boneka Beruang Teddy' }, { emoji: '🎎', name: 'Boneka Jepang' }, { emoji: '🎭', name: 'Topeng' }]
   }
 ];
 
-// Helper functions for randomized rounds
-export function generateFlagQuestion(): FlagQuestion {
-  const randomIndex = Math.floor(Math.random() * FLAG_DATABASE.length);
-  const target = FLAG_DATABASE[randomIndex];
+// ==============================================================
+// 4. DATA UJI KECOCOKAN / DILEMA TELEPATI (100+ DILEMA LENGKAP)
+// ==============================================================
+export const DILEMMA_DATABASE: DilemmaQuestion[] = [
+  // MAKANAN & KULINER
+  { id: 'dl-1', title: 'Sekte Cara Makan Bubur Ayam', category: 'Kebiasaan Makan', optionA: { id: 'A', text: 'Diaduk rata biar bumbunya merata gurih', emoji: '🥣' }, optionB: { id: 'B', text: 'Gak diaduk biar topping tetap rapi estetik', emoji: '🥄' } },
+  { id: 'dl-2', title: 'Sensasi Rasa Kuliner Favorit', category: 'Selera Lidah', optionA: { id: 'A', text: 'Pedas nampol bikin keringetan mantap', emoji: '🌶️' }, optionB: { id: 'B', text: 'Manis gurih bikin mood tenang bahagia', emoji: '🍰' } },
+  { id: 'dl-3', title: 'Varian Olahan Mie Instan', category: 'Mie Instan', optionA: { id: 'A', text: 'Mie goreng gurih pakai telur ceplok', emoji: '🍳' }, optionB: { id: 'B', text: 'Mie kuah panas berkaldu hangat cabai potong', emoji: '🍜' } },
+  { id: 'dl-4', title: 'Minuman Peneman Nongkrong', category: 'Minuman', optionA: { id: 'A', text: 'Kopi hitam atau es kopi susu gula aren', emoji: '☕' }, optionB: { id: 'B', text: 'Teh melati wangi atau Boba brown sugar', emoji: '🧋' } },
+  { id: 'dl-5', title: 'Cara Menikmati Nasi Padang', category: 'Kuliner Nusantara', optionA: { id: 'A', text: 'Bungkus bawa pulang (porsi nasi lebih banyak)', emoji: '📦' }, optionB: { id: 'B', text: 'Makan langsung di tempat (bisa nambah kuah gulai)', emoji: '🍽️' } },
+  { id: 'dl-6', title: 'Camilan Gorengan Wajib', category: 'Gorengan', optionA: { id: 'A', text: 'Bakwan / Bala-bala garing renyah', emoji: '🥬' }, optionB: { id: 'B', text: 'Tahu isi pedas / Mendoan hangat kencur', emoji: '🧈' } },
+  { id: 'dl-7', title: 'Tekstur Telur Ceplok Goreng', category: 'Masakan Rumah', optionA: { id: 'A', text: 'Setengah matang meleleh saat ditusuk garpu', emoji: '🍳' }, optionB: { id: 'B', text: 'Matang sempurna garing pinggirannya renyah', emoji: '✨' } },
+  { id: 'dl-8', title: 'Pilihan Fast Food Favorit', category: 'Fast Food', optionA: { id: 'A', text: 'Ayam goreng crispy berbumbu renyah', emoji: '🍗' }, optionB: { id: 'B', text: 'Burger daging keju leleh saus spesial', emoji: '🍔' } },
+  { id: 'dl-9', title: 'Topping Pizza Paling Pas', category: 'Pizza', optionA: { id: 'A', text: 'Full keju mozzarella & daging gurih', emoji: '🧀' }, optionB: { id: 'B', text: 'Ada potongan nanasnya (Hawaiian segar)', emoji: '🍍' } },
+  { id: 'dl-10', title: 'Gaya Minum Es Teh di Warung', category: 'Minuman Rakyat', optionA: { id: 'A', text: 'Es teh manis dingin segar tenggorokan', emoji: '🧊' }, optionB: { id: 'B', text: 'Teh tawar hangat penawar rasa enek', emoji: '🍵' } },
+
+  // LIBURAN, HANGOUT & GAYA HIDUP
+  { id: 'dl-11', title: 'Destinasi Liburan Impian', category: 'Liburan', optionA: { id: 'A', text: 'Pantai tropis santai, deburan ombak & sunset', emoji: '🏖️' }, optionB: { id: 'B', text: 'Pegunungan sejuk berkabut & udara segar', emoji: '🏔️' } },
+  { id: 'dl-12', title: 'Rencana Malam Minggu', category: 'Weekend', optionA: { id: 'A', text: 'Jalan keluar ke bioskop, kafe atau mall', emoji: '🍿' }, optionB: { id: 'B', text: 'Rebahan di kasur nonton serial streaming santai', emoji: '🛋️' } },
+  { id: 'dl-13', title: 'Gaya Merencanakan Traveling', category: 'Traveling', optionA: { id: 'A', text: 'Itinerary rapi tersusun jam demi jam', emoji: '📝' }, optionB: { id: 'B', text: 'Spontan kemana kaki melangkah (Go with the flow)', emoji: '🎒' } },
+  { id: 'dl-14', title: 'Ritme Jam Produktifmu', category: 'Jam Biologis', optionA: { id: 'A', text: 'Burung hantu / Ide deras keluar tengah malam', emoji: '🦉' }, optionB: { id: 'B', text: 'Early bird / Bangun subuh udara sejuk segar', emoji: '🌅' } },
+  { id: 'dl-15', title: 'Hewan Peliharaan Idaman', category: 'Hewan Peliharaan', optionA: { id: 'A', text: 'Kucing manja yang lucu dan mandiri', emoji: '🐱' }, optionB: { id: 'B', text: 'Anjing setia yang pintar dan aktif diajak main', emoji: '🐶' } },
+  { id: 'dl-16', title: 'Suasana Tempat Nongkrong', category: 'Social', optionA: { id: 'A', text: 'Kafe estetik tenang sambil dengerin musik lofi', emoji: '☕' }, optionB: { id: 'B', text: 'Angkringan pinggir jalan seru ngobrol santai', emoji: '🍢' } },
+  { id: 'dl-17', title: 'Kondisi Kamar Saat Tidur', category: 'Kenyamanan', optionA: { id: 'A', text: 'AC dingin menusuk pakai selimut tebal', emoji: '❄️' }, optionB: { id: 'B', text: 'Suhu ruangan sejuk alami semilir angin jendela', emoji: '🍃' } },
+  { id: 'dl-18', title: 'Pilihan Menginap Liburan', category: 'Akomodasi', optionA: { id: 'A', text: 'Hotel berbintang kasur empuk mewah', emoji: '🏨' }, optionB: { id: 'B', text: 'Glamping / Tenda di tengah alam terbuka asri', emoji: '⛺' } },
+  { id: 'dl-19', title: 'Kendaraan Jalan Sore Santai', category: 'Transportasi', optionA: { id: 'A', text: 'Naik motor boncengan kena semilir angin sore', emoji: '🛵' }, optionB: { id: 'B', text: 'Naik mobil adem sambil dengerin playlist lagu', emoji: '🚗' } },
+  { id: 'dl-20', title: 'Karakter Dalam Hubungan', category: 'Relasi', optionA: { id: 'A', text: 'Sering berkabar chat terus sepanjang hari', emoji: '💬' }, optionB: { id: 'B', text: 'Cukup kabar penting tapi selalu hadir saat butuh', emoji: '❤️' } }
+];
+
+// ==============================================================
+// 5. HELPER GENERATION DENGAN DEDUPLIKASI KETAT
+// ==============================================================
+
+/**
+ * Generate pertanyaan tebak bendera tanpa repetisi
+ */
+export function generateFlagQuestion(usedIds: string[] = []): { question: FlagQuestion; chosenId: string } {
+  const available = FLAG_DATABASE.filter(f => !usedIds.includes(f.id));
+  const pool = available.length > 0 ? available : FLAG_DATABASE;
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  const target = pool[randomIndex];
 
   const wrongOptions: string[] = [];
   while (wrongOptions.length < 3) {
@@ -625,14 +1054,22 @@ export function generateFlagQuestion(): FlagQuestion {
   const options = [target.countryName, ...wrongOptions].sort(() => Math.random() - 0.5);
 
   return {
-    ...target,
-    options
+    question: {
+      ...target,
+      options
+    },
+    chosenId: target.id
   };
 }
 
-export function generateWordQuestion(): WordQuestion {
-  const randomIndex = Math.floor(Math.random() * WORD_DATABASE.length);
-  const target = WORD_DATABASE[randomIndex];
+/**
+ * Generate pertanyaan tebak kata tanpa repetisi
+ */
+export function generateWordQuestion(usedIds: string[] = []): { question: WordQuestion; chosenId: string } {
+  const available = WORD_DATABASE.filter(w => !usedIds.includes(w.id));
+  const pool = available.length > 0 ? available : WORD_DATABASE;
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  const target = pool[randomIndex];
 
   const wrongOptions: string[] = [];
   while (wrongOptions.length < 3) {
@@ -645,14 +1082,28 @@ export function generateWordQuestion(): WordQuestion {
   const options = [target.word, ...wrongOptions].sort(() => Math.random() - 0.5);
 
   return {
-    ...target,
-    options
+    question: {
+      ...target,
+      options
+    },
+    chosenId: target.id
   };
 }
 
-export function generateEmojiVoiceQuestion(player1Id: string, player2Id: string, roundNumber: number): EmojiVoiceQuestion {
-  const randomIndex = Math.floor(Math.random() * EMOJI_VOICE_DATABASE.length);
-  const target = EMOJI_VOICE_DATABASE[randomIndex];
+/**
+ * Generate pertanyaan tebak emoji panggilan suara tanpa repetisi
+ * Dijamin TIDAK AKAN MUNCUL EMOJI YANG SAMA sampai seluruh database selesai dimainkan!
+ */
+export function generateEmojiVoiceQuestion(
+  player1Id: string,
+  player2Id: string,
+  roundNumber: number,
+  usedIds: string[] = []
+): { question: EmojiVoiceQuestion; chosenId: string } {
+  const available = EMOJI_VOICE_DATABASE.filter(e => !usedIds.includes(e.id));
+  const pool = available.length > 0 ? available : EMOJI_VOICE_DATABASE;
+  const randomIndex = Math.floor(Math.random() * pool.length);
+  const target = pool[randomIndex];
 
   const isPlayer1Describer = roundNumber % 2 !== 0;
   const describerPlayerId = isPlayer1Describer ? player1Id : player2Id;
@@ -664,19 +1115,29 @@ export function generateEmojiVoiceQuestion(player1Id: string, player2Id: string,
   ].sort(() => Math.random() - 0.5);
 
   return {
-    id: `${target.id}-${Date.now()}`,
-    targetEmoji: target.targetEmoji,
-    name: target.name,
-    category: target.category,
-    forbiddenWords: target.forbiddenWords,
-    options,
-    describerPlayerId,
-    guesserPlayerId
+    question: {
+      id: `${target.id}-${Date.now()}`,
+      targetEmoji: target.targetEmoji,
+      name: target.name,
+      category: target.category,
+      forbiddenWords: target.forbiddenWords,
+      options,
+      describerPlayerId,
+      guesserPlayerId
+    },
+    chosenId: target.id
   };
 }
 
-export function generateDilemmaQuestion(usedIds: string[] = []): DilemmaQuestion {
+/**
+ * Generate pertanyaan dilema tanpa repetisi
+ */
+export function generateDilemmaQuestion(usedIds: string[] = []): { question: DilemmaQuestion; chosenId: string } {
   const available = DILEMMA_DATABASE.filter(d => !usedIds.includes(d.id));
   const pool = available.length > 0 ? available : DILEMMA_DATABASE;
-  return pool[Math.floor(Math.random() * pool.length)];
+  const chosen = pool[Math.floor(Math.random() * pool.length)];
+  return {
+    question: chosen,
+    chosenId: chosen.id
+  };
 }

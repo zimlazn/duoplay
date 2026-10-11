@@ -57,3 +57,14 @@ body {
   box-shadow: 2px 2px 0px #18181B;
 }
 
+/* Special Pink Theme for Room ACAA */
+body.theme-pink {
+  background-color: #FFF0F5;
+  background-image: radial-gradient(#FBCFE8 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+.theme-pink .pink-glow {
+  box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+}
+

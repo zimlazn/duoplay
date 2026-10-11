@@ -44,10 +44,19 @@ export const GameOverModal: React.FC<GameOverModalProps> = ({
   }
 
   const isIWon = overallWinner?.id === playerId;
+  const isPinkTheme = room.roomId === 'ACAA' || room.isSpecialTheme;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs animate-fade-in">
-      <div className="relative w-full max-w-md bg-white border-2 border-zinc-900 rounded-3xl shadow-[6px_6px_0px_#18181b] overflow-hidden flex flex-col p-6 text-center">
+      <div className={`relative w-full max-w-md border-2 border-zinc-900 rounded-3xl shadow-[6px_6px_0px_#18181b] overflow-hidden flex flex-col p-6 text-center ${
+        isPinkTheme ? 'bg-gradient-to-b from-pink-50 to-rose-50 shadow-[6px_6px_0px_#f43f5e]' : 'bg-white'
+      }`}>
+        <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-lg border border-zinc-900 mx-auto mb-3 ${
+          isPinkTheme ? 'text-pink-900 bg-pink-200 border-pink-900' : 'text-purple-900 bg-purple-100'
+        }`}>
+          game aam buat untuk aca {isPinkTheme ? '💖 🌸' : '💖'} • {room.gameState.totalRounds || 5} Soal Selesai
+        </span>
+
         {/* Trophy Avatar Box */}
         <div className="mx-auto w-20 h-20 rounded-3xl bg-amber-100 border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] flex items-center justify-center text-4xl mb-3">
           {isDraw ? '🤝' : '🏆'}

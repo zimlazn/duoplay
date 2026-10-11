@@ -36,11 +36,42 @@ const rooms: Record<string, RoomState> = {};
 // Timers for rooms
 const roomTimers: Record<string, NodeJS.Timeout> = {};
 
+function initSpecialRoomAcaa() {
+  rooms['ACAA'] = {
+    roomId: 'ACAA',
+    players: {},
+    hostId: '',
+    gameState: {
+      gameType: 'flag',
+      status: 'waiting',
+      currentRound: 1,
+      totalRounds: 5,
+      timeLeft: 0,
+      countdown: 3,
+      playerAnswers: {}
+    },
+    roundHistory: [],
+    usedQuestionIds: { flag: [], word: [], emoji_voice: [], dilemma: [] },
+    isSpecialTheme: true,
+    isPermanent: true
+  };
+}
+
+// Pre-initialize special permanent room ACAA immediately on startup
+initSpecialRoomAcaa();
+
 function generateRoomCode(): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
-  for (let i = 0; i < 4; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  // Ensure we never randomly generate 'ACAA'
+  while (true) {
+    code = '';
+    for (let i = 0; i < 4; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    if (code.toUpperCase() !== 'ACAA') {
+      break;
+    }
   }
   return code;
 }
@@ -141,20 +172,36 @@ function launchRound(roomId: string) {
   room.gameState.status = 'in_round';
   room.gameState.playerAnswers = {};
 
+  if (!room.usedQuestionIds) {
+    room.usedQuestionIds = { flag: [], word: [], emoji_voice: [], dilemma: [] };
+  }
+
   if (room.gameState.gameType === 'flag') {
-    room.gameState.flagData = generateFlagQuestion();
+    const { question, chosenId } = generateFlagQuestion(room.usedQuestionIds.flag || []);
+    room.gameState.flagData = question;
+    if (!room.usedQuestionIds.flag) room.usedQuestionIds.flag = [];
+    room.usedQuestionIds.flag.push(chosenId);
     io.to(roomId).emit('room:updated', room);
     startRoundTimer(roomId, 12, undefined, () => finishRound(roomId));
   } else if (room.gameState.gameType === 'word') {
-    room.gameState.wordData = generateWordQuestion();
+    const { question, chosenId } = generateWordQuestion(room.usedQuestionIds.word || []);
+    room.gameState.wordData = question;
+    if (!room.usedQuestionIds.word) room.usedQuestionIds.word = [];
+    room.usedQuestionIds.word.push(chosenId);
     io.to(roomId).emit('room:updated', room);
     startRoundTimer(roomId, 15, undefined, () => finishRound(roomId));
   } else if (room.gameState.gameType === 'emoji_voice') {
-    room.gameState.emojiVoiceData = generateEmojiVoiceQuestion(p1, p2, roundNum);
+    const { question, chosenId } = generateEmojiVoiceQuestion(p1, p2, roundNum, room.usedQuestionIds.emoji_voice || []);
+    room.gameState.emojiVoiceData = question;
+    if (!room.usedQuestionIds.emoji_voice) room.usedQuestionIds.emoji_voice = [];
+    room.usedQuestionIds.emoji_voice.push(chosenId);
     io.to(roomId).emit('room:updated', room);
     startRoundTimer(roomId, 25, undefined, () => finishRound(roomId));
   } else if (room.gameState.gameType === 'dilemma') {
-    room.gameState.dilemmaData = generateDilemmaQuestion();
+    const { question, chosenId } = generateDilemmaQuestion(room.usedQuestionIds.dilemma || []);
+    room.gameState.dilemmaData = question;
+    if (!room.usedQuestionIds.dilemma) room.usedQuestionIds.dilemma = [];
+    room.usedQuestionIds.dilemma.push(chosenId);
     io.to(roomId).emit('room:updated', room);
     startRoundTimer(roomId, 14, undefined, () => finishRound(roomId));
   } else if (room.gameState.gameType === 'reflex') {
@@ -280,16 +327,23 @@ function finishRound(roomId: string) {
     const targetEmoji = data?.targetEmoji;
     const targetName = data?.name;
 
-    if (guess && guess.answer === targetEmoji) {
-      p1Obj.score += 15;
-      p2Obj.score += 15;
-      winnerId = 'draw';
-      const guesserName = room.players[guesserId || '']?.nickname || 'Penebak';
-      const describerName = room.players[describerId || '']?.nickname || 'Pemberi Clue';
-      feedback = `Kompak banget! ${describerName} memberi deskripsi bagus & ${guesserName} menebak benar: ${targetEmoji} ${targetName}! (+15 poin untuk berdua)`;
+    const guesserName = (guesserId && room.players[guesserId]?.nickname) || 'Penebak';
+    const describerName = (describerId && room.players[describerId]?.nickname) || 'Pemberi Petunjuk';
+
+    if (guess && guess.answer === targetEmoji && guesserId && room.players[guesserId]) {
+      // HANYA PEMAIN YANG MENEBAK BENAR YANG MENDAPATKAN SKOR (+15 POIN)
+      // Pemain yang memberitahu petunjuk (describer) TIDAK MENDAPATKAN SKOR (0 poin)
+      room.players[guesserId].score += 15;
+      winnerId = guesserId;
+      feedback = `🎯 Tebakan tepat! ${guesserName} (Penebak) berhasil menebak: ${targetEmoji} ${targetName}! (+15 poin untuk ${guesserName}, ${describerName} 0 poin)`;
     } else {
       winnerId = 'draw';
-      feedback = `Sayang sekali! Emoji rahasianya adalah ${targetEmoji} (${targetName}). Coba lagi babak berikutnya!`;
+      const guessedEmoji = guess?.answer;
+      if (guessedEmoji) {
+        feedback = `❌ Tebakan meleset! ${guesserName} memilih ${guessedEmoji}. Emoji rahasianya adalah ${targetEmoji} (${targetName}). (Keduanya 0 poin)`;
+      } else {
+        feedback = `⏰ Waktu habis! ${guesserName} belum sempat memilih. Emoji rahasianya adalah ${targetEmoji} (${targetName}). (Keduanya 0 poin)`;
+      }
     }
   } else if (room.gameState.gameType === 'dilemma') {
     const a1 = p1Answer?.choice;
@@ -425,7 +479,8 @@ io.on('connection', (socket: Socket) => {
         countdown: 3,
         playerAnswers: {}
       },
-      roundHistory: []
+      roundHistory: [],
+      usedQuestionIds: { flag: [], word: [], emoji_voice: [], dilemma: [] }
     };
 
     userRoomId = roomId;
@@ -435,11 +490,42 @@ io.on('connection', (socket: Socket) => {
 
   socket.on('room:join', ({ roomId, nickname, avatar }: { roomId: string; nickname: string; avatar: string }) => {
     const cleanRoomId = roomId.trim().toUpperCase();
-    const room = rooms[cleanRoomId];
+    const isSpecialAcaa = cleanRoomId === 'ACAA';
+
+    let room = rooms[cleanRoomId];
+
+    // Special permanent room: if it doesn't exist yet, auto-provision it
+    if (!room && isSpecialAcaa) {
+      rooms[cleanRoomId] = {
+        roomId: 'ACAA',
+        players: {},
+        hostId: socket.id,
+        gameState: {
+          gameType: 'flag',
+          status: 'waiting',
+          currentRound: 1,
+          totalRounds: 5,
+          timeLeft: 0,
+          countdown: 3,
+          playerAnswers: {}
+        },
+        roundHistory: [],
+        usedQuestionIds: { flag: [], word: [], emoji_voice: [], dilemma: [] },
+        isSpecialTheme: true,
+        isPermanent: true
+      };
+      room = rooms[cleanRoomId];
+    }
 
     if (!room) {
       socket.emit('room:error', { message: 'Kode Room tidak ditemukan. Silakan periksa kembali!' });
       return;
+    }
+
+    // Ensure special properties if it's ACAA
+    if (isSpecialAcaa) {
+      room.isSpecialTheme = true;
+      room.isPermanent = true;
     }
 
     const currentPlayers = Object.keys(room.players);
@@ -463,17 +549,21 @@ io.on('connection', (socket: Socket) => {
         return;
       }
 
+      const isFirstPlayer = currentPlayers.length === 0;
       const player: Player = {
         id: socket.id,
-        nickname: nickname || `Player 2`,
-        avatar: avatar || '🦊',
-        isHost: false,
+        nickname: nickname || (isFirstPlayer ? 'Player 1' : 'Player 2'),
+        avatar: avatar || (isFirstPlayer ? '🦁' : '🦊'),
+        isHost: isFirstPlayer,
         score: 0,
         totalWins: 0,
-        isReady: false,
+        isReady: isFirstPlayer,
         isConnected: true
       };
       room.players[socket.id] = player;
+      if (isFirstPlayer) {
+        room.hostId = socket.id;
+      }
     }
 
     userRoomId = cleanRoomId;
@@ -503,6 +593,15 @@ io.on('connection', (socket: Socket) => {
       room.players[socket.id].isReady = isReady;
       io.to(roomId).emit('room:updated', room);
     }
+  });
+
+  socket.on('game:set_rounds', ({ totalRounds }: { totalRounds: number }) => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    const validRounds = [5, 10, 15].includes(totalRounds) ? totalRounds : (totalRounds > 0 ? totalRounds : 5);
+    room.gameState.totalRounds = validRounds;
+    io.to(roomId).emit('room:updated', room);
   });
 
   socket.on('game:select_type', ({ gameType, totalRounds, startImmediately }: { gameType: GameType; totalRounds?: number; startImmediately?: boolean }) => {
@@ -661,15 +760,23 @@ io.on('connection', (socket: Socket) => {
         room.players[socket.id].isConnected = false;
         io.to(userRoomId).emit('room:updated', room);
 
-        // If all disconnected, schedule room cleanup
+        // If all disconnected, schedule room cleanup (unless room is permanent)
         const allDisconnected = Object.values(room.players).every(p => !p.isConnected);
         if (allDisconnected) {
           clearRoomTimer(userRoomId);
-          setTimeout(() => {
-            if (rooms[userRoomId!] && Object.values(rooms[userRoomId!].players).every(p => !p.isConnected)) {
-              delete rooms[userRoomId!];
-            }
-          }, 30000);
+          if (room.isPermanent) {
+            // Permanent room: reset game state to waiting and clear disconnected players when all leave so next visitors get a clean slate
+            room.gameState.status = 'waiting';
+            room.gameState.currentRound = 1;
+            room.gameState.playerAnswers = {};
+            room.players = {};
+          } else {
+            setTimeout(() => {
+              if (rooms[userRoomId!] && !rooms[userRoomId!].isPermanent && Object.values(rooms[userRoomId!].players).every(p => !p.isConnected)) {
+                delete rooms[userRoomId!];
+              }
+            }, 30000);
+          }
         }
       }
     }
@@ -683,6 +790,7 @@ async function startServer() {
     const vite = await createViteServer({
       server: {
         middlewareMode: true,
+        allowedHosts: true as const,
         hmr: !isHmrDisabled,
         ws: isHmrDisabled ? false : { server },
         watch: isHmrDisabled ? null : {},

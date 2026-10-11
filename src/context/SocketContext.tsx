@@ -30,6 +30,7 @@ interface SocketContextType {
   joinRoom: (roomId: string, nickname: string, avatar: string) => void;
   setReady: (isReady: boolean) => void;
   selectGameType: (gameType: GameType, totalRounds?: number, startImmediately?: boolean) => void;
+  setTotalRounds: (rounds: number) => void;
   startGame: () => void;
   rematch: () => void;
   submitAnswer: (data: any) => void;
@@ -201,6 +202,13 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }
   }, [socket]);
 
+  const setTotalRounds = useCallback((rounds: number) => {
+    if (socket) {
+      sound.playClick();
+      socket.emit('game:set_rounds', { totalRounds: rounds });
+    }
+  }, [socket]);
+
   const startGame = useCallback(() => {
     if (socket) {
       sound.playClick();
@@ -257,6 +265,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         joinRoom,
         setReady,
         selectGameType,
+        setTotalRounds,
         startGame,
         rematch,
         submitAnswer,

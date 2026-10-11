@@ -20,6 +20,13 @@ interface GameOption {
 
 export const GameSelectorModal: React.FC<GameSelectorModalProps> = ({ isOpen, onClose }) => {
   const { room, selectGameType, playerId } = useSocket();
+  const [selectedRounds, setSelectedRounds] = React.useState<number>(room?.gameState.totalRounds || 5);
+
+  useEffect(() => {
+    if (room?.gameState.totalRounds) {
+      setSelectedRounds(room.gameState.totalRounds);
+    }
+  }, [room?.gameState.totalRounds]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -86,12 +93,12 @@ export const GameSelectorModal: React.FC<GameSelectorModalProps> = ({ isOpen, on
   ];
 
   const handleSelectAndStart = (type: GameType) => {
-    selectGameType(type, 5, true);
+    selectGameType(type, selectedRounds, true);
     onClose();
   };
 
   const handleSelectOnly = (type: GameType) => {
-    selectGameType(type, 5, false);
+    selectGameType(type, selectedRounds, false);
     onClose();
   };
 
@@ -121,6 +128,38 @@ export const GameSelectorModal: React.FC<GameSelectorModalProps> = ({ isOpen, on
           >
             <X className="w-4 h-4" />
           </button>
+        </div>
+
+        {/* Pilihan Jumlah Ronde / Soal */}
+        <div className="px-5 py-3 bg-[#F4F1EB] border-b-2 border-zinc-900">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-[11px] font-black uppercase text-zinc-700 tracking-wider">
+              🎯 Pilihan Ronde:
+            </span>
+            <span className="text-xs font-black text-purple-950 bg-purple-200 px-2.5 py-0.5 rounded-lg border border-zinc-900">
+              {selectedRounds} Soal
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            {[5, 10, 15].map((rounds) => {
+              const isSelected = selectedRounds === rounds;
+              return (
+                <button
+                  key={rounds}
+                  type="button"
+                  onClick={() => setSelectedRounds(rounds)}
+                  className={`py-2 px-2 rounded-xl text-xs font-black border-2 border-zinc-900 transition-all cursor-pointer flex items-center justify-center gap-1 active:translate-x-[1px] active:translate-y-[1px] ${
+                    isSelected
+                      ? 'bg-amber-300 text-zinc-950 shadow-[2px_2px_0px_#18181b] scale-[1.02]'
+                      : 'bg-white hover:bg-zinc-50 text-zinc-700'
+                  }`}
+                >
+                  <span>{rounds} Soal</span>
+                  {isSelected && <span className="text-[10px]">✓</span>}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Game list */}

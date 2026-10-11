@@ -30,9 +30,28 @@ function GameContainer() {
 
   const gameState = room?.gameState;
   const isPlaying = gameState && gameState.status !== 'waiting';
+  const isPinkTheme = room?.roomId === 'ACAA' || room?.isSpecialTheme;
+
+  // Sync body class for global effects like background
+  React.useEffect(() => {
+    if (isPinkTheme) {
+      document.body.classList.add('theme-pink');
+    } else {
+      document.body.classList.remove('theme-pink');
+    }
+    return () => {
+      document.body.classList.remove('theme-pink');
+    };
+  }, [isPinkTheme]);
 
   return (
-    <div className="min-h-screen bg-[#FAF8F5] text-zinc-900 flex flex-col font-sans selection:bg-pink-200 selection:text-zinc-900">
+    <div
+      className={`min-h-screen text-zinc-900 flex flex-col font-sans transition-colors duration-500 selection:bg-pink-300 selection:text-pink-950 ${
+        isPinkTheme
+          ? 'bg-gradient-to-b from-pink-100/90 via-pink-50 to-rose-100/80'
+          : 'bg-[#FAF8F5]'
+      }`}
+    >
       {/* Real-time floating animated reactions */}
       <FloatingReactions />
 

@@ -63,8 +63,8 @@ export const EmojiVoiceGame: React.FC = () => {
           )}
           <span>
             {isDescriber
-              ? 'PERANMU: PEMBERI CLUE (Bicara di WhatsApp!)'
-              : 'PERANMU: PENEBAK (Dengarkan di WhatsApp!)'}
+              ? 'PERANMU: PEMBERI CLUE (Bicara di WhatsApp! Kamu 0 poin)'
+              : 'PERANMU: PENEBAK (Dengarkan & Tebak! +15 poin jika benar)'}
           </span>
         </div>
         <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-white border border-zinc-900">
@@ -174,10 +174,31 @@ export const EmojiVoiceGame: React.FC = () => {
 
       {/* ROUND OVER REVEAL */}
       {isRoundOver && (
-        <div className="w-full p-3 rounded-2xl bg-amber-100 border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] text-center animate-fade-in">
+        <div className="w-full p-4 rounded-2xl bg-amber-100 border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] text-center animate-fade-in flex flex-col items-center gap-1.5">
           <p className="text-xs text-zinc-900 font-black">
-            Emoji Rahasia: {emojiData.targetEmoji} ({emojiData.name})
+            Emoji Rahasia: <span className="text-xl inline-block align-middle ml-1 mr-1">{emojiData.targetEmoji}</span> ({emojiData.name})
           </p>
+          {guesserAnswer?.answer === emojiData.targetEmoji ? (
+            <div className="flex flex-col items-center gap-1">
+              <p className="text-xs text-emerald-800 font-bold flex items-center justify-center gap-1">
+                <CheckCircle className="w-4 h-4 text-emerald-700" />
+                <span>{guesserName} (Penebak) menebak dengan tepat! (+15 poin)</span>
+              </p>
+              <p className="text-[11px] text-zinc-500 font-medium">
+                Pemberi petunjuk ({describerName}) tidak mendapatkan skor (0 poin).
+              </p>
+            </div>
+          ) : guesserAnswer?.answer ? (
+            <p className="text-xs text-pink-800 font-bold flex items-center justify-center gap-1">
+              <XCircle className="w-4 h-4 text-pink-700" />
+              <span>{guesserName} salah memilih {guesserAnswer.answer} (Kedua pemain 0 poin)</span>
+            </p>
+          ) : (
+            <p className="text-xs text-zinc-600 font-bold flex items-center justify-center gap-1">
+              <Clock className="w-4 h-4 text-zinc-500" />
+              <span>Waktu habis! {guesserName} tidak sempat memilih. (Kedua pemain 0 poin)</span>
+            </p>
+          )}
         </div>
       )}
     </div>

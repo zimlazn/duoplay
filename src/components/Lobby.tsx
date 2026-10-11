@@ -25,6 +25,7 @@ export const Lobby: React.FC<LobbyProps> = ({ onOpenGameSelector, onOpenVoiceCal
     createRoom,
     joinRoom,
     startGame,
+    setTotalRounds,
     error,
     clearError
   } = useSocket();
@@ -89,13 +90,13 @@ export const Lobby: React.FC<LobbyProps> = ({ onOpenGameSelector, onOpenVoiceCal
         {/* Hero Branding */}
         <div className="text-center space-y-1.5">
           <div className="inline-block px-3 py-1 rounded-xl bg-purple-100 border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] text-purple-950 text-xs font-black">
-            Game 2 Player Real-Time
+            game aam buat untuk aca
           </div>
           <h1 className="text-3xl font-black text-zinc-900 tracking-tight">
             DuoPlay
           </h1>
           <p className="text-xs text-zinc-600 max-w-xs mx-auto font-medium">
-            Tebak Bendera, Tebak Kata, Tebak Emoji WhatsApp Call, Uji Kecocokan & Refleks!
+            am buat karna hp aam ga kuat main emel
           </p>
         </div>
 
@@ -200,6 +201,7 @@ export const Lobby: React.FC<LobbyProps> = ({ onOpenGameSelector, onOpenVoiceCal
   }
 
   // Inside Room Lobby
+  const isPinkTheme = room.roomId === 'ACAA' || room.isSpecialTheme;
   const playerIds = Object.keys(room.players);
   const p1 = playerIds[0] ? room.players[playerIds[0]] : null;
   const p2 = playerIds[1] ? room.players[playerIds[1]] : null;
@@ -208,18 +210,32 @@ export const Lobby: React.FC<LobbyProps> = ({ onOpenGameSelector, onOpenVoiceCal
   return (
     <div className="w-full max-w-md mx-auto flex flex-col items-center gap-4 px-2 py-4">
       {/* Room Code Card */}
-      <div className="w-full p-5 bg-white border-2 border-zinc-900 rounded-3xl shadow-[4px_4px_0px_#18181b] flex flex-col items-center text-center">
-        <span className="text-[11px] font-black text-zinc-500 uppercase tracking-wider">
-          Kode Room Kamu
+      <div className={`w-full p-5 border-2 border-zinc-900 rounded-3xl shadow-[4px_4px_0px_#18181b] flex flex-col items-center text-center transition-all ${
+        isPinkTheme ? 'bg-gradient-to-b from-pink-50 to-pink-100/90 shadow-[4px_4px_0px_#f43f5e]' : 'bg-white'
+      }`}>
+        <span className={`text-[11px] font-black px-2.5 py-0.5 rounded-lg border border-zinc-900 mb-2 flex items-center gap-1 ${
+          isPinkTheme
+            ? 'text-pink-900 bg-pink-200 border-pink-900 animate-pulse'
+            : 'text-purple-900 bg-purple-100'
+        }`}>
+          <span>game aam buat untuk aca</span>
+          <span>{isPinkTheme ? '💖 Special Permanent Room 🌸' : '💖'}</span>
+        </span>
+        <span className={`text-[11px] font-black uppercase tracking-wider ${isPinkTheme ? 'text-pink-700' : 'text-zinc-500'}`}>
+          {isPinkTheme ? '🎀 Room Spesial Pink Aktif 🎀' : 'Kode Room Kamu'}
         </span>
         <div className="flex items-center gap-3 my-2">
-          <span className="text-4xl font-mono font-black tracking-widest text-zinc-900">
+          <span className={`text-4xl font-mono font-black tracking-widest ${isPinkTheme ? 'text-pink-950 drop-shadow-sm' : 'text-zinc-900'}`}>
             {room.roomId}
           </span>
           <button
             onClick={handleCopyCode}
             title="Salin Kode"
-            className="p-2.5 rounded-xl bg-purple-100 hover:bg-purple-200 text-purple-950 border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+            className={`p-2.5 rounded-xl border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all ${
+              isPinkTheme
+                ? 'bg-pink-200 hover:bg-pink-300 text-pink-950'
+                : 'bg-purple-100 hover:bg-purple-200 text-purple-950'
+            }`}
           >
             {copiedCode ? <Check className="w-4 h-4 text-emerald-700" /> : <Copy className="w-4 h-4" />}
           </button>
@@ -229,7 +245,11 @@ export const Lobby: React.FC<LobbyProps> = ({ onOpenGameSelector, onOpenVoiceCal
         <div className="flex items-center gap-2 mt-2 w-full">
           <button
             onClick={handleShareWhatsApp}
-            className="flex-1 py-2 px-3 rounded-xl bg-emerald-100 hover:bg-emerald-200 text-emerald-950 border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] text-xs font-black flex items-center justify-center gap-1.5 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+            className={`flex-1 py-2 px-3 rounded-xl border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] text-xs font-black flex items-center justify-center gap-1.5 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all ${
+              isPinkTheme
+                ? 'bg-rose-200 hover:bg-rose-300 text-rose-950'
+                : 'bg-emerald-100 hover:bg-emerald-200 text-emerald-950'
+            }`}
           >
             <Share2 className="w-3.5 h-3.5" />
             Kirim ke WhatsApp
@@ -248,46 +268,88 @@ export const Lobby: React.FC<LobbyProps> = ({ onOpenGameSelector, onOpenVoiceCal
       <div className="w-full space-y-2">
         <div className="flex items-center justify-between text-xs text-zinc-600 px-1 font-bold">
           <span>Pemain ({playerIds.length}/2)</span>
-          <span className="text-emerald-700 font-bold">Live Sync</span>
+          <span className={isPinkTheme ? 'text-pink-700 font-black' : 'text-emerald-700 font-bold'}>
+            {isPinkTheme ? '🌸 Pink Theme Active' : 'Live Sync'}
+          </span>
         </div>
 
         <div className="grid grid-cols-2 gap-3">
           {p1 && (
-            <div className="p-4 rounded-2xl bg-purple-50 border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] flex flex-col items-center text-center relative">
-              <span className="absolute top-2 right-2 text-[10px] font-black text-amber-900 bg-amber-200 px-1.5 py-0.5 rounded-md border border-zinc-900">
+            <div className={`p-4 rounded-2xl border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] flex flex-col items-center text-center relative ${
+              isPinkTheme ? 'bg-pink-100/90 text-pink-950' : 'bg-purple-50'
+            }`}>
+              <span className={`absolute top-2 right-2 text-[10px] font-black px-1.5 py-0.5 rounded-md border border-zinc-900 ${
+                isPinkTheme ? 'bg-pink-300 text-pink-950' : 'bg-amber-200 text-amber-900'
+              }`}>
                 Host
               </span>
               <span className="text-4xl my-1">{p1.avatar}</span>
               <span className="text-xs font-black text-zinc-900 truncate max-w-full">
                 {p1.nickname} {p1.id === playerId ? '(Kamu)' : ''}
               </span>
-              <span className="text-[10px] text-emerald-700 font-bold mt-1">
+              <span className={`text-[10px] font-bold mt-1 ${isPinkTheme ? 'text-pink-700' : 'text-emerald-700'}`}>
                 Tersambung
               </span>
             </div>
           )}
 
           {p2 ? (
-            <div className="p-4 rounded-2xl bg-emerald-50 border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] flex flex-col items-center text-center relative">
+            <div className={`p-4 rounded-2xl border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] flex flex-col items-center text-center relative ${
+              isPinkTheme ? 'bg-rose-100/90 text-rose-950' : 'bg-emerald-50'
+            }`}>
               <span className="text-4xl my-1">{p2.avatar}</span>
               <span className="text-xs font-black text-zinc-900 truncate max-w-full">
                 {p2.nickname} {p2.id === playerId ? '(Kamu)' : ''}
               </span>
-              <span className="text-[10px] text-emerald-700 font-bold mt-1">
+              <span className={`text-[10px] font-bold mt-1 ${isPinkTheme ? 'text-pink-700' : 'text-emerald-700'}`}>
                 Tersambung
               </span>
             </div>
           ) : (
-            <div className="p-4 rounded-2xl border-2 border-dashed border-zinc-400 bg-white flex flex-col items-center justify-center text-center">
-              <span className="text-3xl opacity-40">👥</span>
-              <span className="text-xs text-zinc-500 font-bold mt-1">
-                Menunggu Teman...
+            <div className={`p-4 rounded-2xl border-2 border-dashed flex flex-col items-center justify-center text-center ${
+              isPinkTheme ? 'border-pink-300 bg-pink-50/70' : 'border-zinc-400 bg-white'
+            }`}>
+              <span className="text-3xl opacity-40">{isPinkTheme ? '🌸' : '👥'}</span>
+              <span className={`text-xs font-bold mt-1 ${isPinkTheme ? 'text-pink-700' : 'text-zinc-500'}`}>
+                Menunggu Aca / Teman...
               </span>
-              <span className="text-[10px] text-zinc-400 font-medium">
+              <span className={`text-[10px] font-medium ${isPinkTheme ? 'text-pink-600' : 'text-zinc-400'}`}>
                 Bagikan kode di atas!
               </span>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Pilihan Jumlah Ronde / Soal */}
+      <div className="w-full p-3.5 rounded-2xl bg-white border-2 border-zinc-900 shadow-[3px_3px_0px_#18181b] flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] font-black uppercase text-zinc-700 tracking-wider">
+            🎯 Pilihan Ronde:
+          </span>
+          <span className="text-xs font-black text-purple-950 bg-purple-100 px-2.5 py-0.5 rounded-lg border border-zinc-900">
+            {room.gameState.totalRounds || 5} Soal
+          </span>
+        </div>
+        <div className="grid grid-cols-3 gap-2">
+          {[5, 10, 15].map((rounds) => {
+            const isSelected = (room.gameState.totalRounds || 5) === rounds;
+            return (
+              <button
+                key={rounds}
+                type="button"
+                onClick={() => setTotalRounds(rounds)}
+                className={`py-2 px-2.5 rounded-xl text-xs font-black border-2 border-zinc-900 transition-all cursor-pointer flex items-center justify-center gap-1 active:translate-x-[1px] active:translate-y-[1px] ${
+                  isSelected
+                    ? 'bg-amber-300 text-zinc-950 shadow-[2px_2px_0px_#18181b] scale-[1.02]'
+                    : 'bg-zinc-50 hover:bg-zinc-100 text-zinc-700'
+                }`}
+              >
+                <span>{rounds} Soal</span>
+                {isSelected && <span className="text-[10px]">✓</span>}
+              </button>
+            );
+          })}
         </div>
       </div>
 

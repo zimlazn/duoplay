@@ -85,6 +85,9 @@ export interface RoomState {
   hostId: string;
   gameState: GameState;
   roundHistory: RoundResult[];
+  usedQuestionIds?: Record<string, string[]>;
+  isSpecialTheme?: boolean;
+  isPermanent?: boolean;
   lastReaction?: {
     id: string;
     senderId: string;

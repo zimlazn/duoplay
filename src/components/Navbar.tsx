@@ -36,17 +36,19 @@ export const Navbar: React.FC<NavbarProps> = ({
   const p1 = playerIds[0] ? room?.players[playerIds[0]] : null;
   const p2 = playerIds[1] ? room?.players[playerIds[1]] : null;
 
+  const isPinkTheme = room?.roomId === 'ACAA' || room?.isSpecialTheme;
+
   return (
-    <header className="sticky top-0 z-30 w-full bg-white border-b-2 border-zinc-900 shadow-sm">
+    <header className={`sticky top-0 z-30 w-full border-b-2 border-zinc-900 shadow-sm transition-colors duration-300 ${isPinkTheme ? 'bg-pink-50/95 backdrop-blur-xs' : 'bg-white'}`}>
       <div className="max-w-4xl mx-auto px-3 py-2.5 flex items-center justify-between gap-2">
         {/* Brand & Room Code */}
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5 font-black text-sm tracking-tight text-zinc-900">
-            <span className="w-8 h-8 rounded-xl bg-amber-200 border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] flex items-center justify-center text-sm font-black">
-              🎮
+            <span className={`w-8 h-8 rounded-xl border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] flex items-center justify-center text-sm font-black ${isPinkTheme ? 'bg-pink-300' : 'bg-amber-200'}`}>
+              {isPinkTheme ? '💖' : '🎮'}
             </span>
             <span className="font-extrabold text-base tracking-tight hidden xs:inline">
-              DuoPlay
+              {isPinkTheme ? 'DuoPlay • Acaa' : 'DuoPlay'}
             </span>
           </div>
 
@@ -54,9 +56,14 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={handleCopyCode}
               title="Salin Kode Room"
-              className="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-purple-100 hover:bg-purple-200 border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] text-xs font-mono font-black text-purple-950 active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+              className={`flex items-center gap-1 px-2.5 py-1 rounded-xl border-2 border-zinc-900 shadow-[2px_2px_0px_#18181b] text-xs font-mono font-black active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all ${
+                isPinkTheme
+                  ? 'bg-pink-200 hover:bg-pink-300 text-pink-950'
+                  : 'bg-purple-100 hover:bg-purple-200 text-purple-950'
+              }`}
             >
               <span>{room.roomId}</span>
+              {isPinkTheme && <span className="text-[10px]">🌸</span>}
               {copied ? (
                 <Check className="w-3.5 h-3.5 text-emerald-700" />
               ) : (

@@ -15,7 +15,29 @@ export const RoundResultBanner: React.FC = () => {
   let title = 'Hasil Babak Selesai';
   let bannerBg = 'bg-amber-100';
 
-  if (isDraw) {
+  if (room.gameState.gameType === 'emoji_voice') {
+    if (winnerId && winnerId !== 'draw') {
+      if (winnerId === playerId) {
+        title = '🎉 Tebakanmu Tepat! (+15 Poin Untukmu)';
+        bannerBg = 'bg-emerald-100';
+      } else {
+        const winnerNickname = room.players[winnerId]?.nickname || 'Penebak';
+        title = `🎯 ${winnerNickname} (Penebak) Berhasil Menjawab! (+15 Poin)`;
+        bannerBg = 'bg-purple-100';
+      }
+    } else {
+      title = '❌ Tebakan Meleset / Waktu Habis (0 Poin)';
+      bannerBg = 'bg-pink-100';
+    }
+  } else if (room.gameState.gameType === 'dilemma') {
+    if (feedback?.includes('SEFREKUENSI')) {
+      title = '💖 Cocok Sefrekuensi! (+15 Poin Kecocokan)';
+      bannerBg = 'bg-pink-100';
+    } else {
+      title = '🤝 Beda Pilihan, Saling Melengkapi!';
+      bannerBg = 'bg-yellow-100';
+    }
+  } else if (isDraw) {
     title = '🤝 Babak Ini Seri!';
     bannerBg = 'bg-yellow-100';
   } else if (isMe) {
