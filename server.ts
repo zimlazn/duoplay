@@ -7,7 +7,9 @@ import {
   GameType,
   RoomState,
   Player,
-  RoundResult
+  RoundResult,
+  UnoColor,
+  UnoCard
 } from './src/types/game.ts';
 import {
   generateFlagQuestion,
@@ -15,6 +17,17 @@ import {
   generateEmojiVoiceQuestion,
   generateDilemmaQuestion
 } from './src/data/gameData.ts';
+import {
+  initUnoGame,
+  createUnoDeck,
+  isValidUnoMove
+} from './src/utils/unoLogic.ts';
+import {
+  initLudoGame,
+  getValidLudoMoves,
+  getGlobalTrackIndex,
+  SAFE_INDICES
+} from './src/utils/ludoLogic.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +48,8 @@ const PORT = Number(process.env.PORT) || 3000;
 const rooms: Record<string, RoomState> = {};
 // Timers for rooms
 const roomTimers: Record<string, NodeJS.Timeout> = {};
+// Uno draw decks per room
+const roomUnoDecks: Record<string, UnoCard[]> = {};
 
 function initSpecialRoomAcaa() {
   rooms['ACAA'] = {
@@ -63,7 +78,6 @@ initSpecialRoomAcaa();
 function generateRoomCode(): string {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let code = '';
-  // Ensure we never randomly generate 'ACAA'
   while (true) {
     code = '';
     for (let i = 0; i < 4; i++) {
@@ -104,6 +118,11 @@ function startRoundTimer(roomId: string, seconds: number, onTick?: (left: number
       return;
     }
 
+    // If game is paused, freeze the timer!
+    if (currentRoom.gameState.isPaused) {
+      return;
+    }
+
     remaining -= 1;
     currentRoom.gameState.timeLeft = remaining;
 
@@ -130,6 +149,8 @@ function startCountdownAndRound(roomId: string) {
   room.gameState.status = 'countdown';
   room.gameState.countdown = 3;
   room.gameState.playerAnswers = {};
+  room.gameState.isPaused = false;
+  room.gameState.exitVotes = [];
   delete room.gameState.roundWinnerId;
   delete room.gameState.roundFeedback;
 
@@ -154,6 +175,24 @@ function startCountdownAndRound(roomId: string) {
   }, 1000);
 }
 
+function checkTicTacToeWin(board: Array<string | null>): { winner: 'X' | 'O' | 'draw' | null; line: number[] | null } {
+  const lines = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+  ];
+  for (const line of lines) {
+    const [a, b, c] = line;
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+      return { winner: board[a] as 'X' | 'O', line };
+    }
+  }
+  if (board.every(cell => cell !== null)) {
+    return { winner: 'draw', line: null };
+  }
+  return { winner: null, line: null };
+}
+
 function launchRound(roomId: string) {
   const room = rooms[roomId];
   if (!room) return;
@@ -171,6 +210,8 @@ function launchRound(roomId: string) {
 
   room.gameState.status = 'in_round';
   room.gameState.playerAnswers = {};
+  room.gameState.isPaused = false;
+  room.gameState.exitVotes = [];
 
   if (!room.usedQuestionIds) {
     room.usedQuestionIds = { flag: [], word: [], emoji_voice: [], dilemma: [] };
@@ -224,12 +265,37 @@ function launchRound(roomId: string) {
         currentRoom.gameState.reflexState.signalTimestamp = now;
       }
       io.to(roomId).emit('game:reflex_signal', { timestamp: now });
+      io.to(roomId).emit('room:updated', currentRoom);
 
       // If no one taps within 4 seconds, end round
       roomTimers[roomId] = setTimeout(() => {
         finishRound(roomId);
       }, 4000);
     }, delay);
+  } else if (room.gameState.gameType === 'tictactoe') {
+    const startingPlayerId = roundNum % 2 === 1 ? p1 : p2;
+    room.gameState.tictactoeState = {
+      board: Array(9).fill(null),
+      currentTurnPlayerId: startingPlayerId,
+      playerSymbols: {
+        [p1]: 'X',
+        [p2]: 'O'
+      },
+      winningLine: null,
+      status: 'playing'
+    };
+    io.to(roomId).emit('room:updated', room);
+    startRoundTimer(roomId, 60, undefined, () => finishRound(roomId));
+  } else if (room.gameState.gameType === 'uno') {
+    const { unoState, remainingDeck } = initUnoGame(p1, p2);
+    room.gameState.unoState = unoState;
+    roomUnoDecks[roomId] = remainingDeck;
+    io.to(roomId).emit('room:updated', room);
+    startRoundTimer(roomId, 180, undefined, () => finishRound(roomId));
+  } else if (room.gameState.gameType === 'ludo') {
+    room.gameState.ludoState = initLudoGame(p1, p2);
+    io.to(roomId).emit('room:updated', room);
+    startRoundTimer(roomId, 240, undefined, () => finishRound(roomId));
   }
 }
 
@@ -244,6 +310,8 @@ function finishRound(roomId: string) {
   const [p1, p2] = playerIds;
   const p1Obj = room.players[p1];
   const p2Obj = room.players[p2];
+  if (!p1Obj || !p2Obj) return;
+
   const p1Answer = room.gameState.playerAnswers[p1];
   const p2Answer = room.gameState.playerAnswers[p2];
 
@@ -256,7 +324,6 @@ function finishRound(roomId: string) {
     const p2Correct = p2Answer && p2Answer.answer === correctCountry;
 
     if (p1Correct && p2Correct) {
-      // Compare response time
       const p1Time = p1Answer.timeTaken || 12;
       const p2Time = p2Answer.timeTaken || 12;
       if (p1Time < p2Time) {
@@ -331,8 +398,6 @@ function finishRound(roomId: string) {
     const describerName = (describerId && room.players[describerId]?.nickname) || 'Pemberi Petunjuk';
 
     if (guess && guess.answer === targetEmoji && guesserId && room.players[guesserId]) {
-      // HANYA PEMAIN YANG MENEBAK BENAR YANG MENDAPATKAN SKOR (+15 POIN)
-      // Pemain yang memberitahu petunjuk (describer) TIDAK MENDAPATKAN SKOR (0 poin)
       room.players[guesserId].score += 15;
       winnerId = guesserId;
       feedback = `🎯 Tebakan tepat! ${guesserName} (Penebak) berhasil menebak: ${targetEmoji} ${targetName}! (+15 poin untuk ${guesserName}, ${describerName} 0 poin)`;
@@ -402,6 +467,41 @@ function finishRound(roomId: string) {
       winnerId = 'draw';
       feedback = `Tidak ada yang menekan sinyal!`;
     }
+  } else if (room.gameState.gameType === 'tictactoe') {
+    const ttt = room.gameState.tictactoeState;
+    if (ttt && ttt.status === 'win' && ttt.winnerPlayerId && ttt.winnerPlayerId !== 'draw') {
+      winnerId = ttt.winnerPlayerId;
+      const winObj = room.players[winnerId];
+      if (winObj) winObj.score += 15;
+      feedback = `🎉 ${winObj?.nickname || 'Pemain'} berhasil membentuk garis 3 beruntun! (+15 poin)`;
+    } else {
+      winnerId = 'draw';
+      p1Obj.score += 5;
+      p2Obj.score += 5;
+      feedback = `Seri! Papan Tic Tac Toe terisi penuh tanpa pemenang (+5 poin).`;
+    }
+  } else if (room.gameState.gameType === 'uno') {
+    const uno = room.gameState.unoState;
+    if (uno && uno.winnerPlayerId) {
+      winnerId = uno.winnerPlayerId;
+      const winObj = room.players[winnerId];
+      if (winObj) winObj.score += 30;
+      feedback = `🎉 ${winObj?.nickname || 'Pemain'} berhasil menghabiskan kartu UNO! (+30 poin)`;
+    } else {
+      winnerId = 'draw';
+      feedback = `Waktu babak UNO habis!`;
+    }
+  } else if (room.gameState.gameType === 'ludo') {
+    const ludo = room.gameState.ludoState;
+    if (ludo && ludo.winnerPlayerId) {
+      winnerId = ludo.winnerPlayerId;
+      const winObj = room.players[winnerId];
+      if (winObj) winObj.score += 40;
+      feedback = `🏆 ${winObj?.nickname || 'Pemain'} memenangkan balapan LUDO! (+40 poin)`;
+    } else {
+      winnerId = 'draw';
+      feedback = `Waktu babak LUDO selesai!`;
+    }
   }
 
   // Record round result
@@ -430,7 +530,6 @@ function finishRound(roomId: string) {
     if (currentRoom.gameState.currentRound >= currentRoom.gameState.totalRounds) {
       // GAME OVER
       currentRoom.gameState.status = 'game_over';
-      // Determine overall winner and increase totalWins
       const curP1 = currentRoom.players[p1];
       const curP2 = currentRoom.players[p2];
       if (curP1 && curP2) {
@@ -457,7 +556,7 @@ io.on('connection', (socket: Socket) => {
     const roomId = generateRoomCode();
     const player: Player = {
       id: socket.id,
-      nickname: nickname || 'Player 1',
+      nickname: nickname || 'Pemain 1',
       avatar: avatar || '🦁',
       isHost: true,
       score: 0,
@@ -494,7 +593,6 @@ io.on('connection', (socket: Socket) => {
 
     let room = rooms[cleanRoomId];
 
-    // Special permanent room: if it doesn't exist yet, auto-provision it
     if (!room && isSpecialAcaa) {
       rooms[cleanRoomId] = {
         roomId: 'ACAA',
@@ -522,7 +620,6 @@ io.on('connection', (socket: Socket) => {
       return;
     }
 
-    // Ensure special properties if it's ACAA
     if (isSpecialAcaa) {
       room.isSpecialTheme = true;
       room.isPermanent = true;
@@ -530,7 +627,6 @@ io.on('connection', (socket: Socket) => {
 
     const currentPlayers = Object.keys(room.players);
 
-    // If re-joining an existing player session
     let existingPlayerKey = currentPlayers.find(id => room.players[id].nickname === nickname && !room.players[id].isConnected);
     if (existingPlayerKey) {
       const oldPlayer = room.players[existingPlayerKey];
@@ -552,7 +648,7 @@ io.on('connection', (socket: Socket) => {
       const isFirstPlayer = currentPlayers.length === 0;
       const player: Player = {
         id: socket.id,
-        nickname: nickname || (isFirstPlayer ? 'Player 1' : 'Player 2'),
+        nickname: nickname || (isFirstPlayer ? 'Pemain 1' : 'Pemain 2'),
         avatar: avatar || (isFirstPlayer ? '🦁' : '🦊'),
         isHost: isFirstPlayer,
         score: 0,
@@ -599,7 +695,7 @@ io.on('connection', (socket: Socket) => {
     const current = getSocketRoom();
     if (!current) return;
     const { roomId, room } = current;
-    const validRounds = [5, 10, 15].includes(totalRounds) ? totalRounds : (totalRounds > 0 ? totalRounds : 5);
+    const validRounds = [1, 3, 5, 10, 15].includes(totalRounds) ? totalRounds : (totalRounds > 0 ? totalRounds : 5);
     room.gameState.totalRounds = validRounds;
     io.to(roomId).emit('room:updated', room);
   });
@@ -615,7 +711,6 @@ io.on('connection', (socket: Socket) => {
       room.gameState.totalRounds = totalRounds;
     }
     room.gameState.currentRound = 1;
-    // Reset round scores for new game
     Object.values(room.players).forEach(p => (p.score = 0));
     room.roundHistory = [];
     room.gameState.playerAnswers = {};
@@ -663,18 +758,67 @@ io.on('connection', (socket: Socket) => {
     startCountdownAndRound(roomId);
   });
 
-  socket.on('game:answer', (data: { answer?: any; choice?: string; timeTaken?: number }) => {
+  // Pause / Resume Toggle
+  socket.on('game:pause_toggle', () => {
     const current = getSocketRoom();
     if (!current) return;
     const { roomId, room } = current;
     if (room.gameState.status !== 'in_round') return;
+
+    room.gameState.isPaused = !room.gameState.isPaused;
+    if (room.gameState.isPaused) {
+      room.gameState.pausedByPlayerId = socket.id;
+    } else {
+      delete room.gameState.pausedByPlayerId;
+    }
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  // Exit from game (Requires mutual consent)
+  socket.on('game:exit_request', () => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (!room.gameState.exitVotes) room.gameState.exitVotes = [];
+    if (!room.gameState.exitVotes.includes(socket.id)) {
+      room.gameState.exitVotes.push(socket.id);
+    }
+
+    const playerIds = getPlayerIds(room);
+    if (room.gameState.exitVotes.length >= playerIds.length) {
+      // Both agreed! Reset to Lobby
+      clearRoomTimer(roomId);
+      room.gameState.status = 'waiting';
+      room.gameState.isPaused = false;
+      room.gameState.exitVotes = [];
+      room.gameState.currentRound = 1;
+      room.gameState.playerAnswers = {};
+      delete room.gameState.tictactoeState;
+      delete room.gameState.unoState;
+      delete room.gameState.ludoState;
+    }
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  socket.on('game:exit_cancel', () => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    room.gameState.exitVotes = [];
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  socket.on('game:answer', (data: { answer?: any; choice?: string; timeTaken?: number }) => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.isPaused) return;
 
     room.gameState.playerAnswers[socket.id] = data;
     io.to(roomId).emit('room:updated', room);
 
     const playerIds = getPlayerIds(room);
 
-    // If both players have answered, finish round immediately!
     if (room.gameState.gameType === 'flag' || room.gameState.gameType === 'word' || room.gameState.gameType === 'dilemma') {
       const answeredCount = Object.keys(room.gameState.playerAnswers).length;
       if (answeredCount >= playerIds.length) {
@@ -690,11 +834,12 @@ io.on('connection', (socket: Socket) => {
     }
   });
 
+  // Reflex tap
   socket.on('game:reflex_tap', ({ tapTimestamp }: { tapTimestamp: number }) => {
     const current = getSocketRoom();
     if (!current) return;
     const { roomId, room } = current;
-    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'reflex') return;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'reflex' || room.gameState.isPaused) return;
 
     const reflex = room.gameState.reflexState;
     if (!reflex) return;
@@ -717,6 +862,338 @@ io.on('connection', (socket: Socket) => {
         }
       }
     }
+  });
+
+  // --- TIC TAC TOE HANDLER ---
+  socket.on('tictactoe:move', ({ index }: { index: number }) => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'tictactoe' || room.gameState.isPaused) return;
+
+    const ttt = room.gameState.tictactoeState;
+    if (!ttt || ttt.status !== 'playing') return;
+    if (ttt.currentTurnPlayerId !== socket.id) return;
+    if (index < 0 || index > 8 || ttt.board[index] !== null) return;
+
+    const playerSymbol = ttt.playerSymbols[socket.id];
+    ttt.board[index] = playerSymbol;
+
+    const { winner, line } = checkTicTacToeWin(ttt.board);
+    if (winner && winner !== 'draw') {
+      ttt.status = 'win';
+      ttt.winningLine = line;
+      ttt.winnerPlayerId = socket.id;
+      io.to(roomId).emit('room:updated', room);
+      clearRoomTimer(roomId);
+      setTimeout(() => finishRound(roomId), 1500);
+    } else if (winner === 'draw') {
+      ttt.status = 'draw';
+      ttt.winnerPlayerId = 'draw';
+      io.to(roomId).emit('room:updated', room);
+      clearRoomTimer(roomId);
+      setTimeout(() => finishRound(roomId), 1500);
+    } else {
+      const playerIds = getPlayerIds(room);
+      const nextPlayerId = playerIds.find(id => id !== socket.id) || socket.id;
+      ttt.currentTurnPlayerId = nextPlayerId;
+      io.to(roomId).emit('room:updated', room);
+    }
+  });
+
+  // --- UNO HANDLERS ---
+  socket.on('uno:play_card', ({ cardId, chosenColor }: { cardId: string; chosenColor?: UnoColor }) => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'uno' || room.gameState.isPaused) return;
+
+    const uno = room.gameState.unoState;
+    if (!uno || uno.currentTurnPlayerId !== socket.id) return;
+
+    const playerHand = uno.playerHands[socket.id];
+    if (!playerHand) return;
+
+    const cardIndex = playerHand.findIndex(c => c.id === cardId);
+    if (cardIndex === -1) return;
+
+    const card = playerHand[cardIndex];
+    if (!isValidUnoMove(card, uno.topCard, uno.activeColor)) return;
+
+    playerHand.splice(cardIndex, 1);
+    uno.topCard = card;
+    uno.hasDrawnCardThisTurn = false;
+    delete uno.drawnCardId;
+
+    if (card.color === 'wild') {
+      uno.activeColor = chosenColor || 'red';
+    } else {
+      uno.activeColor = card.color;
+    }
+
+    const playerIds = getPlayerIds(room);
+    const opponentId = playerIds.find(id => id !== socket.id) || socket.id;
+    const playerName = room.players[socket.id]?.nickname || 'Pemain';
+
+    if (playerHand.length === 0) {
+      uno.winnerPlayerId = socket.id;
+      uno.lastActionMessage = `🎉 ${playerName} memenangkan permainan UNO!`;
+      io.to(roomId).emit('room:updated', room);
+      clearRoomTimer(roomId);
+      setTimeout(() => finishRound(roomId), 1500);
+      return;
+    }
+
+    let nextTurn = opponentId;
+    let message = `${playerName} memainkan ${card.color !== 'wild' ? card.color.toUpperCase() : ''} ${card.value.toUpperCase()}`;
+
+    if (card.value === 'skip') {
+      nextTurn = socket.id;
+      message = `${playerName} memainkan Skip! Giliranmu lagi.`;
+    } else if (card.value === 'reverse') {
+      nextTurn = socket.id;
+      message = `${playerName} memainkan Reverse! Giliranmu lagi.`;
+    } else if (card.value === 'draw2') {
+      const deck = roomUnoDecks[roomId] || [];
+      if (deck.length < 2) {
+        deck.push(...createUnoDeck());
+      }
+      const drawn = deck.splice(0, 2);
+      if (!uno.playerHands[opponentId]) uno.playerHands[opponentId] = [];
+      uno.playerHands[opponentId].push(...drawn);
+      uno.drawPileCount = deck.length;
+      nextTurn = socket.id;
+      message = `${playerName} memainkan Draw +2! Lawan mengambil 2 kartu & giliranmu lagi.`;
+    } else if (card.value === 'wild4') {
+      const deck = roomUnoDecks[roomId] || [];
+      if (deck.length < 4) {
+        deck.push(...createUnoDeck());
+      }
+      const drawn = deck.splice(0, 4);
+      if (!uno.playerHands[opponentId]) uno.playerHands[opponentId] = [];
+      uno.playerHands[opponentId].push(...drawn);
+      uno.drawPileCount = deck.length;
+      nextTurn = socket.id;
+      message = `${playerName} memainkan Wild +4 (${uno.activeColor.toUpperCase()})! Lawan mengambil 4 kartu & giliranmu lagi.`;
+    } else if (card.value === 'wild') {
+      nextTurn = opponentId;
+      message = `${playerName} memainkan Wild dan memilih warna ${uno.activeColor.toUpperCase()}!`;
+    }
+
+    uno.currentTurnPlayerId = nextTurn;
+    uno.lastActionMessage = message;
+
+    if (playerHand.length > 1) {
+      uno.unoCalled[socket.id] = false;
+    }
+
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  socket.on('uno:draw_card', () => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'uno' || room.gameState.isPaused) return;
+
+    const uno = room.gameState.unoState;
+    if (!uno || uno.currentTurnPlayerId !== socket.id) return;
+    if (uno.hasDrawnCardThisTurn) return;
+
+    const deck = roomUnoDecks[roomId] || [];
+    if (deck.length === 0) {
+      deck.push(...createUnoDeck());
+      roomUnoDecks[roomId] = deck;
+    }
+
+    const drawnCard = deck.shift();
+    if (!drawnCard) return;
+
+    if (!uno.playerHands[socket.id]) uno.playerHands[socket.id] = [];
+    uno.playerHands[socket.id].push(drawnCard);
+    uno.drawPileCount = deck.length;
+    uno.hasDrawnCardThisTurn = true;
+    uno.drawnCardId = drawnCard.id;
+
+    const playerName = room.players[socket.id]?.nickname || 'Pemain';
+    uno.lastActionMessage = `${playerName} mengambil 1 kartu dari tumpukan.`;
+
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  socket.on('uno:pass_turn', () => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'uno' || room.gameState.isPaused) return;
+
+    const uno = room.gameState.unoState;
+    if (!uno || uno.currentTurnPlayerId !== socket.id) return;
+    if (!uno.hasDrawnCardThisTurn) return;
+
+    uno.hasDrawnCardThisTurn = false;
+    delete uno.drawnCardId;
+
+    const playerIds = getPlayerIds(room);
+    const opponentId = playerIds.find(id => id !== socket.id) || socket.id;
+    uno.currentTurnPlayerId = opponentId;
+
+    const playerName = room.players[socket.id]?.nickname || 'Pemain';
+    uno.lastActionMessage = `${playerName} mengakhiri giliran.`;
+
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  socket.on('uno:call_uno', () => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    const uno = room.gameState.unoState;
+    if (!uno) return;
+
+    const playerHand = uno.playerHands[socket.id] || [];
+    if (playerHand.length === 1) {
+      uno.unoCalled[socket.id] = true;
+      const playerName = room.players[socket.id]?.nickname || 'Pemain';
+      uno.lastActionMessage = `🔥 ${playerName} BERKATA: UNO! (Tersisa 1 kartu!)`;
+      io.to(roomId).emit('room:updated', room);
+    }
+  });
+
+  // --- LUDO HANDLERS ---
+  socket.on('ludo:roll_dice', () => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'ludo' || room.gameState.isPaused) return;
+
+    const ludo = room.gameState.ludoState;
+    if (!ludo || ludo.currentTurnPlayerId !== socket.id) return;
+    if (!ludo.canRoll) return;
+
+    const dice = Math.floor(Math.random() * 6) + 1;
+    ludo.diceValue = dice;
+    ludo.diceRolled = true;
+    ludo.canRoll = false;
+
+    const playerColor = ludo.playerColors[socket.id];
+    const playerTokens = ludo.tokens[playerColor] || [];
+    const valid = getValidLudoMoves(playerTokens, dice);
+    ludo.validMoves = valid;
+
+    const playerName = room.players[socket.id]?.nickname || 'Pemain';
+
+    if (valid.length === 0) {
+      ludo.lastMessage = `${playerName} dapat angka ${dice}. Tidak ada pion yang bisa melangkah!`;
+      io.to(roomId).emit('room:updated', room);
+
+      setTimeout(() => {
+        const curRoom = rooms[roomId];
+        if (!curRoom || !curRoom.gameState.ludoState) return;
+        const curLudo = curRoom.gameState.ludoState;
+
+        if (dice === 6) {
+          curLudo.canRoll = true;
+          curLudo.diceRolled = false;
+          curLudo.validMoves = [];
+          curLudo.lastMessage = `${playerName} dapat angka 6 tapi terhalang. Lempar lagi!`;
+        } else {
+          const pIds = getPlayerIds(curRoom);
+          const nextP = pIds.find(id => id !== socket.id) || socket.id;
+          curLudo.currentTurnPlayerId = nextP;
+          curLudo.canRoll = true;
+          curLudo.diceRolled = false;
+          curLudo.diceValue = null;
+          curLudo.validMoves = [];
+          curLudo.lastMessage = `Giliran berganti ke ${curRoom.players[nextP]?.nickname || 'Lawan'}.`;
+        }
+        io.to(roomId).emit('room:updated', curRoom);
+      }, 1200);
+      return;
+    }
+
+    ludo.lastMessage = `${playerName} dapat angka ${dice}! Pilih pion untuk melangkah.`;
+    io.to(roomId).emit('room:updated', room);
+  });
+
+  socket.on('ludo:move_token', ({ tokenId }: { tokenId: number }) => {
+    const current = getSocketRoom();
+    if (!current) return;
+    const { roomId, room } = current;
+    if (room.gameState.status !== 'in_round' || room.gameState.gameType !== 'ludo' || room.gameState.isPaused) return;
+
+    const ludo = room.gameState.ludoState;
+    if (!ludo || ludo.currentTurnPlayerId !== socket.id) return;
+    if (!ludo.diceRolled || ludo.diceValue === null) return;
+    if (!ludo.validMoves.includes(tokenId)) return;
+
+    const playerColor = ludo.playerColors[socket.id];
+    const playerTokens = ludo.tokens[playerColor] || [];
+    const token = playerTokens.find(t => t.id === tokenId);
+    if (!token) return;
+
+    const dice = ludo.diceValue;
+    if (token.step === -1) {
+      token.step = 0;
+    } else {
+      token.step += dice;
+    }
+
+    let captured = false;
+    let capturedName = '';
+    const playerIds = getPlayerIds(room);
+    const opponentId = playerIds.find(id => id !== socket.id) || socket.id;
+    const opponentColor = ludo.playerColors[opponentId];
+    const opponentTokens = ludo.tokens[opponentColor] || [];
+
+    if (token.step >= 0 && token.step <= 50) {
+      const myGlobal = getGlobalTrackIndex(token.color, token.step);
+      if (myGlobal !== null && !SAFE_INDICES.includes(myGlobal)) {
+        for (const oppToken of opponentTokens) {
+          if (oppToken.step >= 0 && oppToken.step <= 50) {
+            const oppGlobal = getGlobalTrackIndex(oppToken.color, oppToken.step);
+            if (oppGlobal === myGlobal) {
+              oppToken.step = -1;
+              captured = true;
+              capturedName = room.players[opponentId]?.nickname || 'Lawan';
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    const playerName = room.players[socket.id]?.nickname || 'Pemain';
+
+    const allHome = playerTokens.every(t => t.step === 56);
+    if (allHome) {
+      ludo.winnerPlayerId = socket.id;
+      ludo.lastMessage = `🏆 SELAMAT! ${playerName} berhasil memasukkan semua 4 pion ke Home!`;
+      io.to(roomId).emit('room:updated', room);
+      clearRoomTimer(roomId);
+      setTimeout(() => finishRound(roomId), 1500);
+      return;
+    }
+
+    const extraTurn = dice === 6 || captured;
+    if (extraTurn) {
+      ludo.canRoll = true;
+      ludo.diceRolled = false;
+      ludo.diceValue = null;
+      ludo.validMoves = [];
+      ludo.lastMessage = captured
+        ? `⚔️ ${playerName} memakan pion ${capturedName}! Bonus lemparan dadu!`
+        : `🎲 ${playerName} dapat angka 6! Bonus lemparan dadu!`;
+    } else {
+      ludo.currentTurnPlayerId = opponentId;
+      ludo.canRoll = true;
+      ludo.diceRolled = false;
+      ludo.diceValue = null;
+      ludo.validMoves = [];
+      ludo.lastMessage = `Giliran berganti ke ${room.players[opponentId]?.nickname || 'Lawan'}.`;
+    }
+
+    io.to(roomId).emit('room:updated', room);
   });
 
   socket.on('reaction:send', ({ emoji }: { emoji: string }) => {
@@ -760,12 +1237,11 @@ io.on('connection', (socket: Socket) => {
         room.players[socket.id].isConnected = false;
         io.to(userRoomId).emit('room:updated', room);
 
-        // If all disconnected, schedule room cleanup (unless room is permanent)
         const allDisconnected = Object.values(room.players).every(p => !p.isConnected);
         if (allDisconnected) {
           clearRoomTimer(userRoomId);
+          delete roomUnoDecks[userRoomId];
           if (room.isPermanent) {
-            // Permanent room: reset game state to waiting and clear disconnected players when all leave so next visitors get a clean slate
             room.gameState.status = 'waiting';
             room.gameState.currentRound = 1;
             room.gameState.playerAnswers = {};
@@ -774,6 +1250,7 @@ io.on('connection', (socket: Socket) => {
             setTimeout(() => {
               if (rooms[userRoomId!] && !rooms[userRoomId!].isPermanent && Object.values(rooms[userRoomId!].players).every(p => !p.isConnected)) {
                 delete rooms[userRoomId!];
+                delete roomUnoDecks[userRoomId!];
               }
             }, 30000);
           }

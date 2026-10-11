@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @keyframes bounceAndRise {
   0% {
     opacity: 0;
@@ -28,6 +30,21 @@ body {
   -webkit-touch-callout: none;
   background-color: #FAF8F5;
   color: #18181B;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark {
+  background-color: #121216;
+  color: #F4F4F5;
+}
+
+/* Hide scrollbar for neat mobile look */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Tactile retro-pop button press */
@@ -57,14 +74,35 @@ body {
   box-shadow: 2px 2px 0px #18181B;
 }
 
-/* Special Pink Theme for Room ACAA */
+/* Dark mode retro borders */
+.dark .card-retro,
+.dark .btn-retro {
+  box-shadow: 3px 3px 0px #27272a;
+}
+
+/* ========================================================
+   TEMA KHUSUS PINK IMUT ROOM ACAA
+   Mode Gelap DILARANG KERAS berlaku di sini!
+   ======================================================== */
 body.theme-pink {
-  background-color: #FFF0F5;
-  background-image: radial-gradient(#FBCFE8 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
+  background-color: #FCE7F3 !important; /* Soft strawberry pastel pink */
+  background-image: radial-gradient(#F472B6 2.5px, transparent 2.5px) !important;
+  background-size: 22px 22px !important;
+  color: #831843 !important; /* Deep berry pink text */
+}
+
+/* Override any dark styles inside theme-pink */
+.theme-pink,
+.theme-pink * {
+  border-color-scheme: light;
+}
+
+.theme-pink .card-retro,
+.theme-pink .btn-retro {
+  box-shadow: 3px 3px 0px #F472B6 !important;
+  border-color: #BE185D !important;
 }
 
 .theme-pink .pink-glow {
-  box-shadow: 0 0 20px rgba(244, 114, 182, 0.4);
+  box-shadow: 0 0 25px rgba(244, 114, 182, 0.7) !important;
 }
-

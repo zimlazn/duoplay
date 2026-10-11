@@ -15,12 +15,16 @@ import { FloatingReactions } from './components/FloatingReactions';
 import { ReactionPicker } from './components/ReactionPicker';
 import { CountdownOverlay } from './components/CountdownOverlay';
 import { RoundResultBanner } from './components/RoundResultBanner';
+import { PauseExitControls } from './components/PauseExitControls';
 
 import { FlagGame } from './components/games/FlagGame';
 import { WordGame } from './components/games/WordGame';
 import { EmojiVoiceGame } from './components/games/EmojiVoiceGame';
 import { DilemmaGame } from './components/games/DilemmaGame';
 import { ReflexGame } from './components/games/ReflexGame';
+import { TicTacToeGame } from './components/games/TicTacToeGame';
+import { UnoGame } from './components/games/UnoGame';
+import { LudoGame } from './components/games/LudoGame';
 
 function GameContainer() {
   const { room } = useSocket();
@@ -36,6 +40,8 @@ function GameContainer() {
   React.useEffect(() => {
     if (isPinkTheme) {
       document.body.classList.add('theme-pink');
+      document.documentElement.classList.remove('dark');
+      document.body.classList.remove('dark');
     } else {
       document.body.classList.remove('theme-pink');
     }
@@ -46,10 +52,10 @@ function GameContainer() {
 
   return (
     <div
-      className={`min-h-screen text-zinc-900 flex flex-col font-sans transition-colors duration-500 selection:bg-pink-300 selection:text-pink-950 ${
+      className={`min-h-screen flex flex-col font-sans transition-colors duration-500 selection:bg-pink-300 selection:text-pink-950 ${
         isPinkTheme
-          ? 'bg-gradient-to-b from-pink-100/90 via-pink-50 to-rose-100/80'
-          : 'bg-[#FAF8F5]'
+          ? 'bg-gradient-to-b from-[#FCE7F3] via-[#FDF2F8] to-[#FCE7F3] text-pink-950'
+          : 'bg-[#FAF8F5] dark:bg-[#121216] text-zinc-900 dark:text-zinc-100'
       }`}
     >
       {/* Real-time floating animated reactions */}
@@ -74,6 +80,9 @@ function GameContainer() {
           />
         ) : (
           <div className="w-full flex flex-col items-center">
+            {/* Mutual Pause & Exit Controls */}
+            <PauseExitControls />
+
             {/* Round Result Feedback when round finishes */}
             <RoundResultBanner />
 
@@ -83,6 +92,9 @@ function GameContainer() {
             {gameState.gameType === 'emoji_voice' && <EmojiVoiceGame />}
             {gameState.gameType === 'dilemma' && <DilemmaGame />}
             {gameState.gameType === 'reflex' && <ReflexGame />}
+            {gameState.gameType === 'tictactoe' && <TicTacToeGame />}
+            {gameState.gameType === 'uno' && <UnoGame />}
+            {gameState.gameType === 'ludo' && <LudoGame />}
           </div>
         )}
       </main>
