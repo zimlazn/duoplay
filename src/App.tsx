@@ -54,7 +54,7 @@ function GameContainer() {
     <div
       className={`min-h-screen flex flex-col font-sans transition-colors duration-500 selection:bg-pink-300 selection:text-pink-950 ${
         isPinkTheme
-          ? 'bg-gradient-to-b from-[#FCE7F3] via-[#FDF2F8] to-[#FCE7F3] text-pink-950'
+          ? 'bg-transparent text-pink-950'
           : 'bg-[#FAF8F5] dark:bg-[#121216] text-zinc-900 dark:text-zinc-100'
       }`}
     >

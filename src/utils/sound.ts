@@ -198,27 +198,73 @@ class SoundManager {
     } catch (e) {}
   }
 
-  // Dice roll rattle
+  // Dice roll tumble & rattle
   playDiceRoll() {
     if (!this.enabled) return;
     try {
       this.initCtx();
       if (!this.ctx) return;
       const now = this.ctx.currentTime;
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 6; i++) {
         const osc = this.ctx.createOscillator();
         const gain = this.ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(250 + Math.random() * 200, now + i * 0.06);
+        osc.frequency.setValueAtTime(200 + Math.random() * 260, now + i * 0.05);
 
-        gain.gain.setValueAtTime(0.12, now + i * 0.06);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.06 + 0.04);
+        gain.gain.setValueAtTime(0.14, now + i * 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.05 + 0.04);
 
         osc.connect(gain);
         gain.connect(this.ctx.destination);
-        osc.start(now + i * 0.06);
-        osc.stop(now + i * 0.06 + 0.04);
+        osc.start(now + i * 0.05);
+        osc.stop(now + i * 0.05 + 0.04);
       }
+    } catch (e) {}
+  }
+
+  // Ludo pawn hop sound
+  playPawnHop() {
+    if (!this.enabled) return;
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(450, now);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.06);
+
+      gain.gain.setValueAtTime(0.18, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.06);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch (e) {}
+  }
+
+  // Ludo capture clash sound
+  playCapture() {
+    if (!this.enabled) return;
+    try {
+      this.initCtx();
+      if (!this.ctx) return;
+      const now = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(700, now);
+      osc.frequency.exponentialRampToValueAtTime(250, now + 0.18);
+
+      gain.gain.setValueAtTime(0.25, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.2);
     } catch (e) {}
   }
 

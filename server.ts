@@ -274,6 +274,7 @@ function launchRound(roomId: string) {
     }, delay);
   } else if (room.gameState.gameType === 'tictactoe') {
     const startingPlayerId = roundNum % 2 === 1 ? p1 : p2;
+    room.gameState.timeLeft = 0;
     room.gameState.tictactoeState = {
       board: Array(9).fill(null),
       currentTurnPlayerId: startingPlayerId,
@@ -284,18 +285,20 @@ function launchRound(roomId: string) {
       winningLine: null,
       status: 'playing'
     };
+    clearRoomTimer(roomId);
     io.to(roomId).emit('room:updated', room);
-    startRoundTimer(roomId, 60, undefined, () => finishRound(roomId));
   } else if (room.gameState.gameType === 'uno') {
     const { unoState, remainingDeck } = initUnoGame(p1, p2);
+    room.gameState.timeLeft = 0;
     room.gameState.unoState = unoState;
     roomUnoDecks[roomId] = remainingDeck;
+    clearRoomTimer(roomId);
     io.to(roomId).emit('room:updated', room);
-    startRoundTimer(roomId, 180, undefined, () => finishRound(roomId));
   } else if (room.gameState.gameType === 'ludo') {
+    room.gameState.timeLeft = 0;
     room.gameState.ludoState = initLudoGame(p1, p2);
+    clearRoomTimer(roomId);
     io.to(roomId).emit('room:updated', room);
-    startRoundTimer(roomId, 240, undefined, () => finishRound(roomId));
   }
 }
 
